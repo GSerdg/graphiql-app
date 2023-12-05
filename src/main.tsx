@@ -13,7 +13,6 @@ import App from './App';
 import Home from './pages/home/Home';
 import Authorisation from './pages/authorisation/Authorysation';
 import Graphyql from './pages/graphyql/Graphyql';
-import './index.css';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
