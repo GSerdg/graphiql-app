@@ -6,31 +6,21 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import './index.css';
 import ErrorComponent from './components/error-component/ErrorComponent';
 import { Provider } from 'react-redux';
-import App from './App';
 import { setupStore } from './app/store';
+import App from './App';
 import Home from './pages/home/Home';
 import Authorisation from './pages/authorisation/Authorysation';
 import Graphyql from './pages/graphyql/Graphyql';
-
-export const PATHS = {
-  HOME: '/',
-  AUTH: 'auth',
-  GRAPHYQL: 'graphyql',
-};
+import './index.css';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route
-      path={PATHS.HOME}
-      element={<App />}
-      errorElement={<ErrorComponent />}
-    >
+    <Route path="/" element={<App />} errorElement={<ErrorComponent />}>
       <Route index element={<Home />} />
-      <Route path={PATHS.AUTH} element={<Authorisation />} />
-      <Route path={PATHS.GRAPHYQL} element={<Graphyql />} />
+      <Route path="auth" element={<Authorisation />} />
+      <Route path="graphyql" element={<Graphyql />} />
     </Route>
   )
 );
