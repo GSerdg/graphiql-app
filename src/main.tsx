@@ -18,7 +18,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} errorElement={<ErrorComponent />}>
       <Route index element={<Home />} />
-      <Route path="auth" element={<Authorisation />} />
+      <Route path="login" element={<Authorisation />} />
+      <Route path="signup" element={<Authorisation />} />
       <Route path="graphyql" element={<Graphyql />} />
     </Route>
   )
