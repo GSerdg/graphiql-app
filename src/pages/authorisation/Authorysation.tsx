@@ -1,5 +1,6 @@
 import './Authorisation.scss';
+import { Box } from '@mui/material';
 
 export default function Authorisation() {
-  return <div>Authorysation Page</div>;
+  return <Box sx={{ flexGrow: 1 }}>Authorysation Page</Box>;
 }
