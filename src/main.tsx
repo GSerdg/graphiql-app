@@ -11,15 +11,16 @@ import { Provider } from 'react-redux';
 import { setupStore } from './app/store';
 import App from './App';
 import Home from './pages/home/Home';
-import Authorisation from './pages/authorisation/Authorysation';
 import Graphyql from './pages/graphyql/Graphyql';
+import SignupPage from './pages/signup/SignupPage';
+import LoginPage from './pages/login/LoginPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} errorElement={<ErrorComponent />}>
       <Route index element={<Home />} />
-      <Route path="login" element={<Authorisation />} />
-      <Route path="signup" element={<Authorisation />} />
+      <Route path="login" element={<LoginPage />} />
+      <Route path="signup" element={<SignupPage />} />
       <Route path="graphyql" element={<Graphyql />} />
     </Route>
   )
