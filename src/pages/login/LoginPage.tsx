@@ -17,7 +17,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { blueGrey } from '@mui/material/colors';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import { useForm } from 'react-hook-form';
-import { validationSchema } from '../../shared/validationSchema';
+import { signinSchema } from '../../shared/validationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 
@@ -35,7 +35,7 @@ export default function LoginPage() {
     formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(signinSchema),
   });
 
   function handleClickShowPassword() {

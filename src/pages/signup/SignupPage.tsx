@@ -17,14 +17,14 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { green } from '@mui/material/colors';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { useForm } from 'react-hook-form';
-import { validationSchema } from '../../shared/validationSchema';
+import { signupSchema } from '../../shared/validationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 
 interface SubmitForm {
   email: string;
   password: string;
-  repeatPassword?: string;
+  repeatPassword: string;
 }
 
 export default function Signup() {
@@ -37,7 +37,7 @@ export default function Signup() {
     formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(signupSchema),
   });
 
   function handleClickShowPassword() {
