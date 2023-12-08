@@ -12,14 +12,16 @@ import {
   Typography,
 } from '@mui/material';
 import LinkMUI from '@mui/material/Link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { green } from '@mui/material/colors';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { useForm } from 'react-hook-form';
 import { signupSchema } from '../../shared/validationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, registerWithEmailAndPassword } from '../../shared/firebase';
 
 interface SubmitForm {
   email: string;
@@ -30,7 +32,7 @@ interface SubmitForm {
 export default function Signup() {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowRepeatPassword, setIsShowRepeatPassword] = useState(false);
-
+  const [user, loading /* error */] = useAuthState(auth);
   const {
     register,
     handleSubmit,
@@ -39,6 +41,13 @@ export default function Signup() {
     mode: 'onChange',
     resolver: yupResolver(signupSchema),
   });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(user);
+    if (loading) return;
+    if (user) navigate('/');
+  }, [loading, navigate, user]);
 
   function handleClickShowPassword() {
     setIsShowPassword((show) => !show);
@@ -49,7 +58,7 @@ export default function Signup() {
   }
 
   function onSubmitHandelr(data: SubmitForm) {
-    console.log(data);
+    registerWithEmailAndPassword(data.email, data.email, data.password);
   }
 
   return (
