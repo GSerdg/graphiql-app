@@ -10,14 +10,31 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.scss';
 
 export default function Header() {
   const [lang, setLang] = useState('en');
   const [auth, setAuth] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
   console.log(lang);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    if (scrollTop > 60) {
+      setIsSticky(true);
+    } else if (scrollTop < 10) {
+      setIsSticky(false);
+    }
+  };
 
   const handleSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -41,11 +58,20 @@ export default function Header() {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar
+        position="sticky"
+        className={isSticky ? 'appbar--sticky' : 'appbar'}
+      >
         <Container className="header">
-          <Toolbar sx={{ padding: '0 !important' }}>
+          <Toolbar className="header__toolbar">
             <Box sx={{ flexGrow: 1 }}>
-              <Button component={Link} color="inherit" size="large" to="/">
+              <Button
+                component={Link}
+                color="inherit"
+                // size="large"
+                to="/"
+                className="header__button--home"
+              >
                 Home
               </Button>
             </Box>
@@ -59,11 +85,21 @@ export default function Header() {
               <Typography>Ru</Typography>
             </Stack>
             {!auth && (
-              <ButtonGroup size="small">
-                <Button component={Link} color="inherit" to="/login">
+              <ButtonGroup>
+                <Button
+                  component={Link}
+                  color="inherit"
+                  to="/login"
+                  className="header__button"
+                >
                   Log in
                 </Button>
-                <Button component={Link} color="inherit" to="/signup">
+                <Button
+                  component={Link}
+                  color="inherit"
+                  to="/signup"
+                  className="header__button"
+                >
                   Sign up
                 </Button>
               </ButtonGroup>
