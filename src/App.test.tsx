@@ -18,8 +18,8 @@ describe('App', () => {
 
     expect(
       screen.getByRole('link', {
-        name: 'GraphiQL',
+        name: 'Home',
       })
-    ).toHaveTextContent('GraphiQL');
+    ).toHaveTextContent('Home');
   });
 });
