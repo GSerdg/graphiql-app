@@ -6,12 +6,13 @@ import {
   Typography,
   Divider,
   Chip,
-  Avatar,
+  Stack,
 } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.scss';
-import gserg from '/image/gserg.jpg';
+import { ourTeam } from './team-data';
+import { CustomCard } from './card';
 
 export default function Home() {
   const [auth, setAuth] = useState(false);
@@ -22,10 +23,6 @@ export default function Home() {
     } else {
       setAuth(false);
     }
-  };
-
-  const handleSignout = () => {
-    console.log('User logout');
   };
 
   return (
@@ -91,8 +88,9 @@ export default function Home() {
         )}
         {auth && (
           <Button
+            component={Link}
+            to="/graphiql"
             variant="contained"
-            onClick={handleSignout}
             size="large"
             sx={{ marginBottom: '5rem' }}
           >
@@ -118,19 +116,26 @@ export default function Home() {
       >
         <Chip label="OUR TEAM" color="primary" variant="outlined" />
       </Divider>
-      <Box>
-        <Avatar
-          src={gserg}
-          alt="gserg"
-          variant="rounded"
-          sx={{
-            width: '10rem',
-            height: '10rem',
-            // border: '5px solid #1565c0',
-            boxShadow: '0 0 10px 0px #424242',
-          }}
-        />
-      </Box>
+      <Stack
+        className="card-list"
+        direction={{ xs: 'column', sm: 'row' }}
+        spacing={2}
+        margin="5rem 0"
+        justifyContent="space-evenly"
+      >
+        {ourTeam.map((member, index) => {
+          return (
+            <CustomCard
+              key={index}
+              name={member.name}
+              gitLink={member.gitLink}
+              gitName={member.gitName}
+              image={member.image}
+              description={member.description}
+            />
+          );
+        })}
+      </Stack>
     </Container>
   );
 }

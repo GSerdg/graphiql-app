@@ -1,23 +1,17 @@
-import {
-  Box,
-  Container,
-  Typography,
-  List,
-  ListItem,
-  Link,
-} from '@mui/material';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import { Box, Container, Typography, List } from '@mui/material';
 import './Footer.scss';
 import logo from '/svg/rs_school_js.svg';
+import { GitLink } from './GitLink';
+import { ourTeam } from '../../pages/home/team-data';
 
 export default function Footer() {
   return (
-    <Box sx={{ bgcolor: 'primary.light' }}>
+    <Box sx={{ bgcolor: 'primary.main' }}>
       <Container
         component="footer"
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'space-around',
           alignItems: 'center',
           padding: '0 24px',
         }}
@@ -25,64 +19,19 @@ export default function Footer() {
         <a href="https://rs.school/react/">
           <img src={logo} alt="rss_logo" className="logo" />
         </a>
-        <Typography component="span" color="inherit" sx={{ color: '#0a2e52' }}>
+        <Typography component="span" color="inherit" sx={{ color: '#fffffc' }}>
           2023
         </Typography>
         <List sx={{ padding: '1rem 0' }}>
-          <ListItem sx={{ padding: '0 0 0.2rem' }}>
-            <Link
-              href="https://github.com/gserdg"
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                color: '#0F4982',
-                transition: '0.3s',
-                ':hover': {
-                  color: '#0a2e52',
-                },
-              }}
-              underline="none"
-            >
-              <GitHubIcon fontSize="small" sx={{ mr: '0.5rem' }} />
-              GSerdg
-            </Link>
-          </ListItem>
-          <ListItem sx={{ padding: '0 0 0.2rem' }}>
-            <Link
-              href="https://github.com/DonStacky"
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                color: '#0F4982',
-                transition: '0.3s',
-                ':hover': {
-                  color: '#0a2e52',
-                },
-              }}
-              underline="none"
-            >
-              <GitHubIcon fontSize="small" sx={{ mr: '0.5rem' }} />
-              DonStacky
-            </Link>
-          </ListItem>
-          <ListItem sx={{ padding: '0 0 0.2rem' }}>
-            <Link
-              href="https://github.com/user42022"
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                color: '#0F4982',
-                transition: '0.3s',
-                ':hover': {
-                  color: '#0a2e52',
-                },
-              }}
-              underline="none"
-            >
-              <GitHubIcon fontSize="small" sx={{ mr: '0.5rem' }} />
-              user42022
-            </Link>
-          </ListItem>
+          {ourTeam.map((member, index) => {
+            return (
+              <GitLink
+                key={index}
+                gitName={member.gitName}
+                gitLink={member.gitLink}
+              />
+            );
+          })}
         </List>
       </Container>
     </Box>

@@ -6,7 +6,15 @@ html {
   }
 
   @media (min-width: 400px) {
+    font-size: 11px;
+  }
+
+  @media (min-width: 600px) {
     font-size: 12px;
+  }
+
+  @media (min-width: 700px) {
+    font-size: 13px;
   }
 
   @media (min-width: 800px) {

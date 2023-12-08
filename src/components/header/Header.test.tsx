@@ -52,7 +52,6 @@ describe('Tests for header component', () => {
       </BrowserRouter>
     );
 
-    screen.debug();
     const langSwitcher = screen.getByTestId('langSwitcher');
     await userEvent.click(langSwitcher);
 

@@ -12,7 +12,7 @@ import { setupStore } from './app/store';
 import App from './App';
 import Home from './pages/home/Home';
 import Authorisation from './pages/authorisation/Authorysation';
-import Graphyql from './pages/graphyql/Graphyql';
+import Graphiql from './pages/graphiql/Graphiql';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +20,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="login" element={<Authorisation />} />
       <Route path="signup" element={<Authorisation />} />
-      <Route path="graphyql" element={<Graphyql />} />
+      <Route path="graphiql" element={<Graphiql />} />
     </Route>
   )
 );

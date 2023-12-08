@@ -42,7 +42,7 @@ export default function Header() {
   return (
     <>
       <AppBar position="static">
-        <Container>
+        <Container className="header">
           <Toolbar sx={{ padding: '0 !important' }}>
             <Box sx={{ flexGrow: 1 }}>
               <Button component={Link} color="inherit" size="large" to="/">

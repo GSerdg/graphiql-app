@@ -1,4 +1,7 @@
-.header {
-  height: 4rem;
-  background-color: #303240;
+header .header {
+  padding: 0;
+
+  @media (min-width: 400px) {
+    padding: 0 24px;
+  }
 }
