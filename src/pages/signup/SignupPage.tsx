@@ -22,6 +22,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, registerWithEmailAndPassword } from '../../shared/firebase';
+import { FirebaseError } from 'firebase/app';
+import getAuthErrorMessage from '../../shared/firebaseErrors';
 
 interface SubmitForm {
   email: string;
@@ -44,7 +46,6 @@ export default function Signup() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user);
     if (loading) return;
     if (user) navigate('/');
   }, [loading, navigate, user]);
@@ -57,8 +58,14 @@ export default function Signup() {
     setIsShowRepeatPassword((show) => !show);
   }
 
-  function onSubmitHandelr(data: SubmitForm) {
-    registerWithEmailAndPassword(data.email, data.email, data.password);
+  async function onSubmitHandelr(data: SubmitForm) {
+    try {
+      await registerWithEmailAndPassword(data.email, data.email, data.password);
+    } catch (error) {
+      const err = error as FirebaseError;
+      const message = getAuthErrorMessage(err.code);
+      console.log(message);
+    }
   }
 
   return (

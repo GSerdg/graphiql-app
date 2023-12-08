@@ -27,18 +27,21 @@ export async function registerWithEmailAndPassword(
   email: string,
   password: string
 ) {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    await addDoc(collection(db, 'users'), {
-      uid: user.uid,
-      name,
-      authProvider: 'local',
-      email,
-    });
-  } catch (err) {
-    console.error(err);
-  }
+  // try {
+  const res = await createUserWithEmailAndPassword(auth, email, password);
+  const user = res.user;
+  await addDoc(collection(db, 'users'), {
+    uid: user.uid,
+    name,
+    authProvider: 'local',
+    email,
+  });
+  // } catch (error) {
+  //   const err = error as FirebaseError;
+  //   console.log(err.code);
+
+  //   console.error(err);
+  // }
 }
 
 export async function sendPasswordReset(email: string) {
