@@ -3,7 +3,7 @@ import {
   Box,
   Button,
   ButtonGroup,
-  Checkbox,
+  // Checkbox,
   Container,
   Stack,
   Switch,
@@ -12,11 +12,15 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { logout } from '../../shared/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../../shared/firebase';
 import './Header.scss';
 
 export default function Header() {
   const [lang, setLang] = useState('en');
-  const [auth, setAuth] = useState(false);
+  // const [auth, setAuth] = useState(false);
+  const [user] = useAuthState(auth);
   console.log(lang);
 
   const handleSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,16 +31,16 @@ export default function Header() {
     }
   };
 
-  const handleAuth = (event: React.ChangeEvent<HTMLInputElement>) => {
+  /* const handleAuth = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setAuth(true);
     } else {
       setAuth(false);
     }
-  };
+  }; */
 
   const handleSignout = () => {
-    console.log('User logout');
+    logout();
   };
 
   return (
@@ -58,7 +62,7 @@ export default function Header() {
               />
               <Typography>Ru</Typography>
             </Stack>
-            {!auth && (
+            {!user && (
               <ButtonGroup size="small">
                 <Button component={Link} color="inherit" to="/login">
                   Log in
@@ -68,7 +72,7 @@ export default function Header() {
                 </Button>
               </ButtonGroup>
             )}
-            {auth && (
+            {user && (
               <Button
                 color="inherit"
                 variant="outlined"
@@ -78,7 +82,7 @@ export default function Header() {
                 Log out
               </Button>
             )}
-            <Checkbox color="default" onChange={handleAuth} />
+            {/* <Checkbox color="default" onChange={handleAuth} /> */}
           </Toolbar>
         </Container>
       </AppBar>
