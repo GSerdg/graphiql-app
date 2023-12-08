@@ -1,36 +1,86 @@
-import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
-import Toolbar from '@mui/material/Toolbar';
-import './Header.scss';
+import {
+  AppBar,
+  Box,
+  Button,
+  ButtonGroup,
+  Checkbox,
+  Container,
+  Stack,
+  Switch,
+  Toolbar,
+  Typography,
+} from '@mui/material';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import LinkMUI from '@mui/material/Link';
+import './Header.scss';
 
 export default function Header() {
+  const [lang, setLang] = useState('en');
+  const [auth, setAuth] = useState(false);
+  console.log(lang);
+
+  const handleSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      setLang('ru');
+    } else {
+      setLang('en');
+    }
+  };
+
+  const handleAuth = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+  };
+
+  const handleSignout = () => {
+    console.log('User logout');
+  };
+
   return (
     <>
       <AppBar position="static">
-        <Toolbar>
-          <LinkMUI
-            sx={{ flexGrow: 1 }}
-            component={Link}
-            underline="none"
-            color="inherit"
-            to="/"
-          >
-            GraphiQL
-          </LinkMUI>
-          <Button
-            component={Link}
-            color="inherit"
-            sx={{ mr: '0.5rem' }}
-            to="/login"
-          >
-            Log in
-          </Button>
-          <Button component={Link} color="inherit" to="/signup">
-            Sign up
-          </Button>
-        </Toolbar>
+        <Container>
+          <Toolbar sx={{ padding: '0 !important' }}>
+            <Box sx={{ flexGrow: 1 }}>
+              <Button component={Link} color="inherit" size="large" to="/">
+                Home
+              </Button>
+            </Box>
+            <Stack direction="row" sx={{ mr: '2rem', alignItems: 'center' }}>
+              <Typography>En</Typography>
+              <Switch
+                onChange={handleSwitch}
+                color="default"
+                data-testid="langSwitcher"
+              />
+              <Typography>Ru</Typography>
+            </Stack>
+            {!auth && (
+              <ButtonGroup size="small">
+                <Button component={Link} color="inherit" to="/login">
+                  Log in
+                </Button>
+                <Button component={Link} color="inherit" to="/signup">
+                  Sign up
+                </Button>
+              </ButtonGroup>
+            )}
+            {auth && (
+              <Button
+                color="inherit"
+                variant="outlined"
+                onClick={handleSignout}
+                size="small"
+              >
+                Log out
+              </Button>
+            )}
+            <Checkbox color="default" onChange={handleAuth} />
+          </Toolbar>
+        </Container>
       </AppBar>
     </>
   );
