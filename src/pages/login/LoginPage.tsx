@@ -12,14 +12,17 @@ import {
   Typography,
 } from '@mui/material';
 import LinkMUI from '@mui/material/Link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { blueGrey } from '@mui/material/colors';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import { useForm } from 'react-hook-form';
 import { signinSchema } from '../../shared/validationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, sendPasswordReset } from '../../shared/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 interface SubmitForm {
   email: string;
@@ -28,7 +31,8 @@ interface SubmitForm {
 
 export default function LoginPage() {
   const [isShowPassword, setIsShowPassword] = useState(false);
-
+  const [email, setEmail] = useState('');
+  const [loginError, setLoginError] = useState(false);
   const {
     register,
     handleSubmit,
@@ -37,13 +41,24 @@ export default function LoginPage() {
     mode: 'onChange',
     resolver: yupResolver(signinSchema),
   });
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) navigate('/');
+  }, [navigate, user]);
 
   function handleClickShowPassword() {
     setIsShowPassword((show) => !show);
   }
 
-  function onSubmitHandelr(data: SubmitForm) {
-    console.log(data);
+  async function onSubmitHandelr(data: SubmitForm) {
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+    } catch (error) {
+      setLoginError(true);
+      console.error(error);
+    }
   }
 
   return (
@@ -81,6 +96,9 @@ export default function LoginPage() {
               type="text"
               aria-describedby="email-helper-text"
               label="Email"
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
             />
             <FormHelperText id="email-helper-text" sx={{ height: '40px' }}>
               {errors.email?.message || ' '}
@@ -112,10 +130,21 @@ export default function LoginPage() {
               }
               label="Password"
             />
-            <FormHelperText id="password-helper-text" sx={{ height: '40px' }}>
+            <FormHelperText id="password-helper-text" sx={{ height: '20px' }}>
               {errors.password?.message || ' '}
             </FormHelperText>
           </FormControl>
+          {loginError && (
+            <LinkMUI
+              component={Button}
+              variant="caption"
+              onClick={() => {
+                sendPasswordReset(email);
+              }}
+            >
+              Reset your password
+            </LinkMUI>
+          )}
           <Button
             type="submit"
             variant="contained"

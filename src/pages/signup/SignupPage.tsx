@@ -32,7 +32,7 @@ interface SubmitForm {
 export default function Signup() {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowRepeatPassword, setIsShowRepeatPassword] = useState(false);
-  const [user, loading /* error */] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const {
     register,
     handleSubmit,
