@@ -15,7 +15,7 @@ describe('Tests for header component', () => {
 
     const header = screen.getByRole('banner');
     const buttonGroup = screen.getByRole('group');
-    const mainLink = screen.getByRole('link', { name: 'GraphiQL' });
+    const mainLink = screen.getByRole('link', { name: 'Home' });
 
     expect(header).toBeInTheDocument();
     expect(buttonGroup).toBeInTheDocument();
@@ -31,7 +31,7 @@ describe('Tests for header component', () => {
       </Router>
     );
 
-    const mainLink = screen.getByRole('link', { name: 'GraphiQL' });
+    const mainLink = screen.getByRole('link', { name: 'Home' });
     const loginLink = screen.getByRole('link', { name: 'Log in' });
     const signupLink = screen.getByRole('link', { name: 'Sign up' });
 
