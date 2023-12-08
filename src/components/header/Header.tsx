@@ -109,7 +109,7 @@ export default function Header() {
                 color="inherit"
                 variant="outlined"
                 onClick={handleSignout}
-                size="small"
+                className="header__button"
               >
                 Log out
               </Button>
