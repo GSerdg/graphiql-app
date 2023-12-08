@@ -1,7 +1,17 @@
-import { Box, Button, Checkbox, Container, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  Typography,
+  Divider,
+  Chip,
+  Avatar,
+} from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.scss';
+import gserg from '/image/gserg.jpg';
 
 export default function Home() {
   const [auth, setAuth] = useState(false);
@@ -57,8 +67,9 @@ export default function Home() {
           taking care of the hard part so you can focus on actually getting
           things done.
         </Typography>
+        <Checkbox color="default" onChange={handleAuth} />
         {!auth && (
-          <Box>
+          <Box sx={{ marginBottom: '5rem' }}>
             <Button
               component={Link}
               to="/login"
@@ -79,7 +90,12 @@ export default function Home() {
           </Box>
         )}
         {auth && (
-          <Button variant="contained" onClick={handleSignout} size="large">
+          <Button
+            variant="contained"
+            onClick={handleSignout}
+            size="large"
+            sx={{ marginBottom: '5rem' }}
+          >
             Graph
             <Typography
               sx={{
@@ -93,7 +109,27 @@ export default function Home() {
             QL
           </Button>
         )}
-        <Checkbox color="default" onChange={handleAuth} />
+      </Box>
+      <Divider
+        sx={{
+          ':before': { borderTop: 'thin solid #42a5f5' },
+          ':after': { borderTop: 'thin solid #42a5f5' },
+        }}
+      >
+        <Chip label="OUR TEAM" color="primary" variant="outlined" />
+      </Divider>
+      <Box>
+        <Avatar
+          src={gserg}
+          alt="gserg"
+          variant="rounded"
+          sx={{
+            width: '10rem',
+            height: '10rem',
+            // border: '5px solid #1565c0',
+            boxShadow: '0 0 10px 0px #424242',
+          }}
+        />
       </Box>
     </Container>
   );
