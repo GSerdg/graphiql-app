@@ -60,3 +60,22 @@ html .appbar--sticky {
     font-size: 0.7rem;
   }
 }
+
+span.MuiSwitch-switchBase {
+  padding: 0.7rem;
+}
+
+span.MuiSwitch-switchBase.Mui-checked {
+  transform: translateX(1.5rem)
+}
+
+span.MuiSwitch-thumb {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+span.MuiSwitch-root {
+  width: 4.2rem;
+  height: 2.8rem;
+  padding: 0.9rem;
+}

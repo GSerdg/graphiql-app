@@ -68,7 +68,6 @@ export default function Header() {
               <Button
                 component={Link}
                 color="inherit"
-                // size="large"
                 to="/"
                 className="header__button--home"
               >

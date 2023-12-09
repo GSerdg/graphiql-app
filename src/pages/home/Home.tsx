@@ -1,34 +1,21 @@
 import {
   Box,
-  Button,
-  Checkbox,
-  Container,
-  Typography,
-  Divider,
   Chip,
+  Container,
+  Divider,
   Stack,
+  Typography,
 } from '@mui/material';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './Home.scss';
-import { ourTeam } from './team-data';
 import { CustomCard } from './card';
+import { ourTeam } from './team-data';
+import graphqlLogo from '/svg/graphql.png';
 
 export default function Home() {
-  const [auth, setAuth] = useState(false);
-
-  const handleAuth = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      setAuth(true);
-    } else {
-      setAuth(false);
-    }
-  };
-
   return (
     <Container sx={{ flexGrow: 1 }}>
       <Box
-        mt="2rem"
+        my="4rem"
         sx={{
           display: 'flex',
           alignItems: 'center',
@@ -64,49 +51,7 @@ export default function Home() {
           taking care of the hard part so you can focus on actually getting
           things done.
         </Typography>
-        <Checkbox color="default" onChange={handleAuth} />
-        {!auth && (
-          <Box sx={{ marginBottom: '5rem' }}>
-            <Button
-              component={Link}
-              to="/login"
-              variant="contained"
-              size="large"
-              sx={{ marginRight: '1rem' }}
-            >
-              Log in
-            </Button>
-            <Button
-              component={Link}
-              to="/signup"
-              variant="contained"
-              size="large"
-            >
-              Sign up
-            </Button>
-          </Box>
-        )}
-        {auth && (
-          <Button
-            component={Link}
-            to="/graphiql"
-            variant="contained"
-            size="large"
-            sx={{ marginBottom: '5rem' }}
-          >
-            Graph
-            <Typography
-              sx={{
-                textTransform: 'lowercase',
-                fontStyle: 'italic',
-                marginRight: '0.2rem',
-              }}
-            >
-              i
-            </Typography>
-            QL
-          </Button>
-        )}
+        <img src={graphqlLogo} alt="graphQL logo" className="graphql__logo" />
       </Box>
       <Divider
         sx={{

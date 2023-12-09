@@ -34,7 +34,6 @@ export const CustomCard = ({
           marginTop: '1em',
         }}
         image={image}
-        title="gserg"
       ></CardMedia>
       <CardContent>
         <Typography sx={{ textAlign: 'center', fontSize: '1em' }}>
