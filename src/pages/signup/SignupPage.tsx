@@ -1,9 +1,9 @@
 import {
-  Alert,
   AlertColor,
   Avatar,
   Box,
   Button,
+  CircularProgress,
   Container,
   FormControl,
   FormHelperText,
@@ -11,9 +11,6 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
-  Slide,
-  SlideProps,
-  Snackbar,
   Typography,
 } from '@mui/material';
 import LinkMUI from '@mui/material/Link';
@@ -29,15 +26,12 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, registerWithEmailAndPassword } from '../../shared/firebase';
 import { FirebaseError } from 'firebase/app';
 import getAuthErrorMessage from '../../shared/firebaseErrors';
+import ModalMessage from '../../components/modal-message/ModulMessage';
 
 interface SubmitForm {
   email: string;
   password: string;
   repeatPassword: string;
-}
-
-function SlideTransition(props: SlideProps) {
-  return <Slide {...props} direction="left" />;
 }
 
 export default function Signup() {
@@ -46,7 +40,8 @@ export default function Signup() {
   const [isOpenMessage, setIsOpenMessage] = useState(false);
   const [messageType, setMessageType] = useState<AlertColor>();
   const [statusMessage, setStatusMessage] = useState('');
-  const [user, loading] = useAuthState(auth);
+  const [isLoading, setIsLoading] = useState(false);
+  const [user] = useAuthState(auth);
   const {
     register,
     handleSubmit,
@@ -58,12 +53,11 @@ export default function Signup() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (loading) return; //TODO добавить загрузчик
     if (user)
       setTimeout(() => {
         navigate('/');
       }, 3000);
-  }, [loading, navigate, user]);
+  }, [navigate, user]);
 
   function handleClickShowPassword() {
     setIsShowPassword((show) => !show);
@@ -75,16 +69,25 @@ export default function Signup() {
 
   async function onSubmitHandelr(data: SubmitForm) {
     try {
+      setIsLoading(true);
       await registerWithEmailAndPassword(data.email, data.email, data.password);
       setMessageType('success');
       setStatusMessage('registration complite');
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
+
       setMessageType('error');
       setStatusMessage(message);
+
+      if (message === 'Email exists. Please Log In') {
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
+      }
     } finally {
       setIsOpenMessage(true);
+      setIsLoading(false);
     }
   }
 
@@ -104,31 +107,17 @@ export default function Signup() {
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
-        <Snackbar
-          sx={{ marginTop: '50px' }}
-          TransitionComponent={SlideTransition}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          open={isOpenMessage}
-          autoHideDuration={3000}
-          onClose={() => {
-            setIsOpenMessage(false);
-          }}
-        >
-          <Alert
-            onClose={() => {
-              setIsOpenMessage(false);
-            }}
-            severity={messageType}
-            sx={{ width: '100%' }}
-          >
-            {statusMessage}
-          </Alert>
-        </Snackbar>
+        <ModalMessage
+          isOpenMessage={isOpenMessage}
+          setIsOpenMessage={setIsOpenMessage}
+          messageType={messageType}
+          statusMessage={statusMessage}
+        />
         <Box
           component="form"
           noValidate
           onSubmit={handleSubmit(onSubmitHandelr)}
-          sx={{ mt: 3 }}
+          sx={{ mt: 3, position: 'relative' }}
         >
           <FormControl
             error={errors.email ? true : false}
@@ -211,11 +200,24 @@ export default function Signup() {
           <Button
             type="submit"
             variant="contained"
-            disabled={!isValid}
+            disabled={!isValid || isLoading}
             sx={{ mt: 3, mb: 2, float: 'right' }}
           >
             Sign Up
           </Button>
+          {isLoading && (
+            <CircularProgress
+              size={24}
+              sx={{
+                color: green[500],
+                position: 'absolute',
+                top: '22%',
+                right: 'calc(50% - 12px)',
+                marginTop: '-12px',
+                marginLeft: '-12px',
+              }}
+            />
+          )}
         </Box>
         <LinkMUI component={Link} to="/login" variant="caption">
           {'Have an account? Sign In'}

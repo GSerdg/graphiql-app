@@ -24,17 +24,11 @@ export const signupSchema = yup.object().shape({
   password: yup
     .string()
     .required('Enter password')
-    .matches(
-      /[A-Z]/,
-      'Password must contain at least one uppercase letter (A-Z)'
-    )
-    .matches(
-      /[a-z]/,
-      'Password must contain at least one lowercase letter (a-z)'
-    )
+    .matches(/[A-ZА-ЯË]/, 'Password must contain at least one uppercase letter')
+    .matches(/[a-zа-яё]/, 'Password must contain at least one lowercase letter')
     .matches(/[0-9]/, 'Password must contain at least one digit (0-9)')
     .matches(
-      /[\W_]/,
+      /[^\wА-Яа-яËё]/,
       'Password must contain at least one special character (e.g., !@#$%^&*-)'
     )
     .min(8, 'Password too short')

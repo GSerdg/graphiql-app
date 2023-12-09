@@ -5,7 +5,7 @@ export default function getAuthErrorMessage(code: string) {
 
   switch (code) {
     case AuthErrorCodes.EMAIL_EXISTS: {
-      message = 'Email exists';
+      message = 'Email exists. Please Log In';
       break;
     }
     case AuthErrorCodes.ARGUMENT_ERROR: {
@@ -93,6 +93,14 @@ export default function getAuthErrorMessage(code: string) {
     case AuthErrorCodes.TOO_MANY_ATTEMPTS_TRY_LATER: {
       message =
         'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.';
+      break;
+    }
+    case AuthErrorCodes.INVALID_LOGIN_CREDENTIALS: {
+      message = 'Email or password is incorrect';
+      break;
+    }
+    case AuthErrorCodes.NETWORK_REQUEST_FAILED: {
+      message = 'Network request failed';
       break;
     }
     default: {
