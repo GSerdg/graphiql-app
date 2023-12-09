@@ -9,11 +9,15 @@ Welcome to our GraphiQL-application! This platform is a playground/IDE for graph
 5. Interactive documentation for the specified resource
 6. Query prettifying
 
- ## Our stack:
- - [TypeScript](https://www.typescriptlang.org/)
- - [SASS](https://sass-lang.com/)
- - [GraphQL](https://graphql.org/)
- - [MaterialUI](https://mui.com/material-ui/)
+## Our stack:
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://react.dev/)
+- [Redux](https://redux.js.org/)
+- [Firebase](https://firebase.google.com/)
+- [Yup](https://github.com/jquense/yup)
+- [SASS](https://sass-lang.com/)
+- [GraphQL](https://graphql.org/)
+- [MaterialUI](https://mui.com/material-ui/)
 
 ## Requirements:
 
