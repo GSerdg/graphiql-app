@@ -8,20 +8,38 @@ import ErrorBoundary from './components/error-boundary/ErrorBoundary';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import './index.scss';
+import { createContext, useState } from 'react';
+
+interface LangContext {
+  lang: string;
+  setLang: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const LangContext = createContext<LangContext>({} as LangContext);
 
 function App() {
+  const [lang, setLang] = useState('en');
+  console.log(lang);
+
   return (
-    <ErrorBoundary>
-      <CssBaseline>
-        <Box
-          sx={{ flexDirection: 'column', display: 'flex', minHeight: '100vh' }}
-        >
-          <Header />
-          <Outlet />
-          <Footer />
-        </Box>
-      </CssBaseline>
-    </ErrorBoundary>
+    <LangContext.Provider value={{ lang, setLang }}>
+      <ErrorBoundary>
+        <CssBaseline>
+          <Box
+            sx={{
+              flexDirection: 'column',
+              display: 'flex',
+              minHeight: '100vh',
+              paddingTop: '64px',
+            }}
+          >
+            <Header />
+            <Outlet />
+            <Footer />
+          </Box>
+        </CssBaseline>
+      </ErrorBoundary>
+    </LangContext.Provider>
   );
 }
 

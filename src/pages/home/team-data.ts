@@ -12,7 +12,7 @@ export const ourTeam = [
       "I'm a front-end developer. After studying at RS School, I can now do everything in a Java script!!! Well, or almost everything. And everything that I cannot achieve, I will achieve as I work on future interesting and probably very entertaining projects.",
   },
   {
-    name: 'ANDREY KYZILOV',
+    name: 'ANDREY KIZILOV',
     gitLink: 'https://github.com/user42022',
     gitName: 'user42022',
     image: user42022,

@@ -10,15 +10,15 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { LangContext } from '../../App';
 import './Header.scss';
 
 export default function Header() {
-  const [lang, setLang] = useState('en');
+  const { setLang } = useContext(LangContext);
   const [auth, setAuth] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
-  console.log(lang);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -59,7 +59,7 @@ export default function Header() {
   return (
     <>
       <AppBar
-        position="sticky"
+        position="fixed"
         className={isSticky ? 'appbar--sticky' : 'appbar'}
       >
         <Container className="header">

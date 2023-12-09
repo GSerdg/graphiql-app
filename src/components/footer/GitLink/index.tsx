@@ -8,13 +8,14 @@ interface Props {
 
 export const GitLink = ({ gitName, gitLink }: Props): React.ReactNode => {
   return (
-    <ListItem sx={{ padding: '0 0 0.2rem' }}>
+    <ListItem sx={{ padding: '0 0 0.1rem' }}>
       <Link
         href={gitLink}
         sx={{
           display: 'flex',
           alignItems: 'center',
           color: '#fffffc',
+          fontSize: '0.9rem',
           transition: '0.3s',
           ':hover': {
             color: '#b7d9ed',

@@ -11,7 +11,7 @@ export default function Footer() {
         component="footer"
         sx={{
           display: 'flex',
-          justifyContent: 'space-around',
+          justifyContent: 'space-between',
           alignItems: 'center',
           padding: '0 24px',
         }}
@@ -22,7 +22,7 @@ export default function Footer() {
         <Typography component="span" color="inherit" sx={{ color: '#fffffc' }}>
           2023
         </Typography>
-        <List sx={{ padding: '1rem 0' }}>
+        <List sx={{ padding: '0.2rem 0' }}>
           {ourTeam.map((member, index) => {
             return (
               <GitLink
