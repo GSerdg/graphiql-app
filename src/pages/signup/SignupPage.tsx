@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertColor,
   Avatar,
   Box,
   Button,
@@ -9,6 +11,9 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  Slide,
+  SlideProps,
+  Snackbar,
   Typography,
 } from '@mui/material';
 import LinkMUI from '@mui/material/Link';
@@ -31,9 +36,16 @@ interface SubmitForm {
   repeatPassword: string;
 }
 
+function SlideTransition(props: SlideProps) {
+  return <Slide {...props} direction="left" />;
+}
+
 export default function Signup() {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowRepeatPassword, setIsShowRepeatPassword] = useState(false);
+  const [isOpenMessage, setIsOpenMessage] = useState(false);
+  const [messageType, setMessageType] = useState<AlertColor>();
+  const [statusMessage, setStatusMessage] = useState('');
   const [user, loading] = useAuthState(auth);
   const {
     register,
@@ -46,8 +58,11 @@ export default function Signup() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (loading) return;
-    if (user) navigate('/');
+    if (loading) return; //TODO добавить загрузчик
+    if (user)
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
   }, [loading, navigate, user]);
 
   function handleClickShowPassword() {
@@ -61,10 +76,15 @@ export default function Signup() {
   async function onSubmitHandelr(data: SubmitForm) {
     try {
       await registerWithEmailAndPassword(data.email, data.email, data.password);
+      setMessageType('success');
+      setStatusMessage('registration complite');
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
-      console.log(message);
+      setMessageType('error');
+      setStatusMessage(message);
+    } finally {
+      setIsOpenMessage(true);
     }
   }
 
@@ -84,6 +104,26 @@ export default function Signup() {
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
+        <Snackbar
+          sx={{ marginTop: '50px' }}
+          TransitionComponent={SlideTransition}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={isOpenMessage}
+          autoHideDuration={3000}
+          onClose={() => {
+            setIsOpenMessage(false);
+          }}
+        >
+          <Alert
+            onClose={() => {
+              setIsOpenMessage(false);
+            }}
+            severity={messageType}
+            sx={{ width: '100%' }}
+          >
+            {statusMessage}
+          </Alert>
+        </Snackbar>
         <Box
           component="form"
           noValidate
