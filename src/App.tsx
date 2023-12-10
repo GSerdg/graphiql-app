@@ -13,9 +13,7 @@ function App() {
   return (
     <ErrorBoundary>
       <CssBaseline>
-        <Box
-          sx={{ flexDirection: 'column', display: 'flex', minHeight: '100vh' }}
-        >
+        <Box sx={{ flexDirection: 'column', display: 'flex', minHeight: '100vh' }}>
           <Header />
           <Outlet />
           <Footer />

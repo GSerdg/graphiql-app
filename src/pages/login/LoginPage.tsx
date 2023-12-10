@@ -55,10 +55,11 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user)
+    if (user) {
       setTimeout(() => {
         navigate('/');
       }, 3000);
+    }
   }, [navigate, user]);
 
   function handleClickShowPassword() {
@@ -111,12 +112,7 @@ export default function LoginPage() {
           onSubmit={handleSubmit(onSubmitHandelr)}
           sx={{ mt: 3, position: 'relative' }}
         >
-          <FormControl
-            error={errors.email ? true : false}
-            variant="outlined"
-            fullWidth
-            required
-          >
+          <FormControl error={errors.email ? true : false} variant="outlined" fullWidth required>
             <InputLabel htmlFor="email">Email</InputLabel>
             <OutlinedInput
               {...register('email')}

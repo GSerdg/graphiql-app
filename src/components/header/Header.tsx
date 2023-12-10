@@ -55,11 +55,7 @@ export default function Header() {
             </Box>
             <Stack direction="row" sx={{ mr: '2rem', alignItems: 'center' }}>
               <Typography>En</Typography>
-              <Switch
-                onChange={handleSwitch}
-                color="default"
-                data-testid="langSwitcher"
-              />
+              <Switch onChange={handleSwitch} color="default" data-testid="langSwitcher" />
               <Typography>Ru</Typography>
             </Stack>
             {!user && (
@@ -73,12 +69,7 @@ export default function Header() {
               </ButtonGroup>
             )}
             {user && (
-              <Button
-                color="inherit"
-                variant="outlined"
-                onClick={handleSignout}
-                size="small"
-              >
+              <Button color="inherit" variant="outlined" onClick={handleSignout} size="small">
                 Log out
               </Button>
             )}

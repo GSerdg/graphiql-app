@@ -53,10 +53,11 @@ export default function Signup() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user)
+    if (user) {
       setTimeout(() => {
         navigate('/');
       }, 3000);
+    }
   }, [navigate, user]);
 
   function handleClickShowPassword() {
@@ -119,12 +120,7 @@ export default function Signup() {
           onSubmit={handleSubmit(onSubmitHandelr)}
           sx={{ mt: 3, position: 'relative' }}
         >
-          <FormControl
-            error={errors.email ? true : false}
-            variant="outlined"
-            fullWidth
-            required
-          >
+          <FormControl error={errors.email ? true : false} variant="outlined" fullWidth required>
             <InputLabel htmlFor="email">Email</InputLabel>
             <OutlinedInput
               {...register('email')}
@@ -132,8 +128,11 @@ export default function Signup() {
               type="text"
               aria-describedby="email-helper-text"
               label="Email"
+              inputProps={{
+                'data-testid': 'emailTest',
+              }}
             />
-            <FormHelperText id="email-helper-text" sx={{ height: '40px' }}>
+            <FormHelperText id="email-helper-text" data-testid="emailHelperTest" sx={{ height: '40px' }}>
               {errors.email?.message || ' '}
             </FormHelperText>
           </FormControl>
@@ -150,6 +149,7 @@ export default function Signup() {
               id="password"
               type={isShowPassword ? 'text' : 'password'}
               aria-describedby="password-helper-text"
+              inputProps={{ 'data-testid': 'passwordTest' }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -163,7 +163,11 @@ export default function Signup() {
               }
               label="Password"
             />
-            <FormHelperText id="password-helper-text" sx={{ height: '40px' }}>
+            <FormHelperText
+              id="password-helper-text"
+              data-testid="passwordHelperTest"
+              sx={{ height: '40px' }}
+            >
               {errors.password?.message || ' '}
             </FormHelperText>
           </FormControl>
@@ -180,6 +184,7 @@ export default function Signup() {
               id="repeatPassword"
               type={isShowPassword ? 'text' : 'password'}
               aria-describedby="repeatPassword-helper-text"
+              inputProps={{ 'data-testid': 'repeatPasswordTest' }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -193,12 +198,13 @@ export default function Signup() {
               }
               label="Repeat password"
             />
-            <FormHelperText id="repeatPassword-helper-text">
+            <FormHelperText id="repeatPassword-helper-text" data-testid="repeatPasswordHelperTest">
               {errors.repeatPassword?.message || ' '}
             </FormHelperText>
           </FormControl>
           <Button
             type="submit"
+            data-testid="buttonTest"
             variant="contained"
             disabled={!isValid || isLoading}
             sx={{ mt: 3, mb: 2, float: 'right' }}

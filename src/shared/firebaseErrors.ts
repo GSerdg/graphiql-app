@@ -45,8 +45,7 @@ export default function getAuthErrorMessage(code: string) {
       break;
     }
     case AuthErrorCodes.WEAK_PASSWORD: {
-      message =
-        'Your password is too weak.  It must be at least six characters long.';
+      message = 'Your password is too weak.  It must be at least six characters long.';
       break;
     }
     case AuthErrorCodes.INVALID_EMAIL: {
@@ -82,8 +81,7 @@ export default function getAuthErrorMessage(code: string) {
       break;
     }
     case AuthErrorCodes.WEB_STORAGE_UNSUPPORTED: {
-      message =
-        'Web storage is unsupported.  Please update or use a different browser.';
+      message = 'Web storage is unsupported.  Please update or use a different browser.';
       break;
     }
     case AuthErrorCodes.ALREADY_INITIALIZED: {

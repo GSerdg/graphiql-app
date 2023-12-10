@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  Typography,
-  Divider,
-  Chip,
-  Avatar,
-} from '@mui/material';
+import { Box, Button, Checkbox, Container, Typography, Divider, Chip, Avatar } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.scss';
@@ -63,9 +54,8 @@ export default function Home() {
             marginBottom: '1rem',
           }}
         >
-          GraphiQL Client helps you debug GraphQL queries and implementations -
-          taking care of the hard part so you can focus on actually getting
-          things done.
+          GraphiQL Client helps you debug GraphQL queries and implementations - taking care of the hard part
+          so you can focus on actually getting things done.
         </Typography>
         <Checkbox color="default" onChange={handleAuth} />
         {!auth && (
@@ -79,23 +69,13 @@ export default function Home() {
             >
               Log in
             </Button>
-            <Button
-              component={Link}
-              to="/signup"
-              variant="contained"
-              size="large"
-            >
+            <Button component={Link} to="/signup" variant="contained" size="large">
               Sign up
             </Button>
           </Box>
         )}
         {auth && (
-          <Button
-            variant="contained"
-            onClick={handleSignout}
-            size="large"
-            sx={{ marginBottom: '5rem' }}
-          >
+          <Button variant="contained" onClick={handleSignout} size="large" sx={{ marginBottom: '5rem' }}>
             Graph
             <Typography
               sx={{

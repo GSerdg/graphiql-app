@@ -1,10 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
-  signOut,
-} from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
 const env = import.meta.env;
@@ -22,11 +17,7 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-export async function registerWithEmailAndPassword(
-  name: string,
-  email: string,
-  password: string
-) {
+export async function registerWithEmailAndPassword(name: string, email: string, password: string) {
   const res = await createUserWithEmailAndPassword(auth, email, password);
   const user = res.user;
   addDoc(collection(db, 'users'), {

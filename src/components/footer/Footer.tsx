@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  Typography,
-  List,
-  ListItem,
-  Link,
-} from '@mui/material';
+import { Box, Container, Typography, List, ListItem, Link } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import './Footer.scss';
 import logo from '/svg/rs_school_js.svg';
