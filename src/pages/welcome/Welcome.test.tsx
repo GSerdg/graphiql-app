@@ -3,13 +3,13 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { BrowserRouter, Router } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import Home from './Home';
+import Welcome from './Welcome';
 
 describe('Tests for home component', () => {
   it('Make sure the component is rendering', () => {
     render(
       <BrowserRouter>
-        <Home />
+        <Welcome />
       </BrowserRouter>
     );
 
@@ -29,7 +29,7 @@ describe('Tests for home component', () => {
 
     render(
       <Router location={history.location} navigator={history}>
-        <Home />
+        <Welcome />
       </Router>
     );
 

@@ -1,26 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import {
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import ErrorComponent from './components/error-component/ErrorComponent';
-import { Provider } from 'react-redux';
-import { setupStore } from './app/store';
 import App from './App';
-import Home from './pages/home/Home';
-import Authorisation from './pages/authorisation/Authorysation';
-import Graphiql from './pages/graphiql/Graphiql';
+import { setupStore } from './app/store';
+import ErrorComponent from './components/error-component/ErrorComponent';
+import Authorisation from './pages/authorization/Authorization';
+import Welcome from './pages/welcome/Welcome';
+import Editor from './pages/main/Editor';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} errorElement={<ErrorComponent />}>
-      <Route index element={<Home />} />
-      <Route path="login" element={<Authorisation />} />
+      <Route index element={<Welcome />} />
+      <Route path="login" element={<Authorisation />} />+
       <Route path="signup" element={<Authorisation />} />
-      <Route path="graphiql" element={<Graphiql />} />
+      <Route path="editor" element={<Editor />} />
     </Route>
   )
 );

@@ -6,12 +6,12 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import './Home.scss';
+import './Welcome.scss';
 import { CustomCard } from './card';
 import { ourTeam } from './team-data';
-import graphqlLogo from '/svg/graphql.png';
+import graphqlLogo from '/image/graphql.png';
 
-export default function Home() {
+export default function Welcome() {
   return (
     <Container sx={{ flexGrow: 1 }}>
       <Box
@@ -27,7 +27,7 @@ export default function Home() {
           component="h1"
           gutterBottom
           sx={{
-            width: '35rem',
+            width: '31rem',
             textAlign: 'center',
             fontWeight: 700,
             fontSize: '2.5rem',

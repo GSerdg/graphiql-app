@@ -2,7 +2,7 @@ import { Box, Container, Typography, List } from '@mui/material';
 import './Footer.scss';
 import logo from '/svg/rs_school_js.svg';
 import { GitLink } from './GitLink';
-import { ourTeam } from '../../pages/home/team-data';
+import { ourTeam } from '../../pages/welcome/team-data';
 
 export default function Footer() {
   return (

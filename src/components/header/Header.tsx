@@ -14,6 +14,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LangContext } from '../../App';
 import './Header.scss';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function Header() {
   const { setLang } = useContext(LangContext);
@@ -70,6 +71,7 @@ export default function Header() {
                 color="inherit"
                 to="/"
                 className="header__button--home"
+                sx={{ padding: 0 }}
               >
                 Home
               </Button>
@@ -104,14 +106,27 @@ export default function Header() {
               </ButtonGroup>
             )}
             {auth && (
-              <Button
-                color="inherit"
-                variant="outlined"
-                onClick={handleSignout}
-                className="header__button"
-              >
-                Log out
-              </Button>
+              <>
+                <Button
+                  component={Link}
+                  color="inherit"
+                  variant="outlined"
+                  to="/editor"
+                  className="header__button"
+                  sx={{ marginRight: '1rem' }}
+                >
+                  Main page
+                </Button>
+                <Button
+                  color="inherit"
+                  variant="outlined"
+                  onClick={handleSignout}
+                  className="header__button"
+                  endIcon={<LogoutIcon />}
+                >
+                  Log out
+                </Button>
+              </>
             )}
             <Checkbox color="default" onChange={handleAuth} />
           </Toolbar>
