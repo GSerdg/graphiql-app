@@ -17,9 +17,9 @@ describe('App', () => {
     renderWithProviders(<Mocktest />);
 
     expect(
-      screen.getByRole('heading', {
-        level: 1,
+      screen.getByRole('link', {
+        name: 'Home',
       })
-    ).toHaveTextContent('GraphyQL APP');
+    ).toHaveTextContent('Home');
   });
 });

@@ -1,0 +1,25 @@
+.card-list {
+  font-size: 12px;
+  align-items: center;
+
+  @media (min-width: $sm) {
+    font-size: 10px;
+    align-items: stretch;
+  }
+
+  @media (min-width: $md) {
+    font-size: 14px;
+  }
+
+  @media (min-width: $lg) {
+    font-size: 16px;
+  }
+
+  @media (min-width: $xl) {
+    font-size: 18px;
+  }
+}
+
+.graphql__logo {
+  width: 8rem;
+}

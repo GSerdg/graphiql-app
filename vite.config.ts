@@ -12,4 +12,11 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/setupTests.ts', 'vitest-localstorage-mock'],
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "/public/styles/_constants.scss";`,
+      },
+    },
+  },
 });
