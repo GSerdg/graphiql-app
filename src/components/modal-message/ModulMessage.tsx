@@ -16,6 +16,7 @@ export default function ModalMessage(props: ModalMessageProps) {
     <Snackbar
       sx={{ marginTop: '50px' }}
       TransitionComponent={SlideTransition}
+      data-testid="modulTest"
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={props.isOpenMessage}
       autoHideDuration={3000}
