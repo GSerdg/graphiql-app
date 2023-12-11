@@ -22,7 +22,7 @@ export default function NotFound() {
           alignItems: 'center',
         }}
       >
-        <img className="not-found__image" src={rhino}></img>
+        <img className="not-found__image" src={rhino} alt="rhino"></img>
         <Box
           sx={{
             position: 'relative',
