@@ -23,8 +23,7 @@ import { signinSchema } from '../../shared/validationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, sendPasswordReset } from '../../shared/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
 import ModalMessage from '../../components/modal-message/ModulMessage';
 import { FirebaseError } from 'firebase/app';
 import getAuthErrorMessage from '../../shared/firebaseErrors';
@@ -36,7 +35,6 @@ interface SubmitForm {
 
 export default function LoginPage() {
   const [isShowPassword, setIsShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
   const [loginError, setLoginError] = useState(false);
   const [isOpenMessage, setIsOpenMessage] = useState(false);
   const [messageType, setMessageType] = useState<AlertColor>();
@@ -45,6 +43,7 @@ export default function LoginPage() {
 
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({
@@ -69,7 +68,7 @@ export default function LoginPage() {
   async function onSubmitHandelr(data: SubmitForm) {
     try {
       setIsLoading(true);
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      await logInWithEmailAndPassword(data.email, data.password);
       setMessageType('success');
       setStatusMessage('You are logged in');
     } catch (error) {
@@ -120,11 +119,11 @@ export default function LoginPage() {
               type="text"
               aria-describedby="email-helper-text"
               label="Email"
-              onChange={(event) => {
-                setEmail(event.target.value);
+              inputProps={{
+                'data-testid': 'emailTest',
               }}
             />
-            <FormHelperText id="email-helper-text" sx={{ height: '40px' }}>
+            <FormHelperText id="email-helper-text" data-testid="emailHelperTest" sx={{ height: '40px' }}>
               {errors.email?.message || ' '}
             </FormHelperText>
           </FormControl>
@@ -141,6 +140,9 @@ export default function LoginPage() {
               id="password"
               type={isShowPassword ? 'text' : 'password'}
               aria-describedby="password-helper-text"
+              inputProps={{
+                'data-testid': 'passwordTest',
+              }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -154,7 +156,11 @@ export default function LoginPage() {
               }
               label="Password"
             />
-            <FormHelperText id="password-helper-text" sx={{ height: '20px' }}>
+            <FormHelperText
+              id="password-helper-text"
+              data-testid="passwordHelperTest"
+              sx={{ height: '20px' }}
+            >
               {errors.password?.message || ' '}
             </FormHelperText>
           </FormControl>
@@ -162,8 +168,9 @@ export default function LoginPage() {
             <LinkMUI
               component={Button}
               variant="caption"
+              data-testid="resetPasswordTest"
               onClick={() => {
-                sendPasswordReset(email);
+                sendPasswordReset(getValues('email'));
               }}
             >
               Reset your password
@@ -172,6 +179,7 @@ export default function LoginPage() {
           <Button
             type="submit"
             variant="contained"
+            data-testid="buttonTest"
             disabled={!isValid || isLoading}
             sx={{ mt: 3, mb: 2, float: 'right' }}
           >

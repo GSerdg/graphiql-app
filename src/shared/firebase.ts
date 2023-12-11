@@ -1,5 +1,11 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
 const env = import.meta.env;
@@ -26,6 +32,10 @@ export async function registerWithEmailAndPassword(name: string, email: string, 
     authProvider: 'local',
     email,
   });
+}
+
+export async function logInWithEmailAndPassword(email: string, password: string) {
+  await signInWithEmailAndPassword(auth, email, password);
 }
 
 export async function sendPasswordReset(email: string) {

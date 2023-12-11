@@ -45,5 +45,5 @@ export const signinSchema = yup.object().shape({
       'Email address must contain a domain name (e.g., example.com)'
     )
     .email('Email address must be properly formatted (e.g., user@example.com)'),
-  password: yup.string().required('Enter password'),
+  password: yup.string().required('Enter your password'),
 });
