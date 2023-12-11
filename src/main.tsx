@@ -13,6 +13,7 @@ import ErrorComponent from './components/error-component/ErrorComponent';
 import Authorisation from './pages/authorization/Authorization';
 import Welcome from './pages/welcome/Welcome';
 import Editor from './pages/main/Editor';
+import NotFound from './pages/not-found/NotFound';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Authorisation />} />+
       <Route path="signup" element={<Authorisation />} />
       <Route path="editor" element={<Editor />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
