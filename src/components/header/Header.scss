@@ -1,17 +1,17 @@
 header .header {
   padding: 0;
 
-  @media (min-width: 400px) {
+  @media (min-width: $sm) {
     padding: 0 24px;
   }
 }
 
-html .appbar {
+.MuiAppBar-root.app-bar {
  background-color: #1976d2;
  transition: 1s;
 }
 
-html .appbar {
+.MuiAppBar-root.app-bar {
   & p {
     font-size: 1rem;
   }
@@ -35,7 +35,7 @@ html .appbar {
   }
 }
 
-html .appbar--sticky {
+.MuiAppBar-root.app-bar--sticky {
   box-shadow: none;
   background-color: #01579b;
 

@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter, Router } from 'react-router-dom';
-import { describe, expect, it } from 'vitest';
 import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router-dom';
+import { describe, expect, it } from 'vitest';
 import Header from './Header';
-import { createMemoryHistory } from 'history';
 
 describe('Tests for header component', () => {
   it('Make sure the component is rendering', () => {
@@ -23,26 +22,20 @@ describe('Tests for header component', () => {
   });
 
   it('Make sure clicking a link redirects to the appropriate page', async () => {
-    const history = createMemoryHistory();
-
-    render(
-      <Router location={history.location} navigator={history}>
-        <Header />
-      </Router>
-    );
+    render(<Header />, { wrapper: BrowserRouter });
 
     const mainLink = screen.getByRole('link', { name: 'Home' });
     const loginLink = screen.getByRole('link', { name: 'Log in' });
     const signupLink = screen.getByRole('link', { name: 'Sign up' });
 
     await userEvent.click(loginLink);
-    expect(history.location.pathname).toBe('/login');
+    expect(window.location.pathname).toBe('/login');
 
     await userEvent.click(signupLink);
-    expect(history.location.pathname).toBe('/signup');
+    expect(window.location.pathname).toBe('/signup');
 
     await userEvent.click(mainLink);
-    expect(history.location.pathname).toBe('/');
+    expect(window.location.pathname).toBe('/');
   });
 
   it('Check that langSwitcher works', async () => {

@@ -2,7 +2,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import MuiLink from '@mui/material/Link';
 
-interface Props {
+interface DeveloperCardProps {
   name: string;
   gitLink: string;
   gitName: string;
@@ -10,13 +10,13 @@ interface Props {
   description: string;
 }
 
-export const CustomCard = ({
+export const DeveloperCard = ({
   name,
   gitLink,
   gitName,
   image,
   description,
-}: Props): React.ReactNode => {
+}: DeveloperCardProps) => {
   return (
     <Card
       sx={{
@@ -34,7 +34,7 @@ export const CustomCard = ({
           marginTop: '1em',
         }}
         image={image}
-      ></CardMedia>
+      />
       <CardContent>
         <Typography sx={{ textAlign: 'center', fontSize: '1em' }}>
           {name}

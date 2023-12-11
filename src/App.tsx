@@ -1,24 +1,21 @@
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
 import { Box, CssBaseline } from '@mui/material';
+import { createContext, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import ErrorBoundary from './components/error-boundary/ErrorBoundary';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import './index.scss';
-import { createContext, useState } from 'react';
+import { SupportedLocales } from './shared/types';
 
 interface LangContext {
-  lang: string;
-  setLang: React.Dispatch<React.SetStateAction<string>>;
+  lang: SupportedLocales;
+  setLang: React.Dispatch<React.SetStateAction<SupportedLocales>>;
 }
 
 export const LangContext = createContext<LangContext>({} as LangContext);
 
 function App() {
-  const [lang, setLang] = useState('en');
+  const [lang, setLang] = useState<SupportedLocales>('en');
   console.log(lang);
 
   return (

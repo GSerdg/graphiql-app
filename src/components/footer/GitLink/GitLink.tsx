@@ -1,12 +1,12 @@
 import { ListItem, Link } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-interface Props {
+interface GitLinkProps {
   gitName: string;
   gitLink: string;
 }
 
-export const GitLink = ({ gitName, gitLink }: Props): React.ReactNode => {
+export const GitLink = ({ gitName, gitLink }: GitLinkProps) => {
   return (
     <ListItem sx={{ padding: '0 0 0.1rem' }}>
       <Link

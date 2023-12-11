@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import './Welcome.scss';
-import { CustomCard } from './card';
+import { DeveloperCard } from './card/card';
 import { ourTeam } from './team-data';
 import graphqlLogo from '/image/graphql.png';
 
@@ -70,7 +70,7 @@ export default function Welcome() {
       >
         {ourTeam.map((member, index) => {
           return (
-            <CustomCard
+            <DeveloperCard
               key={index}
               name={member.name}
               gitLink={member.gitLink}

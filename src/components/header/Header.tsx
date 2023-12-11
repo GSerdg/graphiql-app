@@ -22,20 +22,20 @@ export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      if (scrollTop > 60) {
+        setIsSticky(true);
+      } else if (scrollTop < 10) {
+        setIsSticky(false);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    if (scrollTop > 60) {
-      setIsSticky(true);
-    } else if (scrollTop < 10) {
-      setIsSticky(false);
-    }
-  };
 
   const handleSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -61,7 +61,7 @@ export default function Header() {
     <>
       <AppBar
         position="fixed"
-        className={isSticky ? 'appbar--sticky' : 'appbar'}
+        className={isSticky ? 'app-bar--sticky' : 'app-bar'}
       >
         <Container className="header">
           <Toolbar className="header__toolbar">
