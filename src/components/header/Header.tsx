@@ -59,11 +59,8 @@ export default function Header() {
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        className={isSticky ? 'app-bar--sticky' : 'app-bar'}
-      >
-        <Container className="header">
+      <AppBar position="fixed" className={isSticky ? 'app-bar--sticky' : 'app-bar'}>
+        <Container className="header" maxWidth="xl">
           <Toolbar className="header__toolbar">
             <Box sx={{ flexGrow: 1 }}>
               <Button
@@ -78,29 +75,15 @@ export default function Header() {
             </Box>
             <Stack direction="row" sx={{ mr: '2rem', alignItems: 'center' }}>
               <Typography>En</Typography>
-              <Switch
-                onChange={handleSwitch}
-                color="default"
-                data-testid="langSwitcher"
-              />
+              <Switch onChange={handleSwitch} color="default" data-testid="langSwitcher" />
               <Typography>Ru</Typography>
             </Stack>
             {!auth && (
               <ButtonGroup>
-                <Button
-                  component={Link}
-                  color="inherit"
-                  to="/login"
-                  className="header__button"
-                >
+                <Button component={Link} color="inherit" to="/login" className="header__button">
                   Log in
                 </Button>
-                <Button
-                  component={Link}
-                  color="inherit"
-                  to="/signup"
-                  className="header__button"
-                >
+                <Button component={Link} color="inherit" to="/signup" className="header__button">
                   Sign up
                 </Button>
               </ButtonGroup>

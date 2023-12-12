@@ -15,6 +15,7 @@ export default function Footer() {
           alignItems: 'center',
           padding: '0 24px',
         }}
+        maxWidth="xl"
       >
         <a href="https://rs.school/react/">
           <img src={logo} alt="rss_logo" className="logo" />
@@ -24,13 +25,7 @@ export default function Footer() {
         </Typography>
         <List sx={{ padding: '0.2rem 0' }}>
           {ourTeam.map((member, index) => {
-            return (
-              <GitLink
-                key={index}
-                gitName={member.gitName}
-                gitLink={member.gitLink}
-              />
-            );
+            return <GitLink key={index} gitName={member.gitName} gitLink={member.gitLink} />;
           })}
         </List>
       </Container>

@@ -1,0 +1,31 @@
+div.editor.MuiContainer-root {
+  padding: 0;
+}
+
+input.editor__endpoint-input {
+  flex-grow: 1;
+  font-size: 1rem;
+  height: 100%;
+  outline: none;
+  background-color: #B8C5D1;
+  border: none;
+  padding: 0 1rem 0;
+  margin-left: 1rem;
+}
+
+span.MuiButton-startIcon svg.MuiSvgIcon-root {
+  font-size: 1rem;
+}
+
+button.editor__button:hover {
+  background-color: darken($color: #38516B, $amount: 5);
+}
+
+.editor__request {
+  border: none;
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+  outline: none;
+  flex-grow: 1;
+  padding: 0;
+}

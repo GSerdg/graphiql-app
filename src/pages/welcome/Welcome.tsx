@@ -1,11 +1,4 @@
-import {
-  Box,
-  Chip,
-  Container,
-  Divider,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Chip, Container, Divider, Stack, Typography } from '@mui/material';
 import './Welcome.scss';
 import { DeveloperCard } from './card/card';
 import { ourTeam } from './team-data';
@@ -13,7 +6,7 @@ import graphqlLogo from '/image/graphql.png';
 
 export default function Welcome() {
   return (
-    <Container sx={{ flexGrow: 1 }}>
+    <Container sx={{ flexGrow: 1 }} maxWidth="xl">
       <Box
         my="4rem"
         sx={{
@@ -47,9 +40,8 @@ export default function Welcome() {
             marginBottom: '1rem',
           }}
         >
-          GraphiQL Client helps you debug GraphQL queries and implementations -
-          taking care of the hard part so you can focus on actually getting
-          things done.
+          GraphiQL Client helps you debug GraphQL queries and implementations - taking care of the hard part
+          so you can focus on actually getting things done.
         </Typography>
         <img src={graphqlLogo} alt="graphQL logo" className="graphql__logo" />
       </Box>
