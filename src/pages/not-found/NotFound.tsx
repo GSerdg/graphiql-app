@@ -70,8 +70,3 @@ export default function NotFound() {
     </Box>
   );
 }
-// component={Link}
-//                 color="inherit"
-//                 to="/"
-//                 className="header__button--home"
-//                 sx={{ padding: 0 }}
