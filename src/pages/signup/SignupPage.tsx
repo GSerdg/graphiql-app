@@ -73,7 +73,7 @@ export default function Signup() {
       setIsLoading(true);
       await registerWithEmailAndPassword(data.email, data.email, data.password);
       setMessageType('success');
-      setStatusMessage('registration complite');
+      setStatusMessage('registration complete');
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);

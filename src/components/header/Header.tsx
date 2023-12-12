@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   ButtonGroup,
-  // Checkbox,
   Container,
   Stack,
   Switch,
@@ -19,7 +18,6 @@ import './Header.scss';
 
 export default function Header() {
   const [lang, setLang] = useState('en');
-  // const [auth, setAuth] = useState(false);
   const [user] = useAuthState(auth);
   console.log(lang);
 
@@ -30,14 +28,6 @@ export default function Header() {
       setLang('en');
     }
   };
-
-  /* const handleAuth = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      setAuth(true);
-    } else {
-      setAuth(false);
-    }
-  }; */
 
   const handleSignout = () => {
     logout();
@@ -73,7 +63,6 @@ export default function Header() {
                 Log out
               </Button>
             )}
-            {/* <Checkbox color="default" onChange={handleAuth} /> */}
           </Toolbar>
         </Container>
       </AppBar>
