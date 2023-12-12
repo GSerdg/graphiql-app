@@ -6,6 +6,7 @@ import App from './App';
 import { setupStore } from './app/store';
 import ErrorComponent from './components/error-component/ErrorComponent';
 import { RequireAuth } from './components/requare-auth/RequareAuth';
+import { RequirePrivateRoute } from './components/requare-private-route/RequarePrivateRoute';
 import LoginPage from './pages/login/LoginPage';
 import Editor from './pages/main/Editor';
 import SignupPage from './pages/signup/SignupPage';
@@ -31,7 +32,14 @@ const router = createBrowserRouter(
           </RequireAuth>
         }
       />
-      <Route path="editor" element={<Editor />} />
+      <Route
+        path="editor"
+        element={
+          <RequirePrivateRoute>
+            <Editor />
+          </RequirePrivateRoute>
+        }
+      />
     </Route>
   )
 );
