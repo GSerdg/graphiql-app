@@ -156,7 +156,7 @@ export default function Signup() {
           <OutlinedInput
             {...register('repeatPassword')}
             id="repeatPassword"
-            type={isShowPassword ? 'text' : 'password'}
+            type={isShowRepeatPassword ? 'text' : 'password'}
             aria-describedby="repeatPassword-helper-text"
             inputProps={{ 'data-testid': 'repeatPasswordTest' }}
             endAdornment={
