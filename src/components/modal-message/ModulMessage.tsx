@@ -1,37 +1,36 @@
-import { SlideProps, Slide, Alert, Snackbar, AlertColor } from '@mui/material';
+import { Alert, Slide, SlideProps, Snackbar } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { setIsOpenMessage } from '../../app/modulSlice';
+import { useSelector } from '../../shared/useSelector';
 
 function SlideTransition(props: SlideProps) {
   return <Slide {...props} direction="left" />;
 }
 
-interface ModalMessageProps {
-  isOpenMessage: boolean;
-  setIsOpenMessage: React.Dispatch<React.SetStateAction<boolean>>;
-  messageType?: AlertColor;
-  statusMessage: string;
-}
+export default function ModalMessage() {
+  const { isOpenMessage, messageType, statusMessage } = useSelector((state) => state.modul);
+  const dispatch = useDispatch();
 
-export default function ModalMessage(props: ModalMessageProps) {
   return (
     <Snackbar
       sx={{ marginTop: '50px' }}
       TransitionComponent={SlideTransition}
       data-testid="modulTest"
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={props.isOpenMessage}
+      open={isOpenMessage}
       autoHideDuration={3000}
       onClose={() => {
-        props.setIsOpenMessage(false);
+        dispatch(setIsOpenMessage(false));
       }}
     >
       <Alert
         onClose={() => {
-          props.setIsOpenMessage(false);
+          dispatch(setIsOpenMessage(false));
         }}
-        severity={props.messageType}
+        severity={messageType}
         sx={{ width: '100%' }}
       >
-        {props.statusMessage}
+        {statusMessage}
       </Alert>
     </Snackbar>
   );

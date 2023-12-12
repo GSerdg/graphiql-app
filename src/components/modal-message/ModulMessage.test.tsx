@@ -1,38 +1,37 @@
-import { describe, expect, it, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { describe, expect, it } from 'vitest';
+import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../app/modulSlice';
+import { renderWithProviders } from '../../test/testUtils';
 import ModalMessage from './ModulMessage';
 
 const Mocktest = () => {
+  const dispatch = useDispatch();
+
+  dispatch(setMessageType('success'));
+  dispatch(setStatusMessage('Message for modul'));
+  dispatch(setIsOpenMessage(true));
+
   return (
     <BrowserRouter>
-      <ModalMessage
-        isOpenMessage={true}
-        setIsOpenMessage={vi.fn()}
-        messageType="error"
-        statusMessage="Message for modul"
-      />
+      <ModalMessage />
     </BrowserRouter>
   );
 };
 
 describe('SignIn', () => {
-  it('should render', async () => {
-    render(<Mocktest />);
-    expect(screen.getByText('Message for modul')).toBeInTheDocument();
-  });
-
   it('should not render', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
-        <ModalMessage
-          isOpenMessage={false}
-          setIsOpenMessage={vi.fn()}
-          messageType="error"
-          statusMessage="Message for modul"
-        />
+        <ModalMessage />
       </BrowserRouter>
     );
     expect(screen.queryByTestId('modulTest')).not.toBeInTheDocument();
+  });
+
+  it('should render', async () => {
+    renderWithProviders(<Mocktest />);
+    expect(screen.getByText('Message for modul')).toBeInTheDocument();
   });
 });

@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import ErrorBoundary from './components/error-boundary/ErrorBoundary';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
+import ModalMessage from './components/modal-message/ModulMessage';
 import './index.scss';
 import { SupportedLocales } from './shared/types';
 
@@ -31,6 +32,7 @@ function App() {
             }}
           >
             <Header />
+            <ModalMessage />
             <Outlet />
             <Footer />
           </Box>

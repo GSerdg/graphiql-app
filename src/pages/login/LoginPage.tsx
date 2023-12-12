@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import {
-  AlertColor,
   Avatar,
   Box,
   Button,
@@ -20,8 +19,9 @@ import { blueGrey, green } from '@mui/material/colors';
 import { FirebaseError } from 'firebase/app';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ModalMessage from '../../components/modal-message/ModulMessage';
+import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../app/modulSlice';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
 import getAuthErrorMessage from '../../shared/firebaseErrors';
 import { signinSchema } from '../../shared/validationSchema';
@@ -34,9 +34,6 @@ interface SubmitForm {
 export default function LoginPage() {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
-  const [isOpenMessage, setIsOpenMessage] = useState(false);
-  const [messageType, setMessageType] = useState<AlertColor>();
-  const [statusMessage, setStatusMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -49,6 +46,8 @@ export default function LoginPage() {
     resolver: yupResolver(signinSchema),
   });
 
+  const dispatch = useDispatch();
+
   function handleClickShowPassword() {
     setIsShowPassword((show) => !show);
   }
@@ -57,16 +56,16 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       await logInWithEmailAndPassword(data.email, data.password);
-      setMessageType('success');
-      setStatusMessage('You are logged in');
+      dispatch(setMessageType('success'));
+      dispatch(setStatusMessage('You are logged in'));
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
-      setMessageType('error');
-      setStatusMessage(message);
+      dispatch(setMessageType('error'));
+      dispatch(setStatusMessage(message));
       setLoginError(true);
     } finally {
-      setIsOpenMessage(true);
+      dispatch(setIsOpenMessage(true));
       setIsLoading(false);
     }
   }
@@ -86,12 +85,6 @@ export default function LoginPage() {
       <Typography component="h1" variant="h5">
         Log In
       </Typography>
-      <ModalMessage
-        isOpenMessage={isOpenMessage}
-        setIsOpenMessage={setIsOpenMessage}
-        messageType={messageType}
-        statusMessage={statusMessage}
-      />
       <Box
         component="form"
         noValidate

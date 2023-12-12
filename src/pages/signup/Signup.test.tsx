@@ -1,8 +1,9 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { registerWithEmailAndPassword } from '../../shared/firebase';
+import { renderWithProviders } from '../../test/testUtils';
 import Signup from './SignupPage';
 
 vi.mock('../../shared/firebase', async (importOriginal) => {
@@ -23,7 +24,7 @@ const Mocktest = () => {
 
 describe('SignUp', () => {
   it('should render', () => {
-    render(<Mocktest />);
+    renderWithProviders(<Mocktest />);
 
     expect(
       screen.getByRole('heading', {
@@ -36,7 +37,7 @@ describe('SignUp', () => {
   });
 
   it('should validate email input', async () => {
-    render(<Mocktest />);
+    renderWithProviders(<Mocktest />);
 
     await userEvent.type(screen.getByTestId('emailTest'), 'a');
     await userEvent.clear(screen.getByTestId('emailTest'));
@@ -59,7 +60,7 @@ describe('SignUp', () => {
   it('should validate password input', async () => {
     // (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
 
-    render(<Mocktest />);
+    renderWithProviders(<Mocktest />);
 
     await userEvent.type(screen.getByTestId('passwordTest'), 'a');
     await userEvent.clear(screen.getByTestId('passwordTest'));
@@ -84,7 +85,7 @@ describe('SignUp', () => {
   });
 
   it('should validate repeat password input', async () => {
-    render(<Mocktest />);
+    renderWithProviders(<Mocktest />);
 
     await userEvent.type(screen.getByTestId('passwordTest'), 'aA1@abcd');
 
@@ -105,7 +106,7 @@ describe('SignUp', () => {
   });
 
   it('should enabled submit button and fetch auth requiest', async () => {
-    render(<Mocktest />);
+    renderWithProviders(<Mocktest />);
 
     expect(screen.getByTestId('buttonTest')).toBeDisabled();
 

@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import {
-  AlertColor,
   Avatar,
   Box,
   Button,
@@ -20,8 +19,9 @@ import { green } from '@mui/material/colors';
 import { FirebaseError } from 'firebase/app';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import ModalMessage from '../../components/modal-message/ModulMessage';
+import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../app/modulSlice';
 import { registerWithEmailAndPassword } from '../../shared/firebase';
 import getAuthErrorMessage from '../../shared/firebaseErrors';
 import { signupSchema } from '../../shared/validationSchema';
@@ -35,9 +35,6 @@ interface SubmitForm {
 export default function Signup() {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowRepeatPassword, setIsShowRepeatPassword] = useState(false);
-  const [isOpenMessage, setIsOpenMessage] = useState(false);
-  const [messageType, setMessageType] = useState<AlertColor>();
-  const [statusMessage, setStatusMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -48,6 +45,7 @@ export default function Signup() {
     resolver: yupResolver(signupSchema),
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function handleClickShowPassword() {
     setIsShowPassword((show) => !show);
@@ -61,20 +59,20 @@ export default function Signup() {
     try {
       setIsLoading(true);
       await registerWithEmailAndPassword(data.email, data.email, data.password);
-      setMessageType('success');
-      setStatusMessage('registration complete');
+      dispatch(setMessageType('success'));
+      dispatch(setStatusMessage('registration complete'));
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
 
-      setMessageType('error');
-      setStatusMessage(message);
+      dispatch(setMessageType('error'));
+      dispatch(setStatusMessage(message));
 
       if (message === 'Email exists. Please Log In') {
         navigate('/login');
       }
     } finally {
-      setIsOpenMessage(true);
+      dispatch(setIsOpenMessage(true));
       setIsLoading(false);
     }
   }
@@ -94,12 +92,6 @@ export default function Signup() {
       <Typography component="h1" variant="h5">
         Sign Up
       </Typography>
-      <ModalMessage
-        isOpenMessage={isOpenMessage}
-        setIsOpenMessage={setIsOpenMessage}
-        messageType={messageType}
-        statusMessage={statusMessage}
-      />
       <Box
         component="form"
         noValidate

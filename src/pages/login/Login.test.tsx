@@ -1,8 +1,9 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedFunction, describe, expect, it, vi } from 'vitest';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
+import { renderWithProviders } from '../../test/testUtils';
 import LoginPage from './LoginPage';
 
 vi.mock('../../shared/firebase', async (importOriginal) => {
@@ -25,7 +26,7 @@ const Mocktest = () => {
 
 describe('SignIn', () => {
   it('should render', () => {
-    render(<Mocktest />);
+    renderWithProviders(<Mocktest />);
 
     expect(
       screen.getByRole('heading', {
@@ -37,7 +38,7 @@ describe('SignIn', () => {
   });
 
   it('should validate email input', async () => {
-    render(<Mocktest />);
+    renderWithProviders(<Mocktest />);
 
     await userEvent.type(screen.getByTestId('emailTest'), 'a');
     await userEvent.clear(screen.getByTestId('emailTest'));
@@ -58,7 +59,7 @@ describe('SignIn', () => {
   });
 
   it('should validate password input', async () => {
-    render(<Mocktest />);
+    renderWithProviders(<Mocktest />);
 
     await userEvent.type(screen.getByTestId('passwordTest'), 'a');
     await userEvent.clear(screen.getByTestId('passwordTest'));
@@ -69,7 +70,7 @@ describe('SignIn', () => {
   });
 
   it('should enabled submit button and fetch auth requiest', async () => {
-    render(<Mocktest />);
+    renderWithProviders(<Mocktest />);
 
     expect(screen.getByTestId('buttonTest')).toBeDisabled();
 
@@ -86,7 +87,7 @@ describe('SignIn', () => {
   });
 
   it('should show reset password button and fetch requiest', async () => {
-    render(<Mocktest />);
+    renderWithProviders(<Mocktest />);
 
     expect(screen.queryByTestId('resetPasswordTest')).not.toBeInTheDocument();
 
