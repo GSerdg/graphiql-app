@@ -1,3 +1,6 @@
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import {
   AlertColor,
   Avatar,
@@ -14,19 +17,16 @@ import {
   Typography,
 } from '@mui/material';
 import LinkMUI from '@mui/material/Link';
-import { useEffect, useState } from 'react';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { blueGrey, green } from '@mui/material/colors';
-import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
-import { useForm } from 'react-hook-form';
-import { signinSchema } from '../../shared/validationSchema';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
-import ModalMessage from '../../components/modal-message/ModulMessage';
 import { FirebaseError } from 'firebase/app';
+import { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import ModalMessage from '../../components/modal-message/ModulMessage';
+import { auth, logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
 import getAuthErrorMessage from '../../shared/firebaseErrors';
+import { signinSchema } from '../../shared/validationSchema';
 
 interface SubmitForm {
   email: string;
@@ -84,7 +84,7 @@ export default function LoginPage() {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{ flexGrow: 1 }}>
       <Box
         sx={{
           marginTop: 8,

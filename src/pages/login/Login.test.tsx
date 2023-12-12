@@ -1,10 +1,10 @@
-import { MockedFunction, describe, expect, it, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { BrowserRouter } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import LoginPage from './LoginPage';
+import { BrowserRouter } from 'react-router-dom';
+import { MockedFunction, describe, expect, it, vi } from 'vitest';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
+import LoginPage from './LoginPage';
 
 vi.mock('react-router-dom', async (importOriginal) => {
   const mod = await importOriginal<typeof import('react-router-dom')>();

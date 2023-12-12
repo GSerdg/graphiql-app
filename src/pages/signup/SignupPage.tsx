@@ -1,3 +1,6 @@
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import {
   AlertColor,
   Avatar,
@@ -14,19 +17,16 @@ import {
   Typography,
 } from '@mui/material';
 import LinkMUI from '@mui/material/Link';
-import { useEffect, useState } from 'react';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { green } from '@mui/material/colors';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import { useForm } from 'react-hook-form';
-import { signupSchema } from '../../shared/validationSchema';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, registerWithEmailAndPassword } from '../../shared/firebase';
 import { FirebaseError } from 'firebase/app';
-import getAuthErrorMessage from '../../shared/firebaseErrors';
+import { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
 import ModalMessage from '../../components/modal-message/ModulMessage';
+import { auth, registerWithEmailAndPassword } from '../../shared/firebase';
+import getAuthErrorMessage from '../../shared/firebaseErrors';
+import { signupSchema } from '../../shared/validationSchema';
 
 interface SubmitForm {
   email: string;
@@ -93,7 +93,7 @@ export default function Signup() {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{ flexGrow: 1 }}>
       <Box
         sx={{
           marginTop: 8,
