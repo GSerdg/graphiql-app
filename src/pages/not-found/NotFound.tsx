@@ -1,6 +1,7 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import rhino from '/svg/rhino.svg';
 import './NotFound.scss';
+import { Link } from 'react-router-dom';
 
 export default function NotFound() {
   return (
@@ -51,8 +52,26 @@ export default function NotFound() {
             Sorry but the page you are looking for does not exist, have been
             removed, name changed or is temporarily unavailable
           </Typography>
+          <Button
+            variant="contained"
+            component={Link}
+            to={'/'}
+            sx={{
+              width: 'fit-content',
+              alignSelf: 'flex-end',
+              color: 'white',
+              backgroundColor: '#1976d2',
+            }}
+          >
+            Go to Homepage
+          </Button>
         </Box>
       </Container>
     </Box>
   );
 }
+// component={Link}
+//                 color="inherit"
+//                 to="/"
+//                 className="header__button--home"
+//                 sx={{ padding: 0 }}
