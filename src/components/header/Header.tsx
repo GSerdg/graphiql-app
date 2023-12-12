@@ -52,10 +52,7 @@ export default function Header() {
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        className={isSticky ? 'app-bar--sticky' : 'app-bar'}
-      >
+      <AppBar position="fixed" className={isSticky ? 'app-bar--sticky' : 'app-bar'}>
         <Container className="header">
           <Toolbar className="header__toolbar">
             <Box sx={{ flexGrow: 1 }}>
@@ -76,20 +73,10 @@ export default function Header() {
             </Stack>
             {!user && (
               <ButtonGroup>
-                <Button
-                  component={Link}
-                  color="inherit"
-                  to="/login"
-                  className="header__button"
-                >
+                <Button component={Link} color="inherit" to="/login" className="header__button">
                   Log in
                 </Button>
-                <Button
-                  component={Link}
-                  color="inherit"
-                  to="/signup"
-                  className="header__button"
-                >
+                <Button component={Link} color="inherit" to="/signup" className="header__button">
                   Sign up
                 </Button>
               </ButtonGroup>

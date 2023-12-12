@@ -24,13 +24,7 @@ export default function Footer() {
         </Typography>
         <List sx={{ padding: '0.2rem 0' }}>
           {ourTeam.map((member, index) => {
-            return (
-              <GitLink
-                key={index}
-                gitName={member.gitName}
-                gitLink={member.gitLink}
-              />
-            );
+            return <GitLink key={index} gitName={member.gitName} gitLink={member.gitLink} />;
           })}
         </List>
       </Container>
