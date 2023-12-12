@@ -5,6 +5,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import App from './App';
 import { setupStore } from './app/store';
 import ErrorComponent from './components/error-component/ErrorComponent';
+import { RequireAuth } from './components/requare-auth/RequareAuth';
 import LoginPage from './pages/login/LoginPage';
 import Editor from './pages/main/Editor';
 import SignupPage from './pages/signup/SignupPage';
@@ -14,8 +15,22 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} errorElement={<ErrorComponent />}>
       <Route index element={<Welcome />} />
-      <Route path="login" element={<LoginPage />} />+
-      <Route path="signup" element={<SignupPage />} />
+      <Route
+        path="login"
+        element={
+          <RequireAuth>
+            <LoginPage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="signup"
+        element={
+          <RequireAuth>
+            <SignupPage />
+          </RequireAuth>
+        }
+      />
       <Route path="editor" element={<Editor />} />
     </Route>
   )

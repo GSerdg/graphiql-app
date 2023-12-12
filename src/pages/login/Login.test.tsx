@@ -1,18 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedFunction, describe, expect, it, vi } from 'vitest';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
 import LoginPage from './LoginPage';
-
-vi.mock('react-router-dom', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('react-router-dom')>();
-  return {
-    ...mod,
-    useNavigate: vi.fn(),
-  };
-});
 
 vi.mock('../../shared/firebase', async (importOriginal) => {
   const mod = await importOriginal<typeof import('../../shared/firebase')>();
@@ -24,8 +15,6 @@ vi.mock('../../shared/firebase', async (importOriginal) => {
   };
 });
 
-vi.mock('react-firebase-hooks/auth');
-
 const Mocktest = () => {
   return (
     <BrowserRouter>
@@ -36,9 +25,8 @@ const Mocktest = () => {
 
 describe('SignIn', () => {
   it('should render', () => {
-    (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
-
     render(<Mocktest />);
+
     expect(
       screen.getByRole('heading', {
         level: 1,
@@ -49,8 +37,6 @@ describe('SignIn', () => {
   });
 
   it('should validate email input', async () => {
-    (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
-
     render(<Mocktest />);
 
     await userEvent.type(screen.getByTestId('emailTest'), 'a');
@@ -72,8 +58,6 @@ describe('SignIn', () => {
   });
 
   it('should validate password input', async () => {
-    (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
-
     render(<Mocktest />);
 
     await userEvent.type(screen.getByTestId('passwordTest'), 'a');
@@ -85,8 +69,6 @@ describe('SignIn', () => {
   });
 
   it('should enabled submit button and fetch auth requiest', async () => {
-    (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
-
     render(<Mocktest />);
 
     expect(screen.getByTestId('buttonTest')).toBeDisabled();
@@ -104,8 +86,6 @@ describe('SignIn', () => {
   });
 
   it('should show reset password button and fetch requiest', async () => {
-    (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
-
     render(<Mocktest />);
 
     expect(screen.queryByTestId('resetPasswordTest')).not.toBeInTheDocument();
@@ -115,6 +95,7 @@ describe('SignIn', () => {
     (logInWithEmailAndPassword as MockedFunction<typeof logInWithEmailAndPassword>).mockRejectedValue({
       code: 'auth/invalid-credential',
     });
+
     await userEvent.click(screen.getByTestId('buttonTest'));
     waitFor(() => {
       expect(screen.getByText('Reset your password')).toBeInTheDocument();
