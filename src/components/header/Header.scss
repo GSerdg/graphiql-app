@@ -7,8 +7,8 @@ header .header {
 }
 
 .MuiAppBar-root.app-bar {
- background-color: #1976d2;
- transition: 1s;
+  background-color: #1976d2;
+  transition: 1s;
 }
 
 .MuiAppBar-root.app-bar {
@@ -67,7 +67,7 @@ span.MuiSwitch-switchBase {
 }
 
 span.MuiSwitch-switchBase.Mui-checked {
-  transform: translateX(1.5rem)
+  transform: translateX(1.5rem);
 }
 
 span.MuiSwitch-thumb {

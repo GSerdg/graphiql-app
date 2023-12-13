@@ -1,21 +1,16 @@
-import {
-  PreloadedState,
-  combineReducers,
-  configureStore,
-} from '@reduxjs/toolkit';
-import inputReducer from './inputSlice';
+import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
 import { api } from './api/api';
+import modulReducer from './modulSlice';
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
-  input: inputReducer,
+  modul: modulReducer,
 });
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(api.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
   });
 }
 
