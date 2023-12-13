@@ -23,7 +23,7 @@ export function RequirePrivateRoute({ children }: { children: JSX.Element }) {
           }}
         />
       ) : !user ? (
-        <Navigate to="/login" state={{ from: location }} replace />
+        <Navigate to="/" state={{ from: location }} replace />
       ) : (
         children
       )}
