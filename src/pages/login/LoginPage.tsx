@@ -52,7 +52,7 @@ export default function LoginPage() {
     setIsShowPassword((show) => !show);
   }
 
-  async function onSubmitHandelr(data: SubmitForm) {
+  async function onSubmitHandler(data: SubmitForm) {
     try {
       setIsLoading(true);
       await logInWithEmailAndPassword(data.email, data.password);
@@ -64,6 +64,24 @@ export default function LoginPage() {
       dispatch(setMessageType('error'));
       dispatch(setStatusMessage(message));
       setLoginError(true);
+    } finally {
+      dispatch(setIsOpenMessage(true));
+      setIsLoading(false);
+    }
+  }
+
+  async function handleResetPasswordClick() {
+    try {
+      setIsLoading(true);
+      await sendPasswordReset(getValues('email'));
+      dispatch(setMessageType('success'));
+      dispatch(setStatusMessage('Password reset link sent!'));
+    } catch (error) {
+      const err = error as Error;
+      const message = getAuthErrorMessage(err.message);
+
+      dispatch(setMessageType('error'));
+      dispatch(setStatusMessage(message));
     } finally {
       dispatch(setIsOpenMessage(true));
       setIsLoading(false);
@@ -88,7 +106,7 @@ export default function LoginPage() {
       <Box
         component="form"
         noValidate
-        onSubmit={handleSubmit(onSubmitHandelr)}
+        onSubmit={handleSubmit(onSubmitHandler)}
         sx={{ mt: 3, position: 'relative' }}
       >
         <FormControl error={errors.email ? true : false} variant="outlined" fullWidth required>
@@ -145,9 +163,7 @@ export default function LoginPage() {
             component={Button}
             variant="caption"
             data-testid="resetPasswordTest"
-            onClick={() => {
-              sendPasswordReset(getValues('email'));
-            }}
+            onClick={handleResetPasswordClick}
           >
             Reset your password
           </LinkMUI>
@@ -175,8 +191,8 @@ export default function LoginPage() {
           />
         )}
       </Box>
-      <LinkMUI component={Link} to="/signup" variant="caption">
-        Don`t have an account? Sign Up
+      <LinkMUI component={Link} to="/signup" variant="body1">
+        {"Don't have an account? Sign Up"}
       </LinkMUI>
     </Box>
   );

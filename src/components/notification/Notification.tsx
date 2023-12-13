@@ -7,8 +7,12 @@ function SlideTransition(props: SlideProps) {
   return <Slide {...props} direction="left" />;
 }
 
-export default function ModalMessage() {
-  const { isOpenMessage, messageType, statusMessage } = useSelector((state) => state.modul);
+export default function Notification() {
+  const {
+    isNotificationOpen: isOpenMessage,
+    notificationType: messageType,
+    description: statusMessage,
+  } = useSelector((state) => state.modul);
   const dispatch = useDispatch();
 
   return (
@@ -18,7 +22,7 @@ export default function ModalMessage() {
       data-testid="modulTest"
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isOpenMessage}
-      autoHideDuration={3000}
+      autoHideDuration={4000}
       onClose={() => {
         dispatch(setIsOpenMessage(false));
       }}

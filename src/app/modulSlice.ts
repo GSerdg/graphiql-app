@@ -1,16 +1,16 @@
 import { AlertColor } from '@mui/material';
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface ModulState {
-  isOpenMessage: boolean;
-  messageType: AlertColor;
-  statusMessage: string;
+export interface NotificationState {
+  isNotificationOpen: boolean;
+  notificationType: AlertColor;
+  description: string;
 }
 
-const initialState: ModulState = {
-  isOpenMessage: false,
-  messageType: 'success',
-  statusMessage: '',
+const initialState: NotificationState = {
+  isNotificationOpen: false,
+  notificationType: 'success',
+  description: '',
 };
 
 export const modulSlice = createSlice({
@@ -18,13 +18,13 @@ export const modulSlice = createSlice({
   initialState,
   reducers: {
     setIsOpenMessage: (state, action) => {
-      state.isOpenMessage = action.payload;
+      state.isNotificationOpen = action.payload;
     },
     setMessageType: (state, action) => {
-      state.messageType = action.payload;
+      state.notificationType = action.payload;
     },
     setStatusMessage: (state, action) => {
-      state.statusMessage = action.payload;
+      state.description = action.payload;
     },
   },
 });

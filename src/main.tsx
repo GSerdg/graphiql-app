@@ -5,8 +5,8 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import App from './App';
 import { setupStore } from './app/store';
 import ErrorComponent from './components/error-component/ErrorComponent';
-import { RequireAuth } from './components/requare-auth/RequareAuth';
-import { RequirePrivateRoute } from './components/requare-private-route/RequarePrivateRoute';
+import { PrivateRoute } from './components/private-route/PrivateRoute';
+import { RedirectAuthorizedUserRoute } from './components/requare-auth/RequareAuth';
 import LoginPage from './pages/login/LoginPage';
 import Editor from './pages/main/Editor';
 import SignupPage from './pages/signup/SignupPage';
@@ -19,25 +19,25 @@ const router = createBrowserRouter(
       <Route
         path="login"
         element={
-          <RequireAuth>
+          <RedirectAuthorizedUserRoute>
             <LoginPage />
-          </RequireAuth>
+          </RedirectAuthorizedUserRoute>
         }
       />
       <Route
         path="signup"
         element={
-          <RequireAuth>
+          <RedirectAuthorizedUserRoute>
             <SignupPage />
-          </RequireAuth>
+          </RedirectAuthorizedUserRoute>
         }
       />
       <Route
         path="editor"
         element={
-          <RequirePrivateRoute>
+          <PrivateRoute>
             <Editor />
-          </RequirePrivateRoute>
+          </PrivateRoute>
         }
       />
     </Route>

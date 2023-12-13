@@ -1,7 +1,8 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
+import { MockedFunction, describe, expect, it, vi } from 'vitest';
+import Notification from '../../components/notification/Notification';
 import { registerWithEmailAndPassword } from '../../shared/firebase';
 import { renderWithProviders } from '../../test/testUtils';
 import Signup from './SignupPage';
@@ -17,6 +18,7 @@ vi.mock('../../shared/firebase', async (importOriginal) => {
 const Mocktest = () => {
   return (
     <BrowserRouter>
+      <Notification />
       <Signup />
     </BrowserRouter>
   );
@@ -58,8 +60,6 @@ describe('SignUp', () => {
   });
 
   it('should validate password input', async () => {
-    // (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
-
     renderWithProviders(<Mocktest />);
 
     await userEvent.type(screen.getByTestId('passwordTest'), 'a');
@@ -122,6 +122,24 @@ describe('SignUp', () => {
     await userEvent.click(screen.getByTestId('buttonTest'));
     waitFor(() => {
       expect(registerWithEmailAndPassword).toHaveBeenCalledWith('a@b.com', 'a@b.com', 'aA1@abcd');
+    });
+  });
+
+  it('should show notification message', async () => {
+    (registerWithEmailAndPassword as MockedFunction<typeof registerWithEmailAndPassword>).mockRejectedValue({
+      code: 'auth/email-already-in-use',
+    });
+
+    renderWithProviders(<Mocktest />);
+
+    expect(screen.queryByTestId('modulTest')).not.toBeInTheDocument();
+
+    await userEvent.type(screen.getByTestId('emailTest'), 'a@b.com');
+    await userEvent.type(screen.getByTestId('passwordTest'), 'aA1@abcd');
+    await userEvent.type(screen.getByTestId('repeatPasswordTest'), 'aA1@abcd');
+    await userEvent.click(screen.getByTestId('buttonTest'));
+    await waitFor(() => {
+      expect(screen.getByText('Email exists. Please Log In')).toBeInTheDocument();
     });
   });
 });

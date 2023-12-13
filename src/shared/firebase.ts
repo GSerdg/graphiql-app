@@ -1,12 +1,12 @@
 import { initializeApp } from 'firebase/app';
 import {
-  getAuth,
   createUserWithEmailAndPassword,
+  getAuth,
   sendPasswordResetEmail,
-  signOut,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { addDoc, collection, getFirestore } from 'firebase/firestore';
 
 const env = import.meta.env;
 const firebaseConfig = {
@@ -39,12 +39,7 @@ export async function logInWithEmailAndPassword(email: string, password: string)
 }
 
 export async function sendPasswordReset(email: string) {
-  try {
-    await sendPasswordResetEmail(auth, email);
-    alert('Password reset link sent!');
-  } catch (err) {
-    console.error(err);
-  }
+  await sendPasswordResetEmail(auth, email);
 }
 
 export function logout() {

@@ -5,9 +5,9 @@ describe('Input slice', () => {
   it('should return default state width empty action', () => {
     const result = modulReducer(undefined, { type: '' });
     expect(result).toEqual({
-      isOpenMessage: false,
-      messageType: 'success',
-      statusMessage: '',
+      isNotificationOpen: false,
+      notificationType: 'success',
+      description: '',
     });
   });
 
@@ -15,34 +15,34 @@ describe('Input slice', () => {
     const action1 = { type: setIsOpenMessage.type, payload: true };
     const result1 = modulReducer(
       {
-        isOpenMessage: false,
-        messageType: 'error',
-        statusMessage: 'Message',
+        isNotificationOpen: false,
+        notificationType: 'error',
+        description: 'Message',
       },
       action1
     );
-    expect(result1.isOpenMessage).toBeTruthy();
+    expect(result1.isNotificationOpen).toBeTruthy();
 
     const action2 = { type: setMessageType.type, payload: 'error' };
     const result2 = modulReducer(
       {
-        isOpenMessage: false,
-        messageType: 'success',
-        statusMessage: 'Message',
+        isNotificationOpen: false,
+        notificationType: 'success',
+        description: 'Message',
       },
       action2
     );
-    expect(result2.messageType).toBe('error');
+    expect(result2.notificationType).toBe('error');
 
     const action3 = { type: setStatusMessage.type, payload: 'Mesage' };
     const result3 = modulReducer(
       {
-        isOpenMessage: false,
-        messageType: 'success',
-        statusMessage: '',
+        isNotificationOpen: false,
+        notificationType: 'success',
+        description: '',
       },
       action3
     );
-    expect(result3.statusMessage).toBe('Mesage');
+    expect(result3.description).toBe('Mesage');
   });
 });

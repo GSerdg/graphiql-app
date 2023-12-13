@@ -20,7 +20,7 @@ import { FirebaseError } from 'firebase/app';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../app/modulSlice';
 import { registerWithEmailAndPassword } from '../../shared/firebase';
 import getAuthErrorMessage from '../../shared/firebaseErrors';
@@ -44,7 +44,6 @@ export default function Signup() {
     mode: 'onChange',
     resolver: yupResolver(signupSchema),
   });
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function handleClickShowPassword() {
@@ -55,7 +54,7 @@ export default function Signup() {
     setIsShowRepeatPassword((show) => !show);
   }
 
-  async function onSubmitHandelr(data: SubmitForm) {
+  async function onSubmitHandeler(data: SubmitForm) {
     try {
       setIsLoading(true);
       await registerWithEmailAndPassword(data.email, data.email, data.password);
@@ -67,10 +66,6 @@ export default function Signup() {
 
       dispatch(setMessageType('error'));
       dispatch(setStatusMessage(message));
-
-      if (message === 'Email exists. Please Log In') {
-        navigate('/login');
-      }
     } finally {
       dispatch(setIsOpenMessage(true));
       setIsLoading(false);
@@ -95,7 +90,7 @@ export default function Signup() {
       <Box
         component="form"
         noValidate
-        onSubmit={handleSubmit(onSubmitHandelr)}
+        onSubmit={handleSubmit(onSubmitHandeler)}
         sx={{ mt: 3, position: 'relative' }}
       >
         <FormControl error={errors.email ? true : false} variant="outlined" fullWidth required>
@@ -199,8 +194,8 @@ export default function Signup() {
           />
         )}
       </Box>
-      <LinkMUI component={Link} to="/login" variant="caption">
-        {'Have an account? Sign In'}
+      <LinkMUI component={Link} to="/login" variant="body1">
+        Have an account? Sign In
       </LinkMUI>
     </Box>
   );
