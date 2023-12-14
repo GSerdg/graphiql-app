@@ -1,10 +1,10 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
-import inputReducer from './inputSlice';
 import { api } from './api/api';
+import modulReducer from './modulSlice';
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
-  input: inputReducer,
+  modul: modulReducer,
 });
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({

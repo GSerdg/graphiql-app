@@ -1,11 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { BrowserRouter } from 'react-router-dom';
-import { describe, expect, it } from 'vitest';
+import { MockedFunction, describe, expect, it, vi } from 'vitest';
 import Header from './Header';
+
+vi.mock('react-firebase-hooks/auth');
 
 describe('Tests for header component', () => {
   it('Make sure the component is rendering', () => {
+    (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
+
     render(
       <BrowserRouter>
         <Header />
@@ -22,6 +27,8 @@ describe('Tests for header component', () => {
   });
 
   it('Make sure clicking a link redirects to the appropriate page', async () => {
+    (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
+
     render(<Header />, { wrapper: BrowserRouter });
 
     const mainLink = screen.getByRole('link', { name: 'Home' });
@@ -39,6 +46,8 @@ describe('Tests for header component', () => {
   });
 
   it('Check that langSwitcher works', async () => {
+    (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
+
     render(
       <BrowserRouter>
         <Header />

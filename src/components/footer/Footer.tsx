@@ -1,8 +1,8 @@
-import { Box, Container, Typography, List } from '@mui/material';
-import './Footer.scss';
-import logo from '/svg/rs_school_js.svg';
-import { GitLink } from './GitLink/GitLink';
+import { Box, Container, List, Typography } from '@mui/material';
 import { ourTeam } from '../../pages/welcome/team-data';
+import './Footer.scss';
+import { GitLink } from './GitLink/GitLink';
+import logo from '/svg/rs_school_js.svg';
 
 export default function Footer() {
   return (
