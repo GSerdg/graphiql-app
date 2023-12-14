@@ -16,8 +16,9 @@ interface LangContext {
 export const LangContext = createContext<LangContext>({} as LangContext);
 
 function App() {
-  const [lang, setLang] = useState<SupportedLocales>('en');
-  console.log(lang);
+  const [lang, setLang] = useState<SupportedLocales>(
+    (localStorage.getItem('lang') as SupportedLocales | undefined) || 'en'
+  );
 
   return (
     <LangContext.Provider value={{ lang, setLang }}>

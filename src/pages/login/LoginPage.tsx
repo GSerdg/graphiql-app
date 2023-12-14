@@ -17,13 +17,15 @@ import {
 import LinkMUI from '@mui/material/Link';
 import { blueGrey, green } from '@mui/material/colors';
 import { FirebaseError } from 'firebase/app';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { LangContext } from '../../App';
 import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../app/modulSlice';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
 import getAuthErrorMessage from '../../shared/firebaseErrors';
+import getTitle, { LangField } from '../../shared/language';
 import { signinSchema } from '../../shared/validationSchema';
 
 interface SubmitForm {
@@ -32,6 +34,8 @@ interface SubmitForm {
 }
 
 export default function LoginPage() {
+  const { lang } = useContext(LangContext);
+
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,7 +49,6 @@ export default function LoginPage() {
     mode: 'onChange',
     resolver: yupResolver(signinSchema),
   });
-
   const dispatch = useDispatch();
 
   function handleClickShowPassword() {
@@ -57,10 +60,10 @@ export default function LoginPage() {
       setIsLoading(true);
       await logInWithEmailAndPassword(data.email, data.password);
       dispatch(setMessageType('success'));
-      dispatch(setStatusMessage('You are logged in'));
+      dispatch(setStatusMessage(getTitle(lang, 'logged')));
     } catch (error) {
       const err = error as FirebaseError;
-      const message = getAuthErrorMessage(err.code);
+      const message = getAuthErrorMessage(err.code, lang);
       dispatch(setMessageType('error'));
       dispatch(setStatusMessage(message));
       setLoginError(true);
@@ -75,10 +78,10 @@ export default function LoginPage() {
       setIsLoading(true);
       await sendPasswordReset(getValues('email'));
       dispatch(setMessageType('success'));
-      dispatch(setStatusMessage('Password reset link sent!'));
+      dispatch(setStatusMessage(getTitle(lang, 'passwordSent')));
     } catch (error) {
       const err = error as Error;
-      const message = getAuthErrorMessage(err.message);
+      const message = getAuthErrorMessage(err.message, lang);
 
       dispatch(setMessageType('error'));
       dispatch(setStatusMessage(message));
@@ -101,7 +104,7 @@ export default function LoginPage() {
         <HowToRegOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Log In
+        {getTitle(lang, 'login')}
       </Typography>
       <Box
         component="form"
@@ -110,19 +113,19 @@ export default function LoginPage() {
         sx={{ mt: 3, position: 'relative' }}
       >
         <FormControl error={errors.email ? true : false} variant="outlined" fullWidth required>
-          <InputLabel htmlFor="email">Email</InputLabel>
+          <InputLabel htmlFor="email">{getTitle(lang, 'emailInput')}</InputLabel>
           <OutlinedInput
             {...register('email')}
             id="email"
             type="text"
             aria-describedby="email-helper-text"
-            label="Email"
+            label={getTitle(lang, 'emailInput')}
             inputProps={{
               'data-testid': 'emailTest',
             }}
           />
           <FormHelperText id="email-helper-text" data-testid="emailHelperTest" sx={{ height: '40px' }}>
-            {errors.email?.message || ' '}
+            {getTitle(lang, errors.email?.message as LangField) || ' '}
           </FormHelperText>
         </FormControl>
         <FormControl
@@ -132,7 +135,7 @@ export default function LoginPage() {
           required
           sx={{ mt: 1 }}
         >
-          <InputLabel htmlFor="password">Password</InputLabel>
+          <InputLabel htmlFor="password">{getTitle(lang, 'passwordInput')}</InputLabel>
           <OutlinedInput
             {...register('password')}
             id="password"
@@ -152,10 +155,10 @@ export default function LoginPage() {
                 </IconButton>
               </InputAdornment>
             }
-            label="Password"
+            label={getTitle(lang, 'passwordInput')}
           />
           <FormHelperText id="password-helper-text" data-testid="passwordHelperTest" sx={{ height: '20px' }}>
-            {errors.password?.message || ' '}
+            {getTitle(lang, errors.password?.message as LangField) || ' '}
           </FormHelperText>
         </FormControl>
         {loginError && (
@@ -165,7 +168,7 @@ export default function LoginPage() {
             data-testid="resetPasswordTest"
             onClick={handleResetPasswordClick}
           >
-            Reset your password
+            {getTitle(lang, 'resetPassword')}
           </LinkMUI>
         )}
         <Button
@@ -175,7 +178,7 @@ export default function LoginPage() {
           disabled={!isValid || isLoading}
           sx={{ mt: 3, mb: 2, float: 'right' }}
         >
-          Log In
+          {getTitle(lang, 'login')}
         </Button>
         {isLoading && (
           <CircularProgress
@@ -192,7 +195,7 @@ export default function LoginPage() {
         )}
       </Box>
       <LinkMUI component={Link} to="/signup" variant="body1">
-        {"Don't have an account? Sign Up"}
+        {getTitle(lang, 'loginLink')}
       </LinkMUI>
     </Box>
   );

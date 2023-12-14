@@ -3,47 +3,41 @@ import * as yup from 'yup';
 export const signupSchema = yup.object().shape({
   email: yup
     .string()
-    .required('Enter your email')
-    .matches(/^\S+$/, 'Email address must not contain leading or trailing whitespace')
-    .matches(
-      /^[-a-z0-9A-Z!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9A-Z!#$%&'*+/=?^_`{|}~]+)*/,
-      'Email address must contain correct email'
-    )
-    .matches(/@/, 'Email address must contain an "@" symbol separating local part and domain name')
+    .required('requareEmailValid')
+    .matches(/^\S+$/, 'spaceEmailValid')
+    .matches(/^[-a-z0-9A-Z!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9A-Z!#$%&'*+/=?^_`{|}~]+)*/, 'nameEmailValid')
+    .matches(/@/, 'symbolEmailValid')
     .matches(
       /@([a-z0-9]([a-z0-9]{0,61}[-a-z0-9])?\.)(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/,
-      'Email address must contain a domain name (e.g., example.com)'
+      'domainEmailValid'
     )
-    .email('Email address must be properly formatted (e.g., user@example.com)'),
+    .email('formatEmailValid'),
   password: yup
     .string()
-    .required('Enter your password')
-    .matches(/[A-ZА-ЯË]/, 'Password must contain at least one uppercase letter')
-    .matches(/[a-zа-яё]/, 'Password must contain at least one lowercase letter')
-    .matches(/[0-9]/, 'Password must contain at least one digit (0-9)')
-    .matches(/[^\wА-Яа-яËё]/, 'Password must contain at least one special character (e.g., !@#$%^&*-)')
-    .min(8, 'Password too short')
-    .matches(/^\S+\S+$/, 'Password must not contain leading or trailing whitespace'),
+    .required('requarePasswordValid')
+    .matches(/[A-ZА-ЯË]/, 'uppercasePasswordValid')
+    .matches(/[a-zа-яё]/, 'lowercasePasswordValid')
+    .matches(/[0-9]/, 'digitPasswordValid')
+    .matches(/[^\wА-Яа-яËё]/, 'characterPasswordValid')
+    .min(8, 'shortPasswordValid')
+    .matches(/^\S+\S+$/, 'spacePasswordValid'),
   repeatPassword: yup
     .string()
-    .required('Repeat your password')
-    .oneOf([yup.ref('password')], 'Passwords must match'),
+    .required('requareRepeatPasswordValid')
+    .oneOf([yup.ref('password')], 'matchPasswordValid'),
 });
 
 export const signinSchema = yup.object().shape({
   email: yup
     .string()
-    .required('Enter your email')
-    .matches(/^\S+$/, 'Email address must not contain leading or trailing whitespace')
-    .matches(
-      /^[-a-z0-9A-Z!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9A-Z!#$%&'*+/=?^_`{|}~]+)*/,
-      'Email address must contain correct email'
-    )
-    .matches(/@/, 'Email address must contain an "@" symbol separating local part and domain name')
+    .required('requareEmailValid')
+    .matches(/^\S+$/, 'spaceEmailValid')
+    .matches(/^[-a-z0-9A-Z!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9A-Z!#$%&'*+/=?^_`{|}~]+)*/, 'nameEmailValid')
+    .matches(/@/, 'symbolEmailValid')
     .matches(
       /@([a-z0-9]([a-z0-9]{0,61}[-a-z0-9])?\.)(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/,
-      'Email address must contain a domain name (e.g., example.com)'
+      'domainEmailValid'
     )
-    .email('Email address must be properly formatted (e.g., user@example.com)'),
-  password: yup.string().required('Enter your password'),
+    .email('formatEmailValid'),
+  password: yup.string().required('requarePasswordValid'),
 });

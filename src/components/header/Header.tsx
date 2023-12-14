@@ -40,8 +40,10 @@ export default function Header() {
 
   const handleSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
+      localStorage.setItem('lang', 'ru');
       setLang('ru');
     } else {
+      localStorage.setItem('lang', 'en');
       setLang('en');
     }
   };
@@ -68,7 +70,12 @@ export default function Header() {
             </Box>
             <Stack direction="row" sx={{ mr: '2rem', alignItems: 'center' }}>
               <Typography>En</Typography>
-              <Switch onChange={handleSwitch} color="default" data-testid="langSwitcher" />
+              <Switch
+                onChange={handleSwitch}
+                color="default"
+                data-testid="langSwitcher"
+                checked={localStorage.getItem('lang') === 'ru' ? true : false}
+              />
               <Typography>Ru</Typography>
             </Stack>
             {!user && (

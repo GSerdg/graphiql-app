@@ -1,9 +1,12 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedFunction, describe, expect, it, vi } from 'vitest';
+import { LangContext } from '../../App';
 import Notification from '../../components/notification/Notification';
 import { registerWithEmailAndPassword } from '../../shared/firebase';
+import { SupportedLocales } from '../../shared/types';
 import { renderWithProviders } from '../../test/testUtils';
 import Signup from './SignupPage';
 
@@ -15,18 +18,22 @@ vi.mock('../../shared/firebase', async (importOriginal) => {
   };
 });
 
-const Mocktest = () => {
+const Mocktest = ({ language }: { language: 'ru' | 'en' }) => {
+  const [lang, setLang] = useState<SupportedLocales>(language);
+
   return (
     <BrowserRouter>
-      <Notification />
-      <Signup />
+      <LangContext.Provider value={{ lang, setLang }}>
+        <Notification />
+        <Signup />
+      </LangContext.Provider>
     </BrowserRouter>
   );
 };
 
 describe('SignUp', () => {
   it('should render', () => {
-    renderWithProviders(<Mocktest />);
+    renderWithProviders(<Mocktest language={'en'} />);
 
     expect(
       screen.getByRole('heading', {
@@ -39,7 +46,7 @@ describe('SignUp', () => {
   });
 
   it('should validate email input', async () => {
-    renderWithProviders(<Mocktest />);
+    renderWithProviders(<Mocktest language={'en'} />);
 
     await userEvent.type(screen.getByTestId('emailTest'), 'a');
     await userEvent.clear(screen.getByTestId('emailTest'));
@@ -60,7 +67,7 @@ describe('SignUp', () => {
   });
 
   it('should validate password input', async () => {
-    renderWithProviders(<Mocktest />);
+    renderWithProviders(<Mocktest language={'en'} />);
 
     await userEvent.type(screen.getByTestId('passwordTest'), 'a');
     await userEvent.clear(screen.getByTestId('passwordTest'));
@@ -85,7 +92,7 @@ describe('SignUp', () => {
   });
 
   it('should validate repeat password input', async () => {
-    renderWithProviders(<Mocktest />);
+    renderWithProviders(<Mocktest language={'en'} />);
 
     await userEvent.type(screen.getByTestId('passwordTest'), 'aA1@abcd');
 
@@ -106,7 +113,7 @@ describe('SignUp', () => {
   });
 
   it('should enabled submit button and fetch auth requiest', async () => {
-    renderWithProviders(<Mocktest />);
+    renderWithProviders(<Mocktest language={'en'} />);
 
     expect(screen.getByTestId('buttonTest')).toBeDisabled();
 
@@ -120,7 +127,7 @@ describe('SignUp', () => {
     expect(screen.getByTestId('buttonTest')).toBeEnabled();
 
     await userEvent.click(screen.getByTestId('buttonTest'));
-    waitFor(() => {
+    await waitFor(() => {
       expect(registerWithEmailAndPassword).toHaveBeenCalledWith('a@b.com', 'a@b.com', 'aA1@abcd');
     });
   });
@@ -130,7 +137,7 @@ describe('SignUp', () => {
       code: 'auth/email-already-in-use',
     });
 
-    renderWithProviders(<Mocktest />);
+    renderWithProviders(<Mocktest language={'en'} />);
 
     expect(screen.queryByTestId('modulTest')).not.toBeInTheDocument();
 
@@ -140,6 +147,45 @@ describe('SignUp', () => {
     await userEvent.click(screen.getByTestId('buttonTest'));
     await waitFor(() => {
       expect(screen.getByText('Email exists. Please Log In')).toBeInTheDocument();
+    });
+  });
+
+  it('should render width ru language', () => {
+    renderWithProviders(<Mocktest language={'ru'} />);
+
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+      })
+    ).toHaveTextContent('Зарегистрироваться');
+    expect(screen.getByText('Адрес электронной почты')).toBeInTheDocument();
+    expect(screen.getByText('Пароль')).toBeInTheDocument();
+    expect(screen.getByText('Повторите пароль')).toBeInTheDocument();
+  });
+
+  it('should show text message width ru language', async () => {
+    (registerWithEmailAndPassword as MockedFunction<typeof registerWithEmailAndPassword>).mockRejectedValue({
+      code: 'auth/email-already-in-use',
+    });
+
+    renderWithProviders(<Mocktest language={'ru'} />);
+
+    await userEvent.type(screen.getByTestId('emailTest'), 'a');
+    expect(
+      screen.getByText(
+        'Адрес электронной почты должен содержать символ «@», разделяющий локальную часть и имя домена.'
+      )
+    ).toBeInTheDocument();
+
+    await userEvent.type(screen.getByTestId('passwordTest'), 'a');
+    expect(screen.getByText('Пароль должен содержать хотя бы одну заглавную букву')).toBeInTheDocument();
+
+    await userEvent.type(screen.getByTestId('emailTest'), 'a@b.com');
+    await userEvent.type(screen.getByTestId('passwordTest'), 'aA1@abcd');
+    await userEvent.type(screen.getByTestId('repeatPasswordTest'), 'aaA1@abcd');
+    await userEvent.click(screen.getByTestId('buttonTest'));
+    await waitFor(() => {
+      expect(screen.getByText('Электронная почта занята. Пожалуйста, войдите')).toBeInTheDocument();
     });
   });
 });

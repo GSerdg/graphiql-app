@@ -17,13 +17,15 @@ import {
 import LinkMUI from '@mui/material/Link';
 import { green } from '@mui/material/colors';
 import { FirebaseError } from 'firebase/app';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { LangContext } from '../../App';
 import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../app/modulSlice';
 import { registerWithEmailAndPassword } from '../../shared/firebase';
 import getAuthErrorMessage from '../../shared/firebaseErrors';
+import getTitle, { LangField } from '../../shared/language';
 import { signupSchema } from '../../shared/validationSchema';
 
 interface SubmitForm {
@@ -33,6 +35,7 @@ interface SubmitForm {
 }
 
 export default function Signup() {
+  const { lang } = useContext(LangContext);
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowRepeatPassword, setIsShowRepeatPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -59,10 +62,10 @@ export default function Signup() {
       setIsLoading(true);
       await registerWithEmailAndPassword(data.email, data.email, data.password);
       dispatch(setMessageType('success'));
-      dispatch(setStatusMessage('registration complete'));
+      dispatch(setStatusMessage(getTitle(lang, 'registrationComplite')));
     } catch (error) {
       const err = error as FirebaseError;
-      const message = getAuthErrorMessage(err.code);
+      const message = getAuthErrorMessage(err.code, lang);
 
       dispatch(setMessageType('error'));
       dispatch(setStatusMessage(message));
@@ -85,7 +88,7 @@ export default function Signup() {
         <AssignmentIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign Up
+        {getTitle(lang, 'signup')}
       </Typography>
       <Box
         component="form"
@@ -94,19 +97,19 @@ export default function Signup() {
         sx={{ mt: 3, position: 'relative' }}
       >
         <FormControl error={errors.email ? true : false} variant="outlined" fullWidth required>
-          <InputLabel htmlFor="email">Email</InputLabel>
+          <InputLabel htmlFor="email">{getTitle(lang, 'emailInput')}</InputLabel>
           <OutlinedInput
             {...register('email')}
             id="email"
             type="text"
             aria-describedby="email-helper-text"
-            label="Email"
+            label={getTitle(lang, 'emailInput')}
             inputProps={{
               'data-testid': 'emailTest',
             }}
           />
           <FormHelperText id="email-helper-text" data-testid="emailHelperTest" sx={{ height: '40px' }}>
-            {errors.email?.message || ' '}
+            {getTitle(lang, errors.email?.message as LangField) || ' '}
           </FormHelperText>
         </FormControl>
         <FormControl
@@ -116,7 +119,7 @@ export default function Signup() {
           required
           sx={{ mt: 1 }}
         >
-          <InputLabel htmlFor="password">Password</InputLabel>
+          <InputLabel htmlFor="password">{getTitle(lang, 'passwordInput')}</InputLabel>
           <OutlinedInput
             {...register('password')}
             id="password"
@@ -134,10 +137,10 @@ export default function Signup() {
                 </IconButton>
               </InputAdornment>
             }
-            label="Password"
+            label={getTitle(lang, 'passwordInput')}
           />
           <FormHelperText id="password-helper-text" data-testid="passwordHelperTest" sx={{ height: '40px' }}>
-            {errors.password?.message || ' '}
+            {getTitle(lang, errors.password?.message as LangField) || ' '}
           </FormHelperText>
         </FormControl>
         <FormControl
@@ -147,7 +150,7 @@ export default function Signup() {
           required
           sx={{ mt: 1 }}
         >
-          <InputLabel htmlFor="repeatPassword">Repeat password</InputLabel>
+          <InputLabel htmlFor="repeatPassword">{getTitle(lang, 'repeatPasswordInput')}</InputLabel>
           <OutlinedInput
             {...register('repeatPassword')}
             id="repeatPassword"
@@ -165,10 +168,10 @@ export default function Signup() {
                 </IconButton>
               </InputAdornment>
             }
-            label="Repeat password"
+            label={getTitle(lang, 'repeatPasswordInput')}
           />
           <FormHelperText id="repeatPassword-helper-text" data-testid="repeatPasswordHelperTest">
-            {errors.repeatPassword?.message || ' '}
+            {getTitle(lang, errors.repeatPassword?.message as LangField) || ' '}
           </FormHelperText>
         </FormControl>
         <Button
@@ -178,7 +181,7 @@ export default function Signup() {
           disabled={!isValid || isLoading}
           sx={{ mt: 3, mb: 2, float: 'right' }}
         >
-          Sign Up
+          {getTitle(lang, 'signup')}
         </Button>
         {isLoading && (
           <CircularProgress
@@ -195,7 +198,7 @@ export default function Signup() {
         )}
       </Box>
       <LinkMUI component={Link} to="/login" variant="body1">
-        Have an account? Sign In
+        {getTitle(lang, 'signupLink')}
       </LinkMUI>
     </Box>
   );
