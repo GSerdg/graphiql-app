@@ -53,7 +53,7 @@ const lang = {
   },
   spaceEmailValid: {
     en: 'Email address must not contain leading or trailing whitespace',
-    ru: 'Адрес электронной почты не должен содержать пробелов в начале или в конце.',
+    ru: 'Адрес электронной почты не должен содержать пробелов в начале или в конце',
   },
   nameEmailValid: {
     en: 'Email address must contain correct email',
@@ -61,15 +61,15 @@ const lang = {
   },
   symbolEmailValid: {
     en: 'Email address must contain an "@" symbol separating local part and domain name',
-    ru: 'Адрес электронной почты должен содержать символ «@», разделяющий локальную часть и имя домена.',
+    ru: 'Адрес электронной почты должен содержать символ «@», разделяющий локальную часть и имя домена',
   },
   domainEmailValid: {
     en: 'Email address must contain a domain name (e.g., example.com)',
-    ru: 'Адрес электронной почты должен содержать доменное имя (например, example.com).',
+    ru: 'Адрес электронной почты должен содержать доменное имя (например, example.com)',
   },
   formatEmailValid: {
     en: 'Email address must be properly formatted (e.g., user@example.com)',
-    ru: 'Адрес электронной почты должен быть правильно отформатирован (например, user@example.com).',
+    ru: 'Адрес электронной почты должен быть правильно отформатирован (например, user@example.com)',
   },
 
   requarePasswordValid: {
@@ -90,7 +90,7 @@ const lang = {
   },
   characterPasswordValid: {
     en: 'Password must contain at least one special character (e.g., !@#$%^&*-)',
-    ru: 'Пароль должен содержать хотя бы один специальный символ (например, !@#$%^&*-).',
+    ru: 'Пароль должен содержать хотя бы один специальный символ (например, !@#$%^&*-)',
   },
   shortPasswordValid: {
     en: 'Password too short',
@@ -98,7 +98,7 @@ const lang = {
   },
   spacePasswordValid: {
     en: 'Password must not contain leading or trailing whitespace',
-    ru: 'Пароль не должен содержать пробелов в начале или в конце.',
+    ru: 'Пароль не должен содержать пробелов в начале или в конце',
   },
   requareRepeatPasswordValid: {
     en: 'Repeat your password',

@@ -22,9 +22,9 @@ export default function getAuthErrorMessage(code: string, lang: 'en' | 'ru') {
     }
     case AuthErrorCodes.CREDENTIAL_TOO_OLD_LOGIN_AGAIN: {
       if (lang === 'ru') {
-        message = 'Пожалуйста, выйдите из системы, повторно войдите и повторите попытку.';
+        message = 'Пожалуйста, выйдите из системы, повторно войдите и повторите попытку';
       } else {
-        message = 'Please logout, re-login, and try again.';
+        message = 'Please logout, re-login, and try again';
       }
       break;
     }
@@ -32,7 +32,7 @@ export default function getAuthErrorMessage(code: string, lang: 'en' | 'ru') {
       if (lang === 'ru') {
         message = 'Некорректный пароль';
       } else {
-        message = 'Incorrect password.';
+        message = 'Incorrect password';
       }
       break;
     }
@@ -46,25 +46,25 @@ export default function getAuthErrorMessage(code: string, lang: 'en' | 'ru') {
     }
     case AuthErrorCodes.USER_CANCELLED: {
       if (lang === 'ru') {
-        message = 'Процесс входа был остановлен вами.';
+        message = 'Процесс входа был остановлен вами';
       } else {
-        message = 'Login process was stopped by you.';
+        message = 'Login process was stopped by you';
       }
       break;
     }
     case AuthErrorCodes.USER_DELETED: {
       if (lang === 'ru') {
-        message = 'Пользователь не существует.';
+        message = 'Пользователь не существует';
       } else {
-        message = 'User does not exist.';
+        message = 'User does not exist';
       }
       break;
     }
     case AuthErrorCodes.USER_DISABLED: {
       if (lang === 'ru') {
-        message = '';
+        message = 'Your account has been disabled';
       } else {
-        message = 'Ваш аккаунт был отключен.';
+        message = 'Ваш аккаунт был отключен';
       }
       break;
     }
@@ -80,7 +80,7 @@ export default function getAuthErrorMessage(code: string, lang: 'en' | 'ru') {
       if (lang === 'ru') {
         message = 'Вы вышли из системы. Пожалуйста, войдите в систему еще раз.';
       } else {
-        message = 'You are signed out.  Please re-sign in.';
+        message = 'You are signed out. Please re-sign in.';
       }
       break;
     }
@@ -88,63 +88,63 @@ export default function getAuthErrorMessage(code: string, lang: 'en' | 'ru') {
       if (lang === 'ru') {
         message = 'Ваш пароль слишком слабый. Оно должно быть не менее шести символов.';
       } else {
-        message = 'Your password is too weak.  It must be at least six characters long.';
+        message = 'Your password is too weak. It must be at least six characters long.';
       }
       break;
     }
     case AuthErrorCodes.INVALID_EMAIL: {
       if (lang === 'ru') {
-        message = 'Адрес электронной почты имеет неправильный формат.';
+        message = 'Адрес электронной почты имеет неправильный формат';
       } else {
-        message = 'The email address is improperly formatted.';
+        message = 'The email address is improperly formatted';
       }
       break;
     }
     case AuthErrorCodes.INTERNAL_ERROR: {
       if (lang === 'ru') {
-        message = 'Внутренняя ошибка.';
+        message = 'Внутренняя ошибка';
       } else {
-        message = 'Internal Error.';
+        message = 'Internal Error';
       }
       break;
     }
     case AuthErrorCodes.INVALID_API_KEY: {
       if (lang === 'ru') {
-        message = 'Неверный ключ API.';
+        message = 'Неверный ключ API';
       } else {
-        message = 'Invalid API key.';
+        message = 'Invalid API key';
       }
       break;
     }
     case AuthErrorCodes.INVALID_APP_CREDENTIAL: {
       if (lang === 'ru') {
-        message = 'Неверные учетные данные приложения.';
+        message = 'Неверные учетные данные приложения';
       } else {
-        message = 'Invalid app credential.';
+        message = 'Invalid app credential';
       }
       break;
     }
     case AuthErrorCodes.INVALID_APP_ID: {
       if (lang === 'ru') {
-        message = 'Неверный идентификатор приложения.';
+        message = 'Неверный идентификатор приложения';
       } else {
-        message = 'Invalid app ID.';
+        message = 'Invalid app ID';
       }
       break;
     }
     case AuthErrorCodes.INVALID_AUTH: {
       if (lang === 'ru') {
-        message = 'Неверный токен пользователя.';
+        message = 'Неверный токен пользователя';
       } else {
-        message = 'Invalid user token.';
+        message = 'Invalid user token';
       }
       break;
     }
     case AuthErrorCodes.TIMEOUT: {
       if (lang === 'ru') {
-        message = 'Тайм-аут аутентификации.';
+        message = 'Тайм-аут аутентификации';
       } else {
-        message = 'Authentication timeout.';
+        message = 'Authentication timeout';
       }
       break;
     }
@@ -152,7 +152,7 @@ export default function getAuthErrorMessage(code: string, lang: 'en' | 'ru') {
       if (lang === 'ru') {
         message = 'Ваш адрес электронной почты не подтвержден. Пожалуйста, проверьте это.';
       } else {
-        message = 'Your email address is not verified.  Please verify it.';
+        message = 'Your email address is not verified. Please verify it.';
       }
       break;
     }
@@ -160,15 +160,15 @@ export default function getAuthErrorMessage(code: string, lang: 'en' | 'ru') {
       if (lang === 'ru') {
         message = 'Веб-хранилище не поддерживается. Пожалуйста, обновите или используйте другой браузер.';
       } else {
-        message = 'Web storage is unsupported.  Please update or use a different browser.';
+        message = 'Web storage is unsupported. Please update or use a different browser.';
       }
       break;
     }
     case AuthErrorCodes.ALREADY_INITIALIZED: {
       if (lang === 'ru') {
-        message = 'Уже инициализирован.';
+        message = 'Уже инициализирован';
       } else {
-        message = 'Already initialized.';
+        message = 'Already initialized';
       }
       break;
     }

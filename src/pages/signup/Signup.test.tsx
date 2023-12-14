@@ -173,7 +173,7 @@ describe('SignUp', () => {
     await userEvent.type(screen.getByTestId('emailTest'), 'a');
     expect(
       screen.getByText(
-        'Адрес электронной почты должен содержать символ «@», разделяющий локальную часть и имя домена.'
+        'Адрес электронной почты должен содержать символ «@», разделяющий локальную часть и имя домена'
       )
     ).toBeInTheDocument();
 
