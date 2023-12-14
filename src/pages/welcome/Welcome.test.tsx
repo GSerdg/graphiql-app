@@ -14,9 +14,7 @@ describe('Tests for home component', () => {
     const title = screen.getAllByRole('heading');
     const divider = screen.getByRole('separator');
 
-    expect(title[0]).toHaveTextContent(
-      'Debugging your GraphQL server was never this easy!'
-    );
+    expect(title[0]).toHaveTextContent('Debugging your GraphQL server was never this easy!');
     expect(divider).toBeInTheDocument();
   });
 });

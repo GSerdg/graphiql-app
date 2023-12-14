@@ -1,8 +1,4 @@
-import {
-  PreloadedState,
-  combineReducers,
-  configureStore,
-} from '@reduxjs/toolkit';
+import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
 import inputReducer from './inputSlice';
 import { api } from './api/api';
 
@@ -14,8 +10,7 @@ export function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(api.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
   });
 }
 

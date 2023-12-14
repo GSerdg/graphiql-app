@@ -23,8 +23,7 @@ export function renderWithProviders(
         input: inputReducer,
       },
       preloadedState,
-      middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(api.middleware),
+      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
     }),
     ...renderOptions
   }: ExtendedRenderOptions = {}

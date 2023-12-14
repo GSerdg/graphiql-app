@@ -7,7 +7,7 @@ input.editor__endpoint-input {
   font-size: 1rem;
   height: 100%;
   outline: none;
-  background-color: #B8C5D1;
+  background-color: #dfe1e9;
   border: none;
   padding: 0 1rem 0;
   margin-left: 1rem;
@@ -18,14 +18,71 @@ span.MuiButton-startIcon svg.MuiSvgIcon-root {
 }
 
 button.editor__button:hover {
-  background-color: darken($color: #38516B, $amount: 5);
+  background-color: darken($color: #38516b, $amount: 5);
 }
 
-.editor__request {
+.editor__query {
   border: none;
   font-size: 0.9rem;
   line-height: 1.4rem;
   outline: none;
   flex-grow: 1;
   padding: 0;
+  white-space: nowrap;
+  resize: none;
+  overflow-y: clip;
+}
+
+.editor__tab-panel {
+  border: none;
+  border-radius: 0 0 0 8px;
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+  outline: none;
+  flex-grow: 1;
+  padding: 0;
+  white-space: nowrap;
+  resize: none;
+}
+
+.MuiIconButton-root.editor__button--play {
+  padding: 0.7rem;
+  background-color: #38516b;
+  color: #fffffc;
+}
+
+.MuiButtonBase-root.editor__tab {
+  color: #fffffc8c;
+  padding: 0.2rem 0.5rem;
+  min-height: 10px;
+}
+
+.MuiButtonBase-root.editor__tab.Mui-selected {
+  color: #fffffc;
+  border: none;
+}
+
+span.MuiTabs-indicator {
+  display: none;
+}
+
+.editor__tab-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid #38516B;
+  background-color: #507DAC;
+  padding: 0.2rem;
+}
+
+.editor__tab-group--open {
+  border-bottom: 2px solid #38516B;
+}
+
+.editor__tab-group--close {
+  border-radius: 0 0 0 5px;
+}
+
+.editor__expand-icon--close {
+  transform: rotate(180deg);
 }
