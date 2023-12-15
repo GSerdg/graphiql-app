@@ -110,7 +110,7 @@ export default function Signup() {
             }}
           />
           <FormHelperText id="email-helper-text" data-testid="emailHelperTest" sx={{ height: '40px' }}>
-            {errors.email ? localize(errors.email.message as LangField) : ' '}
+            {errors.email && localize(errors.email.message as LangField)}
           </FormHelperText>
         </FormControl>
         <FormControl
@@ -141,7 +141,7 @@ export default function Signup() {
             label={localize('passwordInput')}
           />
           <FormHelperText id="password-helper-text" data-testid="passwordHelperTest" sx={{ height: '40px' }}>
-            {errors.password ? localize(errors.password.message as LangField) : ' '}
+            {errors.password && localize(errors.password.message as LangField)}
           </FormHelperText>
         </FormControl>
         <FormControl
@@ -172,7 +172,7 @@ export default function Signup() {
             label={localize('repeatPasswordInput')}
           />
           <FormHelperText id="repeatPassword-helper-text" data-testid="repeatPasswordHelperTest">
-            {errors.repeatPassword ? localize(errors.repeatPassword.message as LangField) : ' '}
+            {errors.repeatPassword && localize(errors.repeatPassword.message as LangField)}
           </FormHelperText>
         </FormControl>
         <Button
