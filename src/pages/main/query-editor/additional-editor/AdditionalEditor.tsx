@@ -1,8 +1,8 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box, IconButton, Tab, Tabs } from '@mui/material';
-import { useState } from 'react';
 import classNames from 'classnames';
-import { EditorTextarea } from '../query-editor/EditorTextarea/EditorTextarea';
+import { useState } from 'react';
+import { EditorTextarea } from '../editor-textarea/EditorTextarea';
 
 const AdditionalEditor = () => {
   const [value, setValue] = useState(0);
@@ -14,8 +14,6 @@ const AdditionalEditor = () => {
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    console.log(newValue);
-    console.log(event);
   };
 
   return (
@@ -23,10 +21,7 @@ const AdditionalEditor = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        // alignItems: 'center',
-        // justifyContent: 'space-between',
         borderRadius: '0 0 0 5px',
-        // height: '2rem',
       }}
     >
       <Box

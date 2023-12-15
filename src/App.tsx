@@ -17,7 +17,6 @@ export const LangContext = createContext<LangContext>({} as LangContext);
 
 function App() {
   const [lang, setLang] = useState<SupportedLocales>('en');
-  console.log(lang);
 
   return (
     <LangContext.Provider value={{ lang, setLang }}>

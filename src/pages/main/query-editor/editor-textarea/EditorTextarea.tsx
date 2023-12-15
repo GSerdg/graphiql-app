@@ -11,12 +11,10 @@ interface EditorTextareaProps {
 
 const EditorTextarea = ({ children, index = 0, value = 0, height }: EditorTextareaProps) => {
   const [linesQty, setLinesQty] = useState(1);
-  // const [query, setQuery] = useState('');
 
   const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newLinesQty = calculateLines(event.target.value);
     setLinesQty(newLinesQty);
-    // setQuery(event.target.value);
   };
 
   return (

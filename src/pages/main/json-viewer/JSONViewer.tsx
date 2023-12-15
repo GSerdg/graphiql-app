@@ -1,7 +1,14 @@
-import { Box, Button } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Box, Button, Drawer, Typography } from '@mui/material';
+import { useState } from 'react';
 
 const JSONViewer = () => {
+  const [isDocsOpen, setIsDocsOpen] = useState(false);
+
+  const toggleDrawer = (isOpen: boolean) => {
+    setIsDocsOpen(isOpen);
+  };
+
   return (
     <Box
       sx={{
@@ -33,10 +40,33 @@ const JSONViewer = () => {
             float: 'left',
           }}
           startIcon={<ArrowBackIosIcon />}
+          onClick={() => {
+            toggleDrawer(true);
+          }}
         >
           DOCS
         </Button>
       </Box>
+      <Drawer
+        anchor="right"
+        open={isDocsOpen}
+        onClose={() => {
+          toggleDrawer(false);
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            backgroundColor: '#507DAC',
+            padding: '2rem',
+            height: '100%',
+            color: '#fffffc',
+          }}
+        >
+          <Typography>Side Docs Panel</Typography>
+        </Box>
+      </Drawer>
     </Box>
   );
 };

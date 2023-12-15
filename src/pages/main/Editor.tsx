@@ -23,7 +23,6 @@ export default function Editor() {
           flexDirection="row"
           sx={{
             height: 'calc(100vh - 12rem)',
-            // maxHeight: 'calc(100vh - 12rem)',
             flexGrow: 1,
             border: '2px solid #38516B',
             borderRadius: '8px',

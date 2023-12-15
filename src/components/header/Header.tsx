@@ -51,62 +51,60 @@ export default function Header() {
   };
 
   return (
-    <>
-      <AppBar position="fixed" className={isSticky ? 'app-bar--sticky' : 'app-bar'}>
-        <Container className="header" maxWidth="xl">
-          <Toolbar className="header__toolbar">
-            <Box sx={{ flexGrow: 1 }}>
+    <AppBar position="fixed" className={isSticky ? 'app-bar--sticky' : 'app-bar'}>
+      <Container className="header" maxWidth="xl">
+        <Toolbar className="header__toolbar">
+          <Box sx={{ flexGrow: 1 }}>
+            <Button
+              component={Link}
+              color="inherit"
+              to="/"
+              className="header__button--home"
+              sx={{ padding: 0 }}
+            >
+              Home
+            </Button>
+          </Box>
+          <Stack direction="row" sx={{ mr: '2rem', alignItems: 'center' }}>
+            <Typography>En</Typography>
+            <Switch onChange={handleSwitch} color="default" data-testid="langSwitcher" />
+            <Typography>Ru</Typography>
+          </Stack>
+          {!user && (
+            <ButtonGroup>
+              <Button component={Link} color="inherit" to="/login" className="header__button">
+                Log in
+              </Button>
+              <Button component={Link} color="inherit" to="/signup" className="header__button">
+                Sign up
+              </Button>
+            </ButtonGroup>
+          )}
+          {user && (
+            <>
               <Button
                 component={Link}
                 color="inherit"
-                to="/"
-                className="header__button--home"
-                sx={{ padding: 0 }}
+                variant="outlined"
+                to="/editor"
+                className="header__button"
+                sx={{ marginRight: '1rem' }}
               >
-                Home
+                Main page
               </Button>
-            </Box>
-            <Stack direction="row" sx={{ mr: '2rem', alignItems: 'center' }}>
-              <Typography>En</Typography>
-              <Switch onChange={handleSwitch} color="default" data-testid="langSwitcher" />
-              <Typography>Ru</Typography>
-            </Stack>
-            {!user && (
-              <ButtonGroup>
-                <Button component={Link} color="inherit" to="/login" className="header__button">
-                  Log in
-                </Button>
-                <Button component={Link} color="inherit" to="/signup" className="header__button">
-                  Sign up
-                </Button>
-              </ButtonGroup>
-            )}
-            {user && (
-              <>
-                <Button
-                  component={Link}
-                  color="inherit"
-                  variant="outlined"
-                  to="/editor"
-                  className="header__button"
-                  sx={{ marginRight: '1rem' }}
-                >
-                  Main page
-                </Button>
-                <Button
-                  color="inherit"
-                  variant="outlined"
-                  onClick={handleSignout}
-                  className="header__button"
-                  endIcon={<LogoutIcon />}
-                >
-                  Log out
-                </Button>
-              </>
-            )}
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </>
+              <Button
+                color="inherit"
+                variant="outlined"
+                onClick={handleSignout}
+                className="header__button"
+                endIcon={<LogoutIcon />}
+              >
+                Log out
+              </Button>
+            </>
+          )}
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 }
