@@ -13,7 +13,7 @@ import {
 import React, { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
-import { LangContext } from '../../App';
+import { LangContext } from '../../contexts/localization';
 import { auth, logout } from '../../shared/firebase';
 import './Header.scss';
 

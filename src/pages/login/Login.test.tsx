@@ -3,10 +3,10 @@ import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedFunction, describe, expect, it, vi } from 'vitest';
-import { LangContext } from '../../App';
 import Notification from '../../components/notification/Notification';
+import { LangContext } from '../../contexts/localization';
+import { SupportedLocales } from '../../localization/language';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
-import { SupportedLocales } from '../../shared/types';
 import { renderWithProviders } from '../../test/testUtils';
 import LoginPage from './LoginPage';
 
