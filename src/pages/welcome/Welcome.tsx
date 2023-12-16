@@ -47,11 +47,11 @@ export default function Welcome() {
       </Box>
       <Divider
         sx={{
-          ':before': { borderTop: 'thin solid #42a5f5' },
-          ':after': { borderTop: 'thin solid #42a5f5' },
+          ':before': { borderTop: 'thin solid #AD7630' },
+          ':after': { borderTop: 'thin solid #AD7630' },
         }}
       >
-        <Chip label="OUR TEAM" color="primary" variant="outlined" />
+        <Chip label="OUR TEAM" variant="outlined" sx={{ color: '#AD7630' }} />
       </Divider>
       <Stack
         className="card-list"

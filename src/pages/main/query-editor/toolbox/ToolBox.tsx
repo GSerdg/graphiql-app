@@ -2,7 +2,6 @@ import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Box, IconButton, Tooltip } from '@mui/material';
-import classNames from 'classnames';
 
 const ToolBox = () => {
   const handleQueryCopy = () => {
@@ -26,22 +25,33 @@ const ToolBox = () => {
         flexDirection: 'column',
         gap: '1rem',
         position: 'sticky',
+        backgroundColor: '#2E3235',
         top: 0,
         right: 0,
       }}
     >
       <Tooltip title="Execute query">
-        <IconButton className={classNames('editor__button', 'editor__button--play')}>
+        <IconButton
+          className="editor__button"
+          sx={{
+            padding: '0.7rem',
+            backgroundColor: '#AD7630',
+            color: '#fffffc',
+          }}
+        >
           <PlayArrowIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="Prettify query">
-        <IconButton>
+        <IconButton sx={{ color: '#808076', '&:hover': { backgroundColor: '#8080762e' } }}>
           <AutoFixHighIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="Copy query">
-        <IconButton onClick={handleQueryCopy}>
+        <IconButton
+          onClick={handleQueryCopy}
+          sx={{ color: '#808076', '&:hover': { backgroundColor: '#8080762e' } }}
+        >
           <ContentCopyIcon />
         </IconButton>
       </Tooltip>

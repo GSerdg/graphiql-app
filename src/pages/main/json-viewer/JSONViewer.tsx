@@ -1,73 +1,55 @@
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Box, Button, Drawer, Typography } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useState } from 'react';
+import { DocsField } from '../docs-field/DocsField';
+import classNames from 'classnames';
 
 const JSONViewer = () => {
   const [isDocsOpen, setIsDocsOpen] = useState(false);
 
-  const toggleDrawer = (isOpen: boolean) => {
-    setIsDocsOpen(isOpen);
+  const handleClick = () => {
+    setIsDocsOpen((isOpen) => !isOpen);
   };
 
   return (
-    <Box
-      sx={{
-        backgroundColor: '#507DAC',
-        width: '46%',
-        borderRadius: '0 5px 5px 0',
-        borderLeft: '2px solid #38516B',
-      }}
-    >
+    <>
       <Box
         sx={{
-          backgroundColor: '#507DAC',
-          display: 'flex',
-          flexDirection: 'row-reverse',
-          borderBottom: '2px solid #507DAC',
-          justifyContent: 'space-between',
-          borderRadius: '0 8px 8px 0',
-          height: '2rem',
-        }}
-      >
-        <Button
-          variant="contained"
-          disableElevation
-          className="editor__button"
-          sx={{
-            boxShadow: 'none',
-            backgroundColor: '#38516B',
-            borderRadius: '0 5px 0 0',
-            float: 'left',
-          }}
-          startIcon={<ArrowBackIosIcon />}
-          onClick={() => {
-            toggleDrawer(true);
-          }}
-        >
-          DOCS
-        </Button>
-      </Box>
-      <Drawer
-        anchor="right"
-        open={isDocsOpen}
-        onClose={() => {
-          toggleDrawer(false);
+          backgroundColor: '#292D30',
+          flexGrow: 1,
+          width: '20%',
+          border: '1px solid #48515B',
         }}
       >
         <Box
           sx={{
             display: 'flex',
-            alignItems: 'center',
-            backgroundColor: '#507DAC',
-            padding: '2rem',
-            height: '100%',
-            color: '#fffffc',
+            flexDirection: 'row-reverse',
+            justifyContent: 'space-between',
+            height: '2rem',
           }}
         >
-          <Typography>Side Docs Panel</Typography>
+          <Button
+            variant="contained"
+            disableElevation
+            className="editor__button"
+            sx={{
+              boxShadow: 'none',
+              backgroundColor: '#AD7630',
+              borderRadius: '0',
+              float: 'left',
+            }}
+            onClick={handleClick}
+          >
+            <ArrowBackIosIcon
+              className={classNames('editor__docs-icon', isDocsOpen && 'editor__docs-icon--open')}
+            />{' '}
+            DOCS
+          </Button>
         </Box>
-      </Drawer>
-    </Box>
+      </Box>
+      {isDocsOpen && <DocsField />}
+    </>
   );
 };
 

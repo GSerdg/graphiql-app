@@ -4,12 +4,12 @@ const EndpointField = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#507DAC',
+        backgroundColor: '#292D30',
         display: 'flex',
         alignItems: 'center',
-        borderBottom: '2px solid #38516B',
+        border: '1px solid #48515B',
+        borderRight: 'none',
         justifyContent: 'space-between',
-        borderRadius: '5px 0 0 0',
         height: '2rem',
       }}
     >
@@ -21,12 +21,12 @@ const EndpointField = () => {
         disableElevation
         sx={{
           boxShadow: 'none',
-          backgroundColor: '#38516B',
+          backgroundColor: '#AD7630',
           borderRadius: 0,
           alignSelf: 'stretch',
         }}
       >
-        Change endpoint
+        Change
       </Button>
     </Box>
   );

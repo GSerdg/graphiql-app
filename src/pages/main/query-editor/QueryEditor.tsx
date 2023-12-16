@@ -1,24 +1,23 @@
 import { Box } from '@mui/material';
 import { AdditionalEditor } from './additional-editor/AdditionalEditor';
-import { EditorTextarea } from './editor-textarea/EditorTextarea';
 import { EndpointField } from './endpoint-field/EndpointField';
+import { InputField } from './input-field/InputField';
 import { ToolBox } from './toolbox/ToolBox';
 
 const QueryEditor = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#fffffc',
-        width: '55%',
-        borderRadius: '8px 0 0 8px',
+        flexGrow: 2,
+        width: '20%',
         display: 'flex',
         flexDirection: 'column',
       }}
     >
       <EndpointField />
-      <EditorTextarea height={100}>
+      <InputField height={100}>
         <ToolBox />
-      </EditorTextarea>
+      </InputField>
       <AdditionalEditor />
     </Box>
   );

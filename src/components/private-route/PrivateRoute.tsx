@@ -11,8 +11,9 @@ export function PrivateRoute({ children }: Readonly<{ children: JSX.Element }>) 
   return (
     <Container
       component="main"
-      maxWidth="lg"
-      sx={{ flexGrow: 1, padding: 0, display: 'flex', alignItems: 'center' }}
+      maxWidth="xl"
+      disableGutters
+      sx={{ flexGrow: 1, display: 'flex', alignItems: 'stretch' }}
     >
       {loading ? (
         <CircularProgress

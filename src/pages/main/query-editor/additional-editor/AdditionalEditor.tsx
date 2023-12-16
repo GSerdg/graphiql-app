@@ -2,7 +2,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box, IconButton, Tab, Tabs } from '@mui/material';
 import classNames from 'classnames';
 import { useState } from 'react';
-import { EditorTextarea } from '../editor-textarea/EditorTextarea';
+import { InputField } from '../input-field/InputField';
 
 const AdditionalEditor = () => {
   const [value, setValue] = useState(0);
@@ -12,7 +12,7 @@ const AdditionalEditor = () => {
     setIsPanelOpen((prevState) => !prevState);
   };
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
@@ -21,7 +21,7 @@ const AdditionalEditor = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        borderRadius: '0 0 0 5px',
+        border: '1px solid #48515B',
       }}
     >
       <Box
@@ -34,14 +34,14 @@ const AdditionalEditor = () => {
           <Tab label="Variables" id="variables" className="editor__tab" />
           <Tab label="Headers" id="headers" className="editor__tab" />
         </Tabs>
-        <IconButton sx={{ padding: '0' }} onClick={handlePanelState}>
+        <IconButton sx={{ padding: '0', color: '#fffffc' }} onClick={handlePanelState}>
           <ExpandMoreIcon className={isPanelOpen ? '' : 'editor__expand-icon--close'} />
         </IconButton>
       </Box>
       {isPanelOpen && (
         <>
-          <EditorTextarea value={value} index={0} height={20} />
-          <EditorTextarea value={value} index={1} height={20} />
+          <InputField value={value} index={0} height={20} />
+          <InputField value={value} index={1} height={20} />
         </>
       )}
     </Box>

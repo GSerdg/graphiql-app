@@ -1,7 +1,7 @@
-import { Container, Box, Stack } from '@mui/material';
-import { QueryEditor } from './query-editor/QueryEditor';
-import { JSONViewer } from './json-viewer/JSONViewer';
+import { Box, Container, Stack } from '@mui/material';
 import './Editor.scss';
+import { JSONViewer } from './json-viewer/JSONViewer';
+import { QueryEditor } from './query-editor/QueryEditor';
 
 export default function Editor() {
   return (
@@ -9,9 +9,7 @@ export default function Editor() {
       sx={{
         flexGrow: 1,
         display: 'flex',
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        padding: '1rem 1rem',
+        alignItems: 'stretch',
       }}
     >
       <Container
@@ -24,8 +22,6 @@ export default function Editor() {
           sx={{
             height: 'calc(100vh - 12rem)',
             flexGrow: 1,
-            border: '2px solid #38516B',
-            borderRadius: '8px',
           }}
         >
           <QueryEditor />
