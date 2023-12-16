@@ -4,7 +4,7 @@ import EndpointField from './endpoint-field/EndpointField';
 import InputField from './input-field/InputField';
 import ToolBox from './toolbox/ToolBox';
 
-const QueryEditor = () => {
+const MainEditor = () => {
   return (
     <Box
       sx={{
@@ -23,4 +23,4 @@ const QueryEditor = () => {
   );
 };
 
-export default QueryEditor;
+export default MainEditor;

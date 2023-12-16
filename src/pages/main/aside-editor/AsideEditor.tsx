@@ -4,7 +4,7 @@ import { useState } from 'react';
 import DocsField from '../docs-field/DocsField';
 import classNames from 'classnames';
 
-const EditorAside = () => {
+const AsideEditor = () => {
   const [isDocsOpen, setIsDocsOpen] = useState(false);
 
   const handleClick = () => {
@@ -53,4 +53,4 @@ const EditorAside = () => {
   );
 };
 
-export default EditorAside;
+export default AsideEditor;

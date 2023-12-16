@@ -1,7 +1,7 @@
 import { Box, Container, Stack } from '@mui/material';
 import './Editor.scss';
-import EditorAside from './editor-aside/EditorAside';
-import QueryEditor from './query-editor/QueryEditor';
+import AsideEditor from './aside-editor/AsideEditor';
+import MainEditor from './main-editor/MainEditor';
 
 export default function Editor() {
   return (
@@ -24,8 +24,8 @@ export default function Editor() {
             flexGrow: 1,
           }}
         >
-          <QueryEditor />
-          <EditorAside />
+          <MainEditor />
+          <AsideEditor />
         </Stack>
       </Container>
     </Box>
