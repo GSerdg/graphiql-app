@@ -58,7 +58,7 @@ export default function Signup() {
     setIsShowRepeatPassword((show) => !show);
   }
 
-  async function onSubmitHandeler(data: SubmitForm) {
+  async function onSubmitHandler(data: SubmitForm) {
     try {
       setIsLoading(true);
       await registerWithEmailAndPassword(data.email, data.email, data.password);
@@ -94,7 +94,7 @@ export default function Signup() {
       <Box
         component="form"
         noValidate
-        onSubmit={handleSubmit(onSubmitHandeler)}
+        onSubmit={handleSubmit(onSubmitHandler)}
         sx={{ mt: 3, position: 'relative' }}
       >
         <FormControl error={errors.email ? true : false} variant="outlined" fullWidth required>
