@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
-import { AdditionalEditor } from './additional-editor/AdditionalEditor';
-import { EndpointField } from './endpoint-field/EndpointField';
-import { InputField } from './input-field/InputField';
-import { ToolBox } from './toolbox/ToolBox';
+import AdditionalEditor from './additional-editor/AdditionalEditor';
+import EndpointField from './endpoint-field/EndpointField';
+import InputField from './input-field/InputField';
+import ToolBox from './toolbox/ToolBox';
 
 const QueryEditor = () => {
   return (
@@ -15,7 +15,7 @@ const QueryEditor = () => {
       }}
     >
       <EndpointField />
-      <InputField height={100}>
+      <InputField slice="query">
         <ToolBox />
       </InputField>
       <AdditionalEditor />
@@ -23,4 +23,4 @@ const QueryEditor = () => {
   );
 };
 
-export { QueryEditor };
+export default QueryEditor;

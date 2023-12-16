@@ -32,4 +32,4 @@ const EndpointField = () => {
   );
 };
 
-export { EndpointField };
+export default EndpointField;

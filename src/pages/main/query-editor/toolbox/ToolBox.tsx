@@ -2,19 +2,39 @@ import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Box, IconButton, Tooltip } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../../../app/modulSlice';
+import { useSelector } from '../../../../shared/useSelector';
 
 const ToolBox = () => {
+  const query = useSelector((state) => state.query.query);
+  const variables = useSelector((state) => state.variables.variables);
+  const headers = useSelector((state) => state.headers.headers);
+  const dispatch = useDispatch();
+
+  const handleExecuteQuery = () => {
+    console.log('query:', query);
+    console.log('variables:', variables);
+    console.log('headers:', headers);
+  };
+
+  const handlePrettify = () => {
+    console.log(query);
+  };
+
   const handleQueryCopy = () => {
-    // navigator.clipboard.writeText(query).then(
-    //   function () {
-    //     console.log('Текст успешно скопирован в буфер обмена', query);
-    //     //TODO Add modal
-    //   },
-    //   function (err) {
-    //     console.error('Произошла ошибка при копировании текста: ', err);
-    //     //TODO Add modal
-    //   }
-    // );
+    navigator.clipboard.writeText(query).then(
+      function () {
+        dispatch(setMessageType('success'));
+        dispatch(setStatusMessage('Query copied successfully'));
+        dispatch(setIsOpenMessage(true));
+      },
+      function () {
+        dispatch(setMessageType('error'));
+        dispatch(setStatusMessage('Copy query failed'));
+        dispatch(setIsOpenMessage(true));
+      }
+    );
   };
 
   return (
@@ -33,6 +53,7 @@ const ToolBox = () => {
       <Tooltip title="Execute query">
         <IconButton
           className="editor__button"
+          onClick={handleExecuteQuery}
           sx={{
             padding: '0.7rem',
             backgroundColor: '#AD7630',
@@ -43,7 +64,10 @@ const ToolBox = () => {
         </IconButton>
       </Tooltip>
       <Tooltip title="Prettify query">
-        <IconButton sx={{ color: '#808076', '&:hover': { backgroundColor: '#8080762e' } }}>
+        <IconButton
+          onClick={handlePrettify}
+          sx={{ color: '#808076', '&:hover': { backgroundColor: '#8080762e' } }}
+        >
           <AutoFixHighIcon />
         </IconButton>
       </Tooltip>
@@ -59,4 +83,4 @@ const ToolBox = () => {
   );
 };
 
-export { ToolBox };
+export default ToolBox;

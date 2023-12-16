@@ -2,7 +2,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box, IconButton, Tab, Tabs } from '@mui/material';
 import classNames from 'classnames';
 import { useState } from 'react';
-import { InputField } from '../input-field/InputField';
+import InputField from '../input-field/InputField';
 
 const AdditionalEditor = () => {
   const [value, setValue] = useState(0);
@@ -40,12 +40,12 @@ const AdditionalEditor = () => {
       </Box>
       {isPanelOpen && (
         <>
-          <InputField value={value} index={0} height={20} />
-          <InputField value={value} index={1} height={20} />
+          <InputField slice="variables" value={value} index={0} height={20} />
+          <InputField slice="headers" value={value} index={1} height={20} />
         </>
       )}
     </Box>
   );
 };
 
-export { AdditionalEditor };
+export default AdditionalEditor;

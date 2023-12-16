@@ -4,7 +4,11 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate, useLocation } from 'react-router-dom';
 import { auth } from '../../shared/firebase';
 
-export function PrivateRoute({ children }: Readonly<{ children: JSX.Element }>) {
+interface PrivateRouteProps {
+  children?: React.ReactNode;
+}
+
+export function PrivateRoute({ children }: PrivateRouteProps) {
   const [user, loading] = useAuthState(auth);
   const location = useLocation();
 

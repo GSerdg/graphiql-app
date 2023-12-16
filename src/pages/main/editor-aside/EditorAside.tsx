@@ -1,10 +1,10 @@
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Box, Button } from '@mui/material';
 import { useState } from 'react';
-import { DocsField } from '../docs-field/DocsField';
+import DocsField from '../docs-field/DocsField';
 import classNames from 'classnames';
 
-const JSONViewer = () => {
+const EditorAside = () => {
   const [isDocsOpen, setIsDocsOpen] = useState(false);
 
   const handleClick = () => {
@@ -53,4 +53,4 @@ const JSONViewer = () => {
   );
 };
 
-export { JSONViewer };
+export default EditorAside;

@@ -1,7 +1,7 @@
 import { Box, Container, Stack } from '@mui/material';
 import './Editor.scss';
-import { JSONViewer } from './json-viewer/JSONViewer';
-import { QueryEditor } from './query-editor/QueryEditor';
+import EditorAside from './editor-aside/EditorAside';
+import QueryEditor from './query-editor/QueryEditor';
 
 export default function Editor() {
   return (
@@ -25,7 +25,7 @@ export default function Editor() {
           }}
         >
           <QueryEditor />
-          <JSONViewer />
+          <EditorAside />
         </Stack>
       </Container>
     </Box>
