@@ -22,11 +22,7 @@ class ErrorBoundary extends Component<ErrorProps, ErrorState> {
     console.error(error);
   }
   render() {
-    return this.state.hasError ? (
-      <h1 className="error-header">Ohh Error!!!</h1>
-    ) : (
-      this.props.children
-    );
+    return this.state.hasError ? <h1 className="error-header">Ohh Error!!!</h1> : this.props.children;
   }
 }
 

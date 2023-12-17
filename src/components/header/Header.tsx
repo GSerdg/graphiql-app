@@ -1,9 +1,9 @@
+import LogoutIcon from '@mui/icons-material/Logout';
 import {
   AppBar,
   Box,
   Button,
   ButtonGroup,
-  Checkbox,
   Container,
   Stack,
   Switch,
@@ -11,14 +11,15 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { LangContext } from '../../App';
+import { auth, logout } from '../../shared/firebase';
 import './Header.scss';
-import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function Header() {
   const { setLang } = useContext(LangContext);
-  const [auth, setAuth] = useState(false);
+  const [user] = useAuthState(auth);
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
@@ -45,24 +46,13 @@ export default function Header() {
     }
   };
 
-  const handleAuth = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      setAuth(true);
-    } else {
-      setAuth(false);
-    }
-  };
-
   const handleSignout = () => {
-    console.log('User logout');
+    logout();
   };
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        className={isSticky ? 'app-bar--sticky' : 'app-bar'}
-      >
+      <AppBar position="fixed" className={isSticky ? 'app-bar--sticky' : 'app-bar'}>
         <Container className="header">
           <Toolbar className="header__toolbar">
             <Box sx={{ flexGrow: 1 }}>
@@ -78,34 +68,20 @@ export default function Header() {
             </Box>
             <Stack direction="row" sx={{ mr: '2rem', alignItems: 'center' }}>
               <Typography>En</Typography>
-              <Switch
-                onChange={handleSwitch}
-                color="default"
-                data-testid="langSwitcher"
-              />
+              <Switch onChange={handleSwitch} color="default" data-testid="langSwitcher" />
               <Typography>Ru</Typography>
             </Stack>
-            {!auth && (
+            {!user && (
               <ButtonGroup>
-                <Button
-                  component={Link}
-                  color="inherit"
-                  to="/login"
-                  className="header__button"
-                >
+                <Button component={Link} color="inherit" to="/login" className="header__button">
                   Log in
                 </Button>
-                <Button
-                  component={Link}
-                  color="inherit"
-                  to="/signup"
-                  className="header__button"
-                >
+                <Button component={Link} color="inherit" to="/signup" className="header__button">
                   Sign up
                 </Button>
               </ButtonGroup>
             )}
-            {auth && (
+            {user && (
               <>
                 <Button
                   component={Link}
@@ -128,7 +104,6 @@ export default function Header() {
                 </Button>
               </>
             )}
-            <Checkbox color="default" onChange={handleAuth} />
           </Toolbar>
         </Container>
       </AppBar>

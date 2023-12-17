@@ -10,13 +10,7 @@ interface DeveloperCardProps {
   description: string;
 }
 
-export const DeveloperCard = ({
-  name,
-  gitLink,
-  gitName,
-  image,
-  description,
-}: DeveloperCardProps) => {
+export const DeveloperCard = ({ name, gitLink, gitName, image, description }: DeveloperCardProps) => {
   return (
     <Card
       sx={{
@@ -36,12 +30,8 @@ export const DeveloperCard = ({
         image={image}
       />
       <CardContent>
-        <Typography sx={{ textAlign: 'center', fontSize: '1em' }}>
-          {name}
-        </Typography>
-        <Typography sx={{ textAlign: 'center', fontSize: '1em' }}>
-          Developer
-        </Typography>
+        <Typography sx={{ textAlign: 'center', fontSize: '1em' }}>{name}</Typography>
+        <Typography sx={{ textAlign: 'center', fontSize: '1em' }}>Developer</Typography>
         <MuiLink
           href={gitLink}
           sx={{
@@ -60,9 +50,7 @@ export const DeveloperCard = ({
           <GitHubIcon fontSize="small" sx={{ mr: '0.5em' }} />
           {gitName}
         </MuiLink>
-        <Typography sx={{ marginTop: '1em', fontSize: '0.9em' }}>
-          {description}
-        </Typography>
+        <Typography sx={{ marginTop: '1em', fontSize: '0.9em' }}>{description}</Typography>
       </CardContent>
     </Card>
   );

@@ -9,8 +9,7 @@ export default function NotFound() {
       component={'main'}
       sx={{
         flexGrow: 1,
-        background:
-          'linear-gradient(239deg, #00ADE3 14.85%, rgba(0, 194, 255, 0.11) 97.1%)',
+        background: 'linear-gradient(239deg, #00ADE3 14.85%, rgba(0, 194, 255, 0.11) 97.1%)',
         display: 'flex',
         flexDirection: 'column',
       }}
@@ -36,21 +35,15 @@ export default function NotFound() {
             justifyContent: 'center',
           }}
         >
-          <Typography
-            variant="h2"
-            component={'h1'}
-            sx={{ fontWeight: 700, textAlign: 'center' }}
-          >
+          <Typography variant="h2" component={'h1'} sx={{ fontWeight: 700, textAlign: 'center' }}>
             404{' '}
             <Typography variant="h3" component={'span'}>
               page not Found
             </Typography>
           </Typography>
-          <Typography
-            sx={{ maxWidth: '40rem', padding: '1rem', textAlign: 'center' }}
-          >
-            Sorry but the page you are looking for does not exist, have been
-            removed, name changed or is temporarily unavailable
+          <Typography sx={{ maxWidth: '40rem', padding: '1rem', textAlign: 'center' }}>
+            Sorry but the page you are looking for does not exist, have been removed, name changed or is
+            temporarily unavailable
           </Typography>
           <Button
             variant="contained"
