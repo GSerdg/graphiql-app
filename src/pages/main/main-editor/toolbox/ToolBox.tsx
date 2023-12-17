@@ -19,7 +19,10 @@ const ToolBox = () => {
   };
 
   const handlePrettify = () => {
-    console.log(query);
+    // console.log(query);
+    const text = query;
+    const a = text.replaceAll(' ', '').replaceAll('\n', '');
+    console.log('text', a);
   };
 
   const handleQueryCopy = () => {
