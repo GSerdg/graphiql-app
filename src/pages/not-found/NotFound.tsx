@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 export default function NotFound() {
   return (
     <Box
+      component={'main'}
       sx={{
         flexGrow: 1,
         background:
@@ -23,11 +24,10 @@ export default function NotFound() {
           alignItems: 'center',
         }}
       >
-        <img className="not-found__image" src={rhino} alt="rhino"></img>
         <Box
+          component={'section'}
           sx={{
             position: 'relative',
-            m: '0 auto 25%',
             display: 'flex',
             flexDirection: 'column',
             flexGrow: 1,
@@ -66,6 +66,7 @@ export default function NotFound() {
             Go to Homepage
           </Button>
         </Box>
+        <img className="not-found__image" src={rhino} alt="rhino"></img>
       </Container>
     </Box>
   );
