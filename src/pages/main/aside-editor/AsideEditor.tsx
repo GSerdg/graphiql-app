@@ -1,16 +1,7 @@
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Box, Button } from '@mui/material';
-import { useState } from 'react';
+import { Box } from '@mui/material';
 import DocsField from '../docs-field/DocsField';
-import classNames from 'classnames';
 
 const AsideEditor = () => {
-  const [isDocsOpen, setIsDocsOpen] = useState(false);
-
-  const handleClick = () => {
-    setIsDocsOpen((isOpen) => !isOpen);
-  };
-
   return (
     <>
       <Box
@@ -19,6 +10,7 @@ const AsideEditor = () => {
           flexGrow: 1,
           width: '20%',
           border: '1px solid #48515B',
+          borderRight: 'none',
         }}
       >
         <Box
@@ -26,29 +18,14 @@ const AsideEditor = () => {
             display: 'flex',
             flexDirection: 'row-reverse',
             justifyContent: 'space-between',
-            height: '2rem',
+            height: '100%',
+            overflow: 'auto',
           }}
         >
-          <Button
-            variant="contained"
-            disableElevation
-            className="editor__button"
-            sx={{
-              boxShadow: 'none',
-              backgroundColor: '#AD7630',
-              borderRadius: '0',
-              float: 'left',
-            }}
-            onClick={handleClick}
-          >
-            <ArrowBackIosIcon
-              className={classNames('editor__docs-icon', isDocsOpen && 'editor__docs-icon--open')}
-            />{' '}
-            DOCS
-          </Button>
+          JSONViewer
         </Box>
       </Box>
-      {isDocsOpen && <DocsField />}
+      <DocsField />
     </>
   );
 };

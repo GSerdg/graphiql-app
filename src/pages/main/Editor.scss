@@ -68,3 +68,20 @@ span.MuiTabs-indicator {
     transform-origin: 25% center;
   }
 }
+
+.editor__docs {
+  flex-grow: 0;
+  width: auto;
+  background-color: #292D30;
+  border: 1px solid #48515B;
+  border-left: none;
+  transition: 0.5s;
+  max-width: 30%;
+  height: 100%;
+
+  &--open {
+    flex-grow: 2;
+    border-left: 1px solid #48515B;
+    overflow-y: scroll;
+  }
+}
