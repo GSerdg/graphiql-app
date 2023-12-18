@@ -20,10 +20,10 @@ interface InputFieldProps {
 const InputField = ({ slice, children, index = 0, value = 0, height = 100 }: InputFieldProps) => {
   const dispatch = useDispatch();
   const initialValue = useSelector((store) => store[slice].value);
-  const [inputValue, setValue] = useState(initialValue);
+  const [inputValue, setInputValue] = useState(initialValue);
 
   const handleChange = (value: string) => {
-    setValue(value);
+    setInputValue(value);
   };
 
   useEffect(() => {
