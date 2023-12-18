@@ -19,10 +19,83 @@ const ToolBox = () => {
   };
 
   const handlePrettify = () => {
-    // console.log(query);
-    const text = query;
-    const a = text.replaceAll(' ', '').replaceAll('\n', '');
-    console.log('text', a);
+    try {
+      const text = query;
+      const checkText: string[] = [];
+
+      // Проверяем на наличие ошибок в расстановке скобок
+      text.match(/{|}/g)?.forEach((item) => {
+        if (item === '{') {
+          checkText.push(item);
+        } else if (item === '}' && (checkText.length === 0 || checkText.pop() !== '{')) {
+          throw new Error('Missing opening or closing parenthesis');
+        }
+      });
+
+      if (checkText.length > 0) {
+        throw new Error('Missing opening or closing parenthesis');
+      }
+
+      const textArray = text
+        .split('\n')
+        .map((item) =>
+          item
+            .trim()
+            .replace(/{\s+/g, '{')
+            .replace(/\s+{/g, '{')
+            .replace(/\s+}/g, '}')
+            .replace(/}\s+/g, '}')
+            .replace(/\s+/g, '\n')
+        );
+      console.log('text: a', textArray);
+
+      let spaces = 2;
+
+      const textConvert = textArray.map((item) => {
+        let string = '';
+
+        if (item.length > 0 && item[0] !== '}' && item[0] !== '{') {
+          string += '\n' + ' '.repeat(spaces - 2);
+        }
+
+        for (let i = 0; i < item.length; i++) {
+          switch (item[i]) {
+            case '{':
+              if (i === 0) {
+                string += item[i] + '\n' + ' '.repeat(spaces);
+              } else if (i === item.length - 1) {
+                string += ' ' + item[i];
+              } else {
+                string += ' ' + item[i] + '\n' + ' '.repeat(spaces);
+              }
+              spaces += 2;
+              break;
+
+            case '\n':
+              string += item[i] + ' '.repeat(spaces - 2);
+              break;
+
+            case '}':
+              spaces -= 2;
+              string += '\n' + ' '.repeat(spaces - 2) + item[i];
+
+              if (i < item.length - 1) {
+                string += '\n' + ' '.repeat(spaces - 2);
+              }
+              break;
+
+            default:
+              string += item[i];
+              break;
+          }
+        }
+        return string;
+      });
+      console.log('text: b', textConvert);
+      console.log(textConvert.join(''));
+    } catch (error) {
+      console.error(error); // TODO обработать ошибку для отображения пользователю
+    }
   };
 
   const handleQueryCopy = () => {
