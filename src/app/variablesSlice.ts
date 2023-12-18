@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface VariablesState {
-  variables: string;
+  value: string;
 }
 
 const initialState: VariablesState = {
-  variables: '',
+  value: '',
 };
 
 export const variablesSlice = createSlice({
@@ -13,7 +13,7 @@ export const variablesSlice = createSlice({
   initialState,
   reducers: {
     setVariables: (state, action) => {
-      state.variables = action.payload;
+      state.value = action.payload;
     },
   },
 });

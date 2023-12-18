@@ -7,9 +7,9 @@ import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../../../
 import { useSelector } from '../../../../shared/useSelector';
 
 const ToolBox = () => {
-  const query = useSelector((state) => state.query.query);
-  const variables = useSelector((state) => state.variables.variables);
-  const headers = useSelector((state) => state.headers.headers);
+  const query = useSelector((state) => state.query.value);
+  const variables = useSelector((state) => state.variables.value);
+  const headers = useSelector((state) => state.headers.value);
   const dispatch = useDispatch();
 
   const handleExecuteQuery = () => {

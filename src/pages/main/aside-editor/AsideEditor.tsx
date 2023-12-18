@@ -21,9 +21,7 @@ const AsideEditor = () => {
             height: '100%',
             overflow: 'auto',
           }}
-        >
-          JSONViewer
-        </Box>
+        ></Box>
       </Box>
       <DocsField />
     </>

@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface HeadersState {
-  headers: string;
+  value: string;
 }
 
 const initialState: HeadersState = {
-  headers: '',
+  value: '',
 };
 
 export const headersSlice = createSlice({
@@ -13,7 +13,7 @@ export const headersSlice = createSlice({
   initialState,
   reducers: {
     setHeaders: (state, action) => {
-      state.headers = action.payload;
+      state.value = action.payload;
     },
   },
 });

@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface QueryState {
-  query: string;
+  value: string;
 }
 
 const initialState: QueryState = {
-  query: '',
+  value: '',
 };
 
 export const querySlice = createSlice({
@@ -13,7 +13,7 @@ export const querySlice = createSlice({
   initialState,
   reducers: {
     setQuery: (state, action) => {
-      state.query = action.payload;
+      state.value = action.payload;
     },
   },
 });

@@ -6,9 +6,11 @@ import { useDispatch } from 'react-redux';
 import { setQuery } from '../../../../app/querySlice';
 import { setHeaders } from '../../../../app/headersSlice';
 import { setVariables } from '../../../../app/variablesSlice';
+import { useState, useEffect } from 'react';
+import { useSelector } from '../../../../shared/useSelector';
 
 interface InputFieldProps {
-  slice: string;
+  slice: 'query' | 'variables' | 'headers';
   children?: React.ReactNode;
   index?: number;
   value?: number;
@@ -17,29 +19,34 @@ interface InputFieldProps {
 
 const InputField = ({ slice, children, index = 0, value = 0, height = 100 }: InputFieldProps) => {
   const dispatch = useDispatch();
+  const initialValue = useSelector((store) => store[slice].value);
+  const [inputValue, setValue] = useState(initialValue);
 
   const handleChange = (value: string) => {
+    setValue(value);
+  };
+
+  useEffect(() => {
     if (slice === 'query') {
-      dispatch(setQuery(value));
+      dispatch(setQuery(inputValue));
     }
     if (slice === 'variables') {
-      dispatch(setVariables(value));
+      dispatch(setVariables(inputValue));
     }
     if (slice === 'headers') {
-      dispatch(setHeaders(value));
+      dispatch(setHeaders(inputValue));
     }
-  };
+  }, [dispatch, slice, inputValue]);
 
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexGrow: 1,
+        flexGrow: 2,
         alignItems: 'stretch',
         maxHeight: `${height}vh`,
         overflow: 'auto',
       }}
-      hidden={value !== index}
+      display={value === index ? 'flex' : 'none'}
     >
       {value === index && (
         <CodeMirror
@@ -49,6 +56,7 @@ const InputField = ({ slice, children, index = 0, value = 0, height = 100 }: Inp
           extensions={[javascript({ jsx: true })]}
           basicSetup={{ highlightActiveLine: false }}
           onChange={handleChange}
+          value={inputValue}
         />
       )}
       {children}

@@ -8,19 +8,27 @@ const AdditionalEditor = () => {
   const [value, setValue] = useState(0);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
+  const setFlexGrow = (isOpen: boolean) => {
+    return isOpen ? 1 : 0;
+  };
+
   const handlePanelState = () => {
     setIsPanelOpen((prevState) => !prevState);
   };
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    setIsPanelOpen(true);
   };
 
   return (
     <Box
       sx={{
         display: 'flex',
+        transition: '0.5s',
+        flexGrow: setFlexGrow(isPanelOpen),
         flexDirection: 'column',
+        backgroundColor: '#2E3235',
         border: '1px solid #48515B',
       }}
     >
@@ -39,10 +47,10 @@ const AdditionalEditor = () => {
         </IconButton>
       </Box>
       {isPanelOpen && (
-        <>
+        <Box sx={{ height: '100%', display: 'flex' }}>
           <InputField slice="variables" value={value} index={0} height={20} />
           <InputField slice="headers" value={value} index={1} height={20} />
-        </>
+        </Box>
       )}
     </Box>
   );
