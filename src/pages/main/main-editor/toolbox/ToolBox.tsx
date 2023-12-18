@@ -50,7 +50,7 @@ const ToolBox = () => {
       console.log('text: a', textArray);
 
       let spaces = 2;
-
+      let count = 0;
       const textConvert = textArray.map((item) => {
         let string = '';
 
@@ -61,7 +61,8 @@ const ToolBox = () => {
         for (let i = 0; i < item.length; i++) {
           switch (item[i]) {
             case '{':
-              if (i === 0) {
+              count += 1;
+              if (i === 0 || item[i - 1] === '}') {
                 string += item[i] + '\n' + ' '.repeat(spaces);
               } else if (i === item.length - 1) {
                 string += ' ' + item[i];
@@ -76,11 +77,18 @@ const ToolBox = () => {
               break;
 
             case '}':
+              count -= 1;
               spaces -= 2;
               string += '\n' + ' '.repeat(spaces - 2) + item[i];
 
-              if (i < item.length - 1) {
-                string += '\n' + ' '.repeat(spaces - 2);
+              if (count === 0) {
+                string += '\n';
+              } else if (i < item.length - 1) {
+                if (item[i + 1] === '}') {
+                  break;
+                } else {
+                  string += '\n' + ' '.repeat(spaces - 2);
+                }
               }
               break;
 
