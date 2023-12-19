@@ -4,7 +4,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setDescription, setIsNotificationOpen, setNotificationType } from '../../../../app/modulSlice';
-import getPrettifyText from '../../../../shared/prettify';
+import convertPrettifyText from '../../../../shared/prettify';
 import { useSelector } from '../../../../shared/useSelector';
 
 const ToolBox = () => {
@@ -21,7 +21,7 @@ const ToolBox = () => {
 
   const handlePrettify = () => {
     try {
-      const prettifyText = getPrettifyText(query);
+      const prettifyText = convertPrettifyText(query);
       console.log(prettifyText);
     } catch (error) {
       const err = error as Error;

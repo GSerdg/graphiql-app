@@ -1,4 +1,4 @@
-export default function getPrettifyText(query: string) {
+export default function convertPrettifyText(query: string) {
   const text = query;
   const checkText: string[] = [];
 
