@@ -21,7 +21,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../app/modulSlice';
+import { setDescription, setIsNotificationOpen, setNotificationType } from '../../app/modulSlice';
 import { LangField, useLocalizer } from '../../localization/language';
 import { registerWithEmailAndPassword } from '../../shared/firebase';
 import useLocalizerErrors from '../../shared/firebaseErrors';
@@ -62,16 +62,16 @@ export default function Signup() {
     try {
       setIsLoading(true);
       await registerWithEmailAndPassword(data.email, data.email, data.password);
-      dispatch(setMessageType('success'));
-      dispatch(setStatusMessage(localize('registrationComplete')));
+      dispatch(setNotificationType('success'));
+      dispatch(setDescription(localize('registrationComplete')));
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
 
-      dispatch(setMessageType('error'));
-      dispatch(setStatusMessage(message));
+      dispatch(setNotificationType('error'));
+      dispatch(setDescription(message));
     } finally {
-      dispatch(setIsOpenMessage(true));
+      dispatch(setIsNotificationOpen(true));
       setIsLoading(false);
     }
   }

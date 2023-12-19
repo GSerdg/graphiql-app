@@ -3,7 +3,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../../../app/modulSlice';
+import { setDescription, setIsNotificationOpen, setNotificationType } from '../../../../app/modulSlice';
 import getPrettifyText from '../../../../shared/prettify';
 import { useSelector } from '../../../../shared/useSelector';
 
@@ -31,14 +31,14 @@ const ToolBox = () => {
   const handleQueryCopy = () => {
     navigator.clipboard.writeText(query).then(
       function () {
-        dispatch(setMessageType('success'));
-        dispatch(setStatusMessage('Query copied successfully'));
-        dispatch(setIsOpenMessage(true));
+        dispatch(setNotificationType('success'));
+        dispatch(setDescription('Query copied successfully'));
+        dispatch(setIsNotificationOpen(true));
       },
       function () {
-        dispatch(setMessageType('error'));
-        dispatch(setStatusMessage('Copy query failed'));
-        dispatch(setIsOpenMessage(true));
+        dispatch(setNotificationType('error'));
+        dispatch(setDescription('Copy query failed'));
+        dispatch(setIsNotificationOpen(true));
       }
     );
   };

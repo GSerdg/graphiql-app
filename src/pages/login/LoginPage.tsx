@@ -21,7 +21,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../app/modulSlice';
+import { setDescription, setIsNotificationOpen, setNotificationType } from '../../app/modulSlice';
 import { LangField, useLocalizer } from '../../localization/language';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
 import useLocalizerErrors from '../../shared/firebaseErrors';
@@ -59,16 +59,16 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       await logInWithEmailAndPassword(data.email, data.password);
-      dispatch(setMessageType('success'));
-      dispatch(setStatusMessage(localize('logged')));
+      dispatch(setNotificationType('success'));
+      dispatch(setDescription(localize('logged')));
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
-      dispatch(setMessageType('error'));
-      dispatch(setStatusMessage(message));
+      dispatch(setNotificationType('error'));
+      dispatch(setDescription(message));
       setLoginError(true);
     } finally {
-      dispatch(setIsOpenMessage(true));
+      dispatch(setIsNotificationOpen(true));
       setIsLoading(false);
     }
   }
@@ -77,16 +77,16 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       await sendPasswordReset(getValues('email'));
-      dispatch(setMessageType('success'));
-      dispatch(setStatusMessage(localize('passwordSent')));
+      dispatch(setNotificationType('success'));
+      dispatch(setDescription(localize('passwordSent')));
     } catch (error) {
       const err = error as Error;
       const message = getAuthErrorMessage(err.message);
 
-      dispatch(setMessageType('error'));
-      dispatch(setStatusMessage(message));
+      dispatch(setNotificationType('error'));
+      dispatch(setDescription(message));
     } finally {
-      dispatch(setIsOpenMessage(true));
+      dispatch(setIsNotificationOpen(true));
       setIsLoading(false);
     }
   }

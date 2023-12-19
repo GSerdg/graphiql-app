@@ -1,6 +1,6 @@
 import { Alert, Slide, SlideProps, Snackbar } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { setIsOpenMessage } from '../../app/modulSlice';
+import { setIsNotificationOpen } from '../../app/modulSlice';
 import { useSelector } from '../../shared/useSelector';
 
 function SlideTransition(props: SlideProps) {
@@ -24,12 +24,12 @@ export default function Notification() {
       open={isOpenMessage}
       autoHideDuration={4000}
       onClose={() => {
-        dispatch(setIsOpenMessage(false));
+        dispatch(setIsNotificationOpen(false));
       }}
     >
       <Alert
         onClose={() => {
-          dispatch(setIsOpenMessage(false));
+          dispatch(setIsNotificationOpen(false));
         }}
         severity={messageType}
         sx={{ width: '100%' }}
