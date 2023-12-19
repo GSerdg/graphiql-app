@@ -4,6 +4,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../../../app/modulSlice';
+import getPrettifyText from '../../../../shared/prettify';
 import { useSelector } from '../../../../shared/useSelector';
 
 const ToolBox = () => {
@@ -20,89 +21,10 @@ const ToolBox = () => {
 
   const handlePrettify = () => {
     try {
-      const text = query;
-      const checkText: string[] = [];
-
-      // Проверяем на наличие ошибок в расстановке скобок
-      text.match(/{|}/g)?.forEach((item) => {
-        if (item === '{') {
-          checkText.push(item);
-        } else if (item === '}' && (checkText.length === 0 || checkText.pop() !== '{')) {
-          throw new Error('Missing opening or closing parenthesis');
-        }
-      });
-
-      if (checkText.length > 0) {
-        throw new Error('Missing opening or closing parenthesis');
-      }
-
-      const textArray = text
-        .split('\n')
-        .map((item) =>
-          item
-            .trim()
-            .replace(/{\s+/g, '{')
-            .replace(/\s+{/g, '{')
-            .replace(/\s+}/g, '}')
-            .replace(/}\s+/g, '}')
-            .replace(/\s+/g, '\n')
-        );
-      console.log('text: a', textArray);
-
-      let spaces = 2;
-      let count = 0;
-      const textConvert = textArray.map((item) => {
-        let string = '';
-
-        if (item.length > 0 && item[0] !== '}' && item[0] !== '{') {
-          string += '\n' + ' '.repeat(spaces - 2);
-        }
-
-        for (let i = 0; i < item.length; i++) {
-          switch (item[i]) {
-            case '{':
-              count += 1;
-              if (i === 0 || item[i - 1] === '}') {
-                string += item[i] + '\n' + ' '.repeat(spaces);
-              } else if (i === item.length - 1) {
-                string += ' ' + item[i];
-              } else {
-                string += ' ' + item[i] + '\n' + ' '.repeat(spaces);
-              }
-              spaces += 2;
-              break;
-
-            case '\n':
-              string += item[i] + ' '.repeat(spaces - 2);
-              break;
-
-            case '}':
-              count -= 1;
-              spaces -= 2;
-              string += '\n' + ' '.repeat(spaces - 2) + item[i];
-
-              if (count === 0) {
-                string += '\n';
-              } else if (i < item.length - 1) {
-                if (item[i + 1] === '}') {
-                  break;
-                } else {
-                  string += '\n' + ' '.repeat(spaces - 2);
-                }
-              }
-              break;
-
-            default:
-              string += item[i];
-              break;
-          }
-        }
-        return string;
-      });
-      console.log('text: b', textConvert);
-      console.log(textConvert.join(''));
+      const prettifyText = getPrettifyText(query);
+      console.log(prettifyText);
     } catch (error) {
-      console.error(error); // TODO обработать ошибку для отображения пользователю
+      console.error(error);
     }
   };
 
