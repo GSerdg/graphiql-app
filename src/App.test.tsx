@@ -1,8 +1,11 @@
-import { describe, expect, it } from 'vitest';
 import { screen } from '@testing-library/react';
-import App from './App';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { BrowserRouter } from 'react-router-dom';
+import { MockedFunction, describe, expect, it, vi } from 'vitest';
+import App from './App';
 import { renderWithProviders } from './test/testUtils';
+
+vi.mock('react-firebase-hooks/auth');
 
 const Mocktest = () => {
   return (
@@ -14,6 +17,8 @@ const Mocktest = () => {
 
 describe('App', () => {
   it('Should renders', () => {
+    (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
+
     renderWithProviders(<Mocktest />);
 
     expect(
