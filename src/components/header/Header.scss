@@ -17,6 +17,7 @@ header .header {
 
   & .header__button--home {
     font-size: 1.1rem;
+    min-width: 40px;
   }
 
   & .header__button {
@@ -29,8 +30,9 @@ header .header {
 
   & .header__toolbar {
     transition: 1s;
-    min-height: 64px;
-    padding: 12px 0;
+    height: 4rem;
+    padding: 12px;
+    min-height: 38px;
   }
 }
 
@@ -47,12 +49,13 @@ header .header {
 
   & .header__button--home {
     font-size: 1rem;
+    min-width: 40px;
   }
 
   & .header__toolbar {
     transition: 1s;
     min-height: 40px;
-    padding: 2px 0;
+    padding: 2px 12px;
   }
 
   & .header__button {

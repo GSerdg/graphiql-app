@@ -27,7 +27,7 @@ function App() {
               flexDirection: 'column',
               display: 'flex',
               minHeight: '100vh',
-              paddingTop: '66px',
+              paddingTop: '4rem',
             }}
           >
             <Header />
