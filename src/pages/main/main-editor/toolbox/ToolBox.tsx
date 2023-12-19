@@ -24,7 +24,10 @@ const ToolBox = () => {
       const prettifyText = getPrettifyText(query);
       console.log(prettifyText);
     } catch (error) {
-      console.error(error);
+      const err = error as Error;
+      dispatch(setNotificationType('error'));
+      dispatch(setDescription(err.message));
+      dispatch(setIsNotificationOpen(true));
     }
   };
 
