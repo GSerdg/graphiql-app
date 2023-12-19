@@ -14,10 +14,9 @@ interface InputFieldProps {
   children?: React.ReactNode;
   index?: number;
   value?: number;
-  height?: number;
 }
 
-const InputField = ({ slice, children, index = 0, value = 0, height = 100 }: InputFieldProps) => {
+const InputField = ({ slice, children, index = 0, value = 0 }: InputFieldProps) => {
   const dispatch = useDispatch();
   const initialValue = useSelector((store) => store[slice].value);
   const [inputValue, setInputValue] = useState(initialValue);
@@ -43,7 +42,6 @@ const InputField = ({ slice, children, index = 0, value = 0, height = 100 }: Inp
       sx={{
         flexGrow: 2,
         alignItems: 'stretch',
-        maxHeight: `${height}vh`,
         overflow: 'auto',
       }}
       display={value === index ? 'flex' : 'none'}

@@ -18,6 +18,9 @@ const AdditionalEditor = () => {
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+  };
+
+  const handleClick = () => {
     setIsPanelOpen(true);
   };
 
@@ -38,7 +41,7 @@ const AdditionalEditor = () => {
           isPanelOpen ? 'editor__tab-group--open' : 'editor__tab-group--close'
         )}
       >
-        <Tabs value={value} onChange={handleChange} sx={{ minHeight: '10px' }}>
+        <Tabs value={value} onChange={handleChange} onClick={handleClick} sx={{ minHeight: '10px' }}>
           <Tab label="Variables" id="variables" className="editor__tab" />
           <Tab label="Headers" id="headers" className="editor__tab" />
         </Tabs>
@@ -48,8 +51,8 @@ const AdditionalEditor = () => {
       </Box>
       {isPanelOpen && (
         <Box sx={{ height: '100%', display: 'flex' }}>
-          <InputField slice="variables" value={value} index={0} height={20} />
-          <InputField slice="headers" value={value} index={1} height={20} />
+          <InputField slice="variables" value={value} index={0} />
+          <InputField slice="headers" value={value} index={1} />
         </Box>
       )}
     </Box>
