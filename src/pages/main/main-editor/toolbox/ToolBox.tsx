@@ -26,7 +26,6 @@ const ToolBox = () => {
     try {
       const prettifyText = convertPrettifyText(query);
       dispatch(setQuery(prettifyText));
-      console.log(prettifyText);
     } catch (error) {
       const err = error as Error;
       dispatch(setNotificationType('error'));
