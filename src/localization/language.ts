@@ -111,6 +111,14 @@ const localizedStrings = {
     en: 'Passwords must match',
     ru: 'Пароли должны совпадать',
   },
+  prettifyEnclosedError: {
+    en: 'Parameters must be enclosed in quotes',
+    ru: 'Параметры должны быть заключены в скобки',
+  },
+  prettifyMissingError: {
+    en: 'Missing opening or closing parenthesis',
+    ru: 'Пропущена открывающая или закрывающая скобка',
+  },
 };
 
 export type LangField = keyof typeof localizedStrings;

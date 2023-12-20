@@ -7,12 +7,12 @@ export default function convertPrettifyText(query: string) {
     if (item === '{') {
       checkText.push(item);
     } else if (item === '}' && (checkText.length === 0 || checkText.pop() !== '{')) {
-      throw new Error('Missing opening or closing parenthesis');
+      throw new Error('prettifyMissingError');
     }
   });
 
   if (checkText.length > 0) {
-    throw new Error('Missing opening or closing parenthesis');
+    throw new Error('prettifyMissingError');
   }
 
   const textArray = text
@@ -75,7 +75,7 @@ export default function convertPrettifyText(query: string) {
 
         default:
           if (count === 0) {
-            throw new Error('Parameters must be enclosed in quotes');
+            throw new Error('prettifyEnclosedError');
           }
           string += item[i];
           break;

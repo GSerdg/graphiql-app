@@ -4,6 +4,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setDescription, setIsNotificationOpen, setNotificationType } from '../../../../app/modulSlice';
+import { LangField, useLocalizer } from '../../../../localization/language';
 import convertPrettifyText from '../../../../shared/prettify';
 import { useSelector } from '../../../../shared/useSelector';
 
@@ -12,6 +13,7 @@ const ToolBox = () => {
   const variables = useSelector((state) => state.variables.variables);
   const headers = useSelector((state) => state.headers.headers);
   const dispatch = useDispatch();
+  const localizer = useLocalizer();
 
   const handleExecuteQuery = () => {
     console.log('query:', query);
@@ -26,7 +28,7 @@ const ToolBox = () => {
     } catch (error) {
       const err = error as Error;
       dispatch(setNotificationType('error'));
-      dispatch(setDescription(err.message));
+      dispatch(setDescription(localizer(err.message as LangField)));
       dispatch(setIsNotificationOpen(true));
     }
   };

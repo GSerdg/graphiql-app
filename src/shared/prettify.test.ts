@@ -10,7 +10,7 @@ const prettifyText = `{
 }
 `;
 
-describe('Input slice', () => {
+describe('Prettify', () => {
   it('should throw an error if a parenthesis is missing', () => {
     expect(() => {
       convertPrettifyText(`{allFilms{films{title}}}`);
@@ -18,16 +18,16 @@ describe('Input slice', () => {
 
     expect(() => {
       convertPrettifyText(`{allFilms{films{title}}`);
-    }).toThrowError('Missing opening or closing parenthesis');
+    }).toThrowError('prettifyMissingError');
     expect(() => {
       convertPrettifyText(`{allFilms films{title}}}`);
-    }).toThrowError('Missing opening or closing parenthesis');
+    }).toThrowError('prettifyMissingError');
   });
 
   it('should throw an error if a parenthesis not enclosed in quotes', () => {
     expect(() => {
       convertPrettifyText(`allFilms{films{title}}`);
-    }).toThrowError('Parameters must be enclosed in quotes');
+    }).toThrowError('prettifyEnclosedError');
   });
 
   it('should format edge cases', () => {
