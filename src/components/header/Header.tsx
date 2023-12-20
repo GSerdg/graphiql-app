@@ -16,11 +16,13 @@ import { Link } from 'react-router-dom';
 import { LangContext } from '../../contexts/localization';
 import { auth, logout } from '../../shared/firebase';
 import './Header.scss';
+import { useLocalizer } from '../../localization/language';
 
 export default function Header() {
   const { setLang } = useContext(LangContext);
   const [user] = useAuthState(auth);
   const [isSticky, setIsSticky] = useState(false);
+  const localize = useLocalizer();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,21 +66,21 @@ export default function Header() {
               className="header__button--home"
               sx={{ padding: 0 }}
             >
-              Home
+              {localize('headerHomeButton')}
             </Button>
           </Box>
           <Stack direction="row" sx={{ mr: '2rem', alignItems: 'center' }}>
-            <Typography>En</Typography>
+            <Typography>{localize('languageSwitchEn')}</Typography>
             <Switch onChange={handleSwitch} color="default" data-testid="langSwitcher" />
-            <Typography>Ru</Typography>
+            <Typography>{localize('languageSwitchRu')}</Typography>
           </Stack>
           {!user && (
             <ButtonGroup>
               <Button component={Link} color="inherit" to="/login" className="header__button">
-                Log in
+                {localize('headerLoginButton')}
               </Button>
               <Button component={Link} color="inherit" to="/signup" className="header__button">
-                Sign up
+                {localize('headerSignupButton')}
               </Button>
             </ButtonGroup>
           )}
@@ -92,7 +94,7 @@ export default function Header() {
                 className="header__button"
                 sx={{ marginRight: '1rem' }}
               >
-                Main page
+                {localize('headerMainPageButton')}
               </Button>
               <Button
                 color="inherit"
@@ -101,7 +103,7 @@ export default function Header() {
                 className="header__button"
                 endIcon={<LogoutIcon />}
               >
-                Log out
+                {localize('headerLogoutButton')}
               </Button>
             </>
           )}

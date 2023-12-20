@@ -111,6 +111,34 @@ const localizedStrings = {
     en: 'Passwords must match',
     ru: 'Пароли должны совпадать',
   },
+  headerHomeButton: {
+    en: 'Home',
+    ru: 'Домой',
+  },
+  languageSwitchEn: {
+    en: 'en',
+    ru: 'анг',
+  },
+  languageSwitchRu: {
+    en: 'ru',
+    ru: 'рус',
+  },
+  headerLoginButton: {
+    en: 'Log in',
+    ru: 'Вход',
+  },
+  headerSignupButton: {
+    en: 'Sign up',
+    ru: 'Регистрация',
+  },
+  headerMainPageButton: {
+    en: 'Main page',
+    ru: 'На главную',
+  },
+  headerLogoutButton: {
+    en: 'Log out',
+    ru: 'Выход',
+  },
 };
 
 export type LangField = keyof typeof localizedStrings;
