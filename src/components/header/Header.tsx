@@ -13,7 +13,7 @@ import {
 import React, { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
-import { LangContext } from '../../App';
+import { LangContext } from '../../contexts/localization';
 import { auth, logout } from '../../shared/firebase';
 import './Header.scss';
 
@@ -40,8 +40,10 @@ export default function Header() {
 
   const handleSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
+      localStorage.setItem('lang', 'ru');
       setLang('ru');
     } else {
+      localStorage.setItem('lang', 'en');
       setLang('en');
     }
   };

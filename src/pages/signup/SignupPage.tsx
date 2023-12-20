@@ -22,8 +22,9 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../app/modulSlice';
+import { LangField, useLocalizer } from '../../localization/language';
 import { registerWithEmailAndPassword } from '../../shared/firebase';
-import getAuthErrorMessage from '../../shared/firebaseErrors';
+import useLocalizerErrors from '../../shared/firebaseErrors';
 import { signupSchema } from '../../shared/validationSchema';
 
 interface SubmitForm {
@@ -33,6 +34,9 @@ interface SubmitForm {
 }
 
 export default function Signup() {
+  const localize = useLocalizer();
+  const getAuthErrorMessage = useLocalizerErrors();
+
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowRepeatPassword, setIsShowRepeatPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,12 +58,12 @@ export default function Signup() {
     setIsShowRepeatPassword((show) => !show);
   }
 
-  async function onSubmitHandeler(data: SubmitForm) {
+  async function onSubmitHandler(data: SubmitForm) {
     try {
       setIsLoading(true);
       await registerWithEmailAndPassword(data.email, data.email, data.password);
       dispatch(setMessageType('success'));
-      dispatch(setStatusMessage('registration complete'));
+      dispatch(setStatusMessage(localize('registrationComplete')));
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
@@ -85,28 +89,28 @@ export default function Signup() {
         <AssignmentIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign Up
+        {localize('signup')}
       </Typography>
       <Box
         component="form"
         noValidate
-        onSubmit={handleSubmit(onSubmitHandeler)}
+        onSubmit={handleSubmit(onSubmitHandler)}
         sx={{ mt: 3, position: 'relative' }}
       >
         <FormControl error={errors.email ? true : false} variant="outlined" fullWidth required>
-          <InputLabel htmlFor="email">Email</InputLabel>
+          <InputLabel htmlFor="email">{localize('emailInput')}</InputLabel>
           <OutlinedInput
             {...register('email')}
             id="email"
             type="text"
             aria-describedby="email-helper-text"
-            label="Email"
+            label={localize('emailInput')}
             inputProps={{
               'data-testid': 'emailTest',
             }}
           />
           <FormHelperText id="email-helper-text" data-testid="emailHelperTest" sx={{ height: '40px' }}>
-            {errors.email?.message || ' '}
+            {errors.email && localize(errors.email.message as LangField)}
           </FormHelperText>
         </FormControl>
         <FormControl
@@ -116,7 +120,7 @@ export default function Signup() {
           required
           sx={{ mt: 1 }}
         >
-          <InputLabel htmlFor="password">Password</InputLabel>
+          <InputLabel htmlFor="password">{localize('passwordInput')}</InputLabel>
           <OutlinedInput
             {...register('password')}
             id="password"
@@ -134,10 +138,10 @@ export default function Signup() {
                 </IconButton>
               </InputAdornment>
             }
-            label="Password"
+            label={localize('passwordInput')}
           />
           <FormHelperText id="password-helper-text" data-testid="passwordHelperTest" sx={{ height: '40px' }}>
-            {errors.password?.message || ' '}
+            {errors.password && localize(errors.password.message as LangField)}
           </FormHelperText>
         </FormControl>
         <FormControl
@@ -147,7 +151,7 @@ export default function Signup() {
           required
           sx={{ mt: 1 }}
         >
-          <InputLabel htmlFor="repeatPassword">Repeat password</InputLabel>
+          <InputLabel htmlFor="repeatPassword">{localize('repeatPasswordInput')}</InputLabel>
           <OutlinedInput
             {...register('repeatPassword')}
             id="repeatPassword"
@@ -165,10 +169,10 @@ export default function Signup() {
                 </IconButton>
               </InputAdornment>
             }
-            label="Repeat password"
+            label={localize('repeatPasswordInput')}
           />
           <FormHelperText id="repeatPassword-helper-text" data-testid="repeatPasswordHelperTest">
-            {errors.repeatPassword?.message || ' '}
+            {errors.repeatPassword && localize(errors.repeatPassword.message as LangField)}
           </FormHelperText>
         </FormControl>
         <Button
@@ -178,7 +182,7 @@ export default function Signup() {
           disabled={!isValid || isLoading}
           sx={{ mt: 3, mb: 2, float: 'right' }}
         >
-          Sign Up
+          {localize('signup')}
         </Button>
         {isLoading && (
           <CircularProgress
@@ -195,7 +199,7 @@ export default function Signup() {
         )}
       </Box>
       <LinkMUI component={Link} to="/login" variant="body1">
-        Have an account? Sign In
+        {localize('signupLink')}
       </LinkMUI>
     </Box>
   );
