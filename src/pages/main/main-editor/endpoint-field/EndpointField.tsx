@@ -1,6 +1,9 @@
 import { Box, Button, Typography } from '@mui/material';
+import { useLocalizer } from '../../../../localization/language';
 
 const EndpointField = () => {
+  const localize = useLocalizer();
+
   return (
     <Box
       sx={{
@@ -14,7 +17,7 @@ const EndpointField = () => {
       }}
     >
       <Typography sx={{ padding: { xs: '0 0 0 12px', sm: '0 0 0 24px' }, color: '#fffffc' }}>
-        Endpoint:
+        {localize('endpoint')}
       </Typography>
       <input type="text" className="editor__endpoint-input" />
       <Button
@@ -28,7 +31,7 @@ const EndpointField = () => {
           alignSelf: 'stretch',
         }}
       >
-        Change
+        {localize('mainChangeButton')}
       </Button>
     </Box>
   );

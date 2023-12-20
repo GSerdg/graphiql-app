@@ -154,6 +154,26 @@ const localizedStrings = {
     en: 'Вeveloper',
     ru: 'Разработчик',
   },
+  endpoint: {
+    en: 'Endpoint:',
+    ru: 'Эндпоинт:',
+  },
+  mainChangeButton: {
+    en: 'Change:',
+    ru: 'Изменить',
+  },
+  tabHeaders: {
+    en: 'Headers:',
+    ru: 'Заголовки',
+  },
+  tabVariables: {
+    en: 'Variables',
+    ru: 'Переменные',
+  },
+  docsButton: {
+    en: 'DOCS',
+    ru: 'Справка',
+  },
 };
 
 export type LangField = keyof typeof localizedStrings;

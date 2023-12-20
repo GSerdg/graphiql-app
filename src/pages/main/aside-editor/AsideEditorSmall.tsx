@@ -1,10 +1,12 @@
-import { Box, Stack, Button } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Box, Button, Stack } from '@mui/material';
 import classNames from 'classnames';
 import { useState } from 'react';
+import { useLocalizer } from '../../../localization/language';
 
 const AsideEditorSmall = () => {
   const [isDocsOpen, setIsDocsOpen] = useState(false);
+  const localize = useLocalizer();
 
   const handleClick = () => {
     setIsDocsOpen((isOpen) => !isOpen);
@@ -45,28 +47,9 @@ const AsideEditorSmall = () => {
           <ArrowBackIosIcon
             className={classNames('editor__docs-icon', isDocsOpen && 'editor__docs-icon--open')}
           />{' '}
-          DOCS
+          {localize('docsButton')}
         </Button>
-        <Box className={classNames('editor__docs-content', isDocsOpen && 'editor__docs-content--open')}>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi alias soluta laudantium, dolore
-          blanditiis aliquam veritatis ex! Ab voluptas doloribus perferendis, provident nostrum ad incidunt
-          quaerat tempora laboriosam dolore nemo! Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Facilis dolore, vero fugiat at ab tenetur explicabo saepe! Repellendus perspiciatis vel repudiandae
-          officiis omnis iste, odio magni dicta esse repellat eum quis consequuntur! Expedita nisi tempora
-          quisquam totam, iure quia, quos id facere esse adipisci iusto accusantium commodi reiciendis illum
-          dolores recusandae repellendus, maxime repellat officiis. Assumenda iusto suscipit asperiores totam?
-          Consectetur numquam voluptatum nostrum fugiat a facere eveniet! Voluptatibus earum amet culpa sequi,
-          labore reprehenderit provident ut vitae incidunt molestias minus? Ut sed inventore libero nesciunt
-          quo quos rem officiis ratione. Ducimus, nulla expedita in repellat accusamus, quia id, fugiat
-          excepturi quidem voluptatibus explicabo error esse aliquam voluptas sequi alias rem similique fugit
-          sapiente provident soluta deleniti. Id repellendus eveniet, voluptas quas minus accusantium modi
-          facilis sequi voluptatibus minima soluta est ipsa iste libero porro, similique iure sunt sit
-          voluptate, enim itaque illo autem. Asperiores soluta, nesciunt vero officia eligendi quos?
-          Reiciendis quas voluptatem rem illum harum eius tenetur architecto sed illo inventore, asperiores
-          consectetur recusandae assumenda deserunt facere quod iusto nihil temporibus beatae cupiditate iure
-          explicabo. Dolore, quo deserunt! Impedit earum numquam deserunt nobis dolore animi, et quos facilis
-          nihil iste iure asperiores excepturi fugit at aut aspernatur perspiciatis.
-        </Box>
+        <Box className={classNames('editor__docs-content', isDocsOpen && 'editor__docs-content--open')}></Box>
       </Box>
     </Stack>
   );

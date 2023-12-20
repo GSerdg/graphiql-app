@@ -1,10 +1,12 @@
-import { Box, Button } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Box, Button } from '@mui/material';
 import classNames from 'classnames';
 import { useState } from 'react';
+import { useLocalizer } from '../../../localization/language';
 
 const DocsField = () => {
   const [isDocsOpen, setIsDocsOpen] = useState(false);
+  const localizer = useLocalizer();
 
   const handleClick = () => {
     setIsDocsOpen((isOpen) => !isOpen);
@@ -27,7 +29,7 @@ const DocsField = () => {
         <ArrowBackIosIcon
           className={classNames('editor__docs-icon', isDocsOpen && 'editor__docs-icon--open')}
         />{' '}
-        DOCS
+        {localizer('docsButton')}
       </Button>
       <Box className={classNames('editor__docs-content', isDocsOpen && 'editor__docs-content--open')}></Box>
     </Box>
