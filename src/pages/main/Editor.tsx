@@ -1,9 +1,15 @@
 import { Box, Container, Stack } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import './Editor.scss';
-import AsideEditor from './aside-editor/AsideEditor';
+import AsideEditorMiddle from './aside-editor/AsideEditorMiddle';
+import AsideEditorSmall from './aside-editor/AsideEditorSmall';
 import MainEditor from './main-editor/MainEditor';
 
+const md = 900;
+
 export default function Editor() {
+  const matches = useMediaQuery(`(min-width:${md}px)`);
+
   return (
     <Box
       sx={{
@@ -18,14 +24,16 @@ export default function Editor() {
         className="editor"
       >
         <Stack
-          flexDirection="row"
+          // flexDirection="row"
+          direction={{ xs: 'column', md: 'row' }}
           sx={{
             height: 'calc(100vh - 12rem)',
             flexGrow: 1,
           }}
         >
           <MainEditor />
-          <AsideEditor />
+          {matches && <AsideEditorMiddle />}
+          {!matches && <AsideEditorSmall />}
         </Stack>
       </Container>
     </Box>

@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Stack } from '@mui/material';
 import AdditionalEditor from './additional-editor/AdditionalEditor';
 import EndpointField from './endpoint-field/EndpointField';
 import InputField from './input-field/InputField';
@@ -6,10 +6,11 @@ import ToolBox from './toolbox/ToolBox';
 
 const MainEditor = () => {
   return (
-    <Box
+    <Stack
       sx={{
-        flexGrow: 2,
-        width: '20%',
+        flexGrow: { xs: 1, md: 2 },
+        height: { xs: '20%', md: '100%' },
+        width: { xs: '100%', md: '20%' },
         display: 'flex',
         flexDirection: 'column',
       }}
@@ -19,7 +20,7 @@ const MainEditor = () => {
         <ToolBox />
       </InputField>
       <AdditionalEditor />
-    </Box>
+    </Stack>
   );
 };
 

@@ -13,7 +13,9 @@ const EndpointField = () => {
         height: '2rem',
       }}
     >
-      <Typography sx={{ padding: '0 0 0 24px', color: '#fffffc' }}>Endpoint:</Typography>
+      <Typography sx={{ padding: { xs: '0 0 0 12px', sm: '0 0 0 24px' }, color: '#fffffc' }}>
+        Endpoint:
+      </Typography>
       <input type="text" className="editor__endpoint-input" />
       <Button
         variant="contained"

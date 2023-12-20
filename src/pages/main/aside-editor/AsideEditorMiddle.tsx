@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import DocsField from '../docs-field/DocsField';
 
-const AsideEditor = () => {
+const AsideEditorMiddle = () => {
   return (
     <>
       <Box
@@ -28,4 +28,4 @@ const AsideEditor = () => {
   );
 };
 
-export default AsideEditor;
+export default AsideEditorMiddle;

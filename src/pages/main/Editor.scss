@@ -75,13 +75,23 @@ span.MuiTabs-indicator {
   border: 1px solid #48515B;
   border-left: none;
   transition: 0.5s;
-  max-width: 30%;
   height: 100%;
   position: relative;
+  overflow: hidden;
 
   &--open {
     flex-grow: 2;
     border-left: 1px solid #48515B;
+    overflow-y: auto;
+
+    @media (max-width: $md) {
+      flex-grow: 1;
+      border-top: none;
+    }
+
+    @media (max-width: $sm) {
+      border-left: none;
+    }
   }
 }
 
