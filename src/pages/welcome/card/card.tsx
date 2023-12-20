@@ -1,6 +1,7 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import MuiLink from '@mui/material/Link';
+import { useLocalizer } from '../../../localization/language';
 
 interface DeveloperCardProps {
   name: string;
@@ -11,6 +12,8 @@ interface DeveloperCardProps {
 }
 
 export const DeveloperCard = ({ name, gitLink, gitName, image, description }: DeveloperCardProps) => {
+  const localize = useLocalizer();
+
   return (
     <Card
       sx={{
@@ -31,7 +34,7 @@ export const DeveloperCard = ({ name, gitLink, gitName, image, description }: De
       />
       <CardContent>
         <Typography sx={{ textAlign: 'center', fontSize: '1em' }}>{name}</Typography>
-        <Typography sx={{ textAlign: 'center', fontSize: '1em' }}>Developer</Typography>
+        <Typography sx={{ textAlign: 'center', fontSize: '1em' }}>{localize('role')}</Typography>
         <MuiLink
           href={gitLink}
           sx={{

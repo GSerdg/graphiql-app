@@ -1,10 +1,16 @@
 import { Box, Chip, Container, Divider, Stack, Typography } from '@mui/material';
+import { useContext } from 'react';
+import { LangContext } from '../../contexts/localization';
+import { useLocalizer } from '../../localization/language';
 import './Welcome.scss';
 import { DeveloperCard } from './card/card';
 import { ourTeam } from './team-data';
 import graphqlLogo from '/image/graphql.png';
 
 export default function Welcome() {
+  const { lang } = useContext(LangContext);
+  const localize = useLocalizer();
+
   return (
     <Container sx={{ flexGrow: 1 }} maxWidth="xl">
       <Box
@@ -27,7 +33,7 @@ export default function Welcome() {
             lineHeight: '3.3rem',
           }}
         >
-          Debugging your GraphQL server was never this easy!
+          {localize('welcomeTitle')}
         </Typography>
         <Typography
           variant="h4"
@@ -40,8 +46,7 @@ export default function Welcome() {
             marginBottom: '1rem',
           }}
         >
-          GraphiQL Client helps you debug GraphQL queries and implementations - taking care of the hard part
-          so you can focus on actually getting things done.
+          {localize('welcomeSubtitle')}
         </Typography>
         <img src={graphqlLogo} alt="graphQL logo" className="graphql__logo" />
       </Box>
@@ -51,7 +56,7 @@ export default function Welcome() {
           ':after': { borderTop: 'thin solid #AD7630' },
         }}
       >
-        <Chip label="OUR TEAM" variant="outlined" sx={{ color: '#AD7630' }} />
+        <Chip label={localize('chipOurTeam')} variant="outlined" sx={{ color: '#AD7630' }} />
       </Divider>
       <Stack
         className="card-list"
@@ -60,7 +65,7 @@ export default function Welcome() {
         margin="5rem 0"
         justifyContent="space-evenly"
       >
-        {ourTeam.map((member, index) => {
+        {ourTeam[lang].map((member, index) => {
           return (
             <DeveloperCard
               key={index}

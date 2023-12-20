@@ -19,7 +19,7 @@ import './Header.scss';
 import { useLocalizer } from '../../localization/language';
 
 export default function Header() {
-  const { setLang } = useContext(LangContext);
+  const { lang, setLang } = useContext(LangContext);
   const [user] = useAuthState(auth);
   const [isSticky, setIsSticky] = useState(false);
   const localize = useLocalizer();
@@ -71,7 +71,12 @@ export default function Header() {
           </Box>
           <Stack direction="row" sx={{ mr: '2rem', alignItems: 'center' }}>
             <Typography>{localize('languageSwitchEn')}</Typography>
-            <Switch onChange={handleSwitch} color="default" data-testid="langSwitcher" />
+            <Switch
+              onChange={handleSwitch}
+              color="default"
+              data-testid="langSwitcher"
+              defaultChecked={lang === 'ru'}
+            />
             <Typography>{localize('languageSwitchRu')}</Typography>
           </Stack>
           {!user && (

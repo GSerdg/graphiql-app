@@ -74,7 +74,6 @@ const localizedStrings = {
     en: 'Email address must be properly formatted (e.g., user@example.com)',
     ru: 'Адрес электронной почты должен быть правильно отформатирован (например, user@example.com)',
   },
-
   requirePasswordValidation: {
     en: 'Enter your password',
     ru: 'Введите пароль',
@@ -138,6 +137,22 @@ const localizedStrings = {
   headerLogoutButton: {
     en: 'Log out',
     ru: 'Выход',
+  },
+  welcomeTitle: {
+    en: 'Debugging your GraphQL server was never this easy!',
+    ru: 'Отладка вашего сервера GraphQL никогда не была такой простой!',
+  },
+  welcomeSubtitle: {
+    en: 'GraphiQL Client helps you debug GraphQL queries and implementations - taking care of the hard part so you can focus on actually getting things done.',
+    ru: 'Клиент GraphiQL помогает отлаживать запросы и реализации GraphQL, беря на себя самую сложную часть, чтобы вы могли сосредоточиться на том, чтобы действительно добиться цели.',
+  },
+  chipOurTeam: {
+    en: 'OUR TEAM',
+    ru: 'НАША КОМАНДА',
+  },
+  role: {
+    en: 'Вeveloper',
+    ru: 'Разработчик',
   },
 };
 

@@ -24,7 +24,6 @@ export default function Editor() {
         className="editor"
       >
         <Stack
-          // flexDirection="row"
           direction={{ xs: 'column', md: 'row' }}
           sx={{
             height: 'calc(100vh - 12rem)',
