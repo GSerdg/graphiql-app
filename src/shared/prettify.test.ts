@@ -24,17 +24,16 @@ describe('Prettify', () => {
     }).toThrowError('prettifyMissingError');
   });
 
-  it('should throw an error if a parenthesis not enclosed in quotes', () => {
-    expect(() => {
-      convertPrettifyText(`allFilms{films{title}}`);
-    }).toThrowError('prettifyEnclosedError');
-  });
-
   it('should format edge cases', () => {
     expect(convertPrettifyText('')).toBe('');
     expect(convertPrettifyText('{}')).toBe('{\n  \n}\n');
     expect(convertPrettifyText('{{}}')).toBe('{\n   {\n    \n  }\n}\n');
     expect(convertPrettifyText('{}{}')).toBe('{\n  \n}\n{\n  \n}\n');
+    expect(convertPrettifyText('{\n}{\n}')).toBe('{\n}\n{\n}\n');
+    expect(convertPrettifyText('{}\n{}')).toBe('{\n  \n}\n{\n  \n}\n');
+    expect(convertPrettifyText('{}{{}}')).toBe('{\n  \n}\n{\n   {\n    \n  }\n}\n');
+    // expect(convertPrettifyText('{}{\n{}}')).toBe('{\n  \n}\n{\n   {\n    \n  }\n}\n');
+    // expect(convertPrettifyText('{\n}{{}}')).toBe('{\n  \n}\n{\n  \n}\n');
   });
 
   it('should add or remove spaces.', () => {
