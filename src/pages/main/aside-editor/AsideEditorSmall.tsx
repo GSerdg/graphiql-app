@@ -49,7 +49,7 @@ const AsideEditorSmall = () => {
           />{' '}
           {localize('docsButton')}
         </Button>
-        <Box className={classNames('editor__docs-content', isDocsOpen && 'editor__docs-content--open')}></Box>
+        {isDocsOpen && <Box className="editor__docs-content" data-testid="docs-panel"></Box>}
       </Box>
     </Stack>
   );

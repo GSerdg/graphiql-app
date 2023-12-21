@@ -5,12 +5,14 @@ import { Box, IconButton, Tooltip } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../../../app/modulSlice';
 import { useSelector } from '../../../../shared/useSelector';
+import { useLocalizer } from '../../../../localization/language';
 
 const ToolBox = () => {
   const query = useSelector((state) => state.query.value);
   const variables = useSelector((state) => state.variables.value);
   const headers = useSelector((state) => state.headers.value);
   const dispatch = useDispatch();
+  const localize = useLocalizer();
 
   const handleExecuteQuery = () => {
     console.log('query:', query);
@@ -50,7 +52,7 @@ const ToolBox = () => {
         right: 0,
       }}
     >
-      <Tooltip title="Execute query">
+      <Tooltip title={localize('tooltipExecute')}>
         <IconButton
           className="editor__button"
           onClick={handleExecuteQuery}
@@ -63,7 +65,7 @@ const ToolBox = () => {
           <PlayArrowIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Prettify query">
+      <Tooltip title={localize('tooltipPrettify')}>
         <IconButton
           onClick={handlePrettify}
           sx={{ color: '#808076', '&:hover': { backgroundColor: '#8080762e' } }}
@@ -71,7 +73,7 @@ const ToolBox = () => {
           <AutoFixHighIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Copy query">
+      <Tooltip title={localize('tooltipCopy')}>
         <IconButton
           onClick={handleQueryCopy}
           sx={{ color: '#808076', '&:hover': { backgroundColor: '#8080762e' } }}

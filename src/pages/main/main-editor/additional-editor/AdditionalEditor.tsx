@@ -47,12 +47,16 @@ const AdditionalEditor = () => {
           <Tab label={localizer('tabHeaders')} id="variables" className="editor__tab" />
           <Tab label={localizer('tabVariables')} id="headers" className="editor__tab" />
         </Tabs>
-        <IconButton sx={{ padding: '0', color: '#fffffc' }} onClick={handlePanelState}>
+        <IconButton
+          sx={{ padding: '0', color: '#fffffc' }}
+          onClick={handlePanelState}
+          data-testid="expand-button"
+        >
           <ExpandMoreIcon className={isPanelOpen ? '' : 'editor__expand-icon--close'} />
         </IconButton>
       </Box>
       {isPanelOpen && (
-        <Box sx={{ height: '100%', display: 'flex' }}>
+        <Box sx={{ height: '100%', display: 'flex' }} data-testid="additional-editor">
           <InputField slice="variables" value={value} index={0} />
           <InputField slice="headers" value={value} index={1} />
         </Box>

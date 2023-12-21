@@ -159,11 +159,11 @@ const localizedStrings = {
     ru: 'Эндпоинт:',
   },
   mainChangeButton: {
-    en: 'Change:',
+    en: 'Change',
     ru: 'Изменить',
   },
   tabHeaders: {
-    en: 'Headers:',
+    en: 'Headers',
     ru: 'Заголовки',
   },
   tabVariables: {
@@ -173,6 +173,18 @@ const localizedStrings = {
   docsButton: {
     en: 'DOCS',
     ru: 'Справка',
+  },
+  tooltipExecute: {
+    en: 'Execute query',
+    ru: 'Выполнить запрос',
+  },
+  tooltipPrettify: {
+    en: 'Prettify query',
+    ru: 'Форматировать запрос',
+  },
+  tooltipCopy: {
+    en: 'Copy query',
+    ru: 'Копировать запрос',
   },
 };
 
