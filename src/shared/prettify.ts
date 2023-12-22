@@ -15,80 +15,85 @@ export default function convertPrettifyText(query: string) {
     throw new Error('prettifyMissingError');
   }
 
-  const textArray = text
-    .split('\n')
-    .map((item) =>
-      item
-        .trim()
-        .replace(/{\s+/g, '{')
-        .replace(/\s+{/g, '{')
-        .replace(/\s+}/g, '}')
-        .replace(/}\s+/g, '}')
-        .replace(/\s+/g, '\n')
-    );
-  console.log('a', textArray);
+  const textString = text
+    .trim()
+    .replace(/\s*{\s*/g, '{')
+    .replace(/\s*}\s*/g, '}')
+    .replace(/\s*:\s*/g, ':')
+    .replace(/\s*,\s*/g, ',')
+    .replace(/\s+/g, '\n');
 
-  let spaces = 2;
-  let count = 0;
-  const textConvert = textArray.map((item) => {
-    let string = '';
+  let nestingLevel = 0;
+  let isInside = false;
+  let string = '';
 
-    if (item.length > 0 && item[0] !== '}' && item[0] !== '{') {
-      if (count > 0) {
-        string += '\n' + ' '.repeat(spaces - 2);
-      }
+  for (let i = 0; i < textString.length; i++) {
+    let nextWord: string | undefined;
+
+    if (i < textString.length - 1) {
+      nextWord = textString[i + 1];
     }
 
-    for (let i = 0; i < item.length; i++) {
-      switch (item[i]) {
-        case '{':
-          count += 1;
+    switch (textString[i]) {
+      case '{':
+        nestingLevel += 1;
 
-          if (count === 1 && string.length > 0 && string.slice(-2, -1) !== '}') {
-            string += ' ' + item[i];
-          } else if (count === 1 && i === item.length - 1) {
-            string += item[i];
-          } else if ((i === 0 && item.length > 1) || item[i - 1] === '}') {
-            string += item[i] + '\n' + ' '.repeat(spaces);
-          } else if (i === item.length - 1) {
-            string += ' ' + item[i];
-          } else {
-            string += ' ' + item[i] + '\n' + ' '.repeat(spaces);
-          }
-          spaces += 2;
+        if (nestingLevel === 1 && i === 0) {
+          nextWord === '}'
+            ? (string += textString[i] + '\n')
+            : (string += textString[i] + '\n' + ' '.repeat(nestingLevel * 2));
+        } else if (i > 0) {
+          nextWord === '}'
+            ? (string += textString[i] + '\n' + ' '.repeat((nestingLevel - 1) * 2))
+            : (string += textString[i] + '\n' + ' '.repeat(nestingLevel * 2));
+        }
+        break;
+
+      case '\n':
+        if (nextWord === '(') {
           break;
+        }
 
-        case '\n':
-          if (count === 0) {
-            string += ' ';
-          } else {
-            string += item[i] + ' '.repeat(spaces - 2);
-          }
-          break;
+        if (isInside && i > 0) {
+          textString[i - 1] === '(' || nextWord === ')' ? (string += '') : (string += ' ');
+        } else if (nestingLevel === 0) {
+          string += ' ';
+        } else {
+          string += textString[i] + ' '.repeat(nestingLevel * 2);
+        }
+        break;
 
-        case '}':
-          count -= 1;
-          spaces -= 2;
-          string += '\n' + ' '.repeat(spaces - 2) + item[i];
+      case '}':
+        nestingLevel -= 1;
 
-          if (count === 0) {
-            string += '\n';
-          } else if (i < item.length - 1) {
-            if (item[i + 1] === '}') {
-              break;
-            } else {
-              string += '\n' + ' '.repeat(spaces - 2);
-            }
-          }
-          break;
+        if (i === textString.length - 1) {
+          string += textString[i];
+        } else {
+          nextWord !== '}'
+            ? (string += textString[i] + '\n' + ' '.repeat(nestingLevel * 2))
+            : (string += textString[i] + '\n' + ' '.repeat((nestingLevel - 1) * 2));
+        }
+        break;
 
-        default:
-          string += item[i];
-          break;
-      }
+      case ':':
+        string += textString[i] + ' ';
+        break;
+
+      case ',':
+        string += textString[i] + ' ';
+        break;
+
+      default:
+        textString[i] === '(' && (isInside = true);
+        textString[i] === ')' && (isInside = false);
+
+        nextWord === '{'
+          ? (string += textString[i] + ' ')
+          : nextWord === '}'
+          ? (string += textString[i] + '\n' + ' '.repeat((nestingLevel - 1) * 2))
+          : (string += textString[i]);
+        break;
     }
-    return string;
-  });
-  console.log(textConvert);
-  return textConvert.join('');
+  }
+  return string;
 }
