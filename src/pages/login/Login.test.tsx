@@ -3,8 +3,9 @@ import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedFunction, describe, expect, it, vi } from 'vitest';
-import useNotification from '../../components/notification/Notification';
+import { Notification } from '../../components/notification/Notification';
 import { LangContext, SupportedLocales } from '../../contexts/localization';
+import { NotificationProvider } from '../../contexts/notification';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
 import { renderWithProviders } from '../../test/testUtils';
 import LoginPage from './LoginPage';
@@ -21,13 +22,14 @@ vi.mock('../../shared/firebase', async (importOriginal) => {
 
 const Mocktest = ({ language }: { language: 'ru' | 'en' }) => {
   const [lang, setLang] = useState<SupportedLocales>(language);
-  const { Notification } = useNotification();
   return (
     <BrowserRouter>
-      <LangContext.Provider value={{ lang, setLang }}>
-        <Notification />
-        <LoginPage />
-      </LangContext.Provider>
+      <NotificationProvider>
+        <LangContext.Provider value={{ lang, setLang }}>
+          <Notification />
+          <LoginPage />
+        </LangContext.Provider>
+      </NotificationProvider>
     </BrowserRouter>
   );
 };

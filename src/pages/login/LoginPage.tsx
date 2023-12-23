@@ -20,8 +20,8 @@ import { FirebaseError } from 'firebase/app';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import useNotification from '../../components/notification/Notification';
 import { LangField, useLocalizer } from '../../contexts/localization';
+import { useNotification } from '../../contexts/notification';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
 import useLocalizerErrors from '../../shared/firebaseErrors';
 import { signinSchema } from '../../shared/validationSchema';
@@ -33,7 +33,7 @@ interface SubmitForm {
 
 export default function LoginPage() {
   const localize = useLocalizer();
-  const { handleNotificationOpen } = useNotification();
+  const notification = useNotification();
   const getAuthErrorMessage = useLocalizerErrors();
 
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -58,11 +58,11 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       await logInWithEmailAndPassword(data.email, data.password);
-      handleNotificationOpen('success', localize('logged'));
+      notification('success', localize('logged'));
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
-      handleNotificationOpen('error', message);
+      notification('error', message);
       setLoginError(true);
     } finally {
       setIsLoading(false);
@@ -73,11 +73,11 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       await sendPasswordReset(getValues('email'));
-      handleNotificationOpen('success', localize('passwordSent'));
+      notification('success', localize('passwordSent'));
     } catch (error) {
       const err = error as Error;
       const message = getAuthErrorMessage(err.message);
-      handleNotificationOpen('error', message);
+      notification('error', message);
     } finally {
       setIsLoading(false);
     }

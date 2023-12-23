@@ -26,6 +26,14 @@ export function useLocalizer() {
   };
 }
 
+export function useLangContext() {
+  const context = useContext(LangContext);
+  if (context === undefined) {
+    throw new Error('useLangContext must be used within a LangProvider');
+  }
+  return context;
+}
+
 export const LangContext = createContext<LangContext>({} as LangContext);
 
 export function LangProvider({ children }: { children: JSX.Element }) {

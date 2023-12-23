@@ -1,9 +1,8 @@
 import { AuthErrorCodes } from 'firebase/auth';
-import { useContext } from 'react';
-import { LangContext } from '../contexts/localization';
+import { useLangContext } from '../contexts/localization';
 
 export default function useLocalizerErrors() {
-  const { lang } = useContext(LangContext);
+  const { lang } = useLangContext();
 
   return (code: string) => {
     let message: string;

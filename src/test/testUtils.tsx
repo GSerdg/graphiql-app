@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { api } from '../app/api/api';
-import modulReducer from '../app/modulSlice';
+// import modulReducer from '../app/modulSlice';
 import type { AppStore, RootState } from '../app/store';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
@@ -20,7 +20,7 @@ export function renderWithProviders(
     store = configureStore({
       reducer: {
         [api.reducerPath]: api.reducer,
-        modul: modulReducer,
+        // modul: modulReducer,
       },
       preloadedState,
       middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
