@@ -1,8 +1,6 @@
 import { Component } from 'react';
+import FallbackComponent from './FallbackComponent';
 import './ErrorBoundary.scss';
-import { Box, Container, CssBaseline, Typography } from '@mui/material';
-import ErrorAlert from './ErrorAlert';
-import '../../index.scss';
 
 interface ErrorProps {
   children: JSX.Element;
@@ -24,29 +22,7 @@ class ErrorBoundary extends Component<ErrorProps, ErrorState> {
     console.error(error);
   }
   render() {
-    return this.state.error ? (
-      <CssBaseline>
-        <Box className="error-wrapper">
-          <Container>
-            <Box className="error-header">
-              <Box sx={{ color: 'white' }}>
-                <Typography component={'h1'} sx={{ fontSize: '2rem' }}>
-                  Something went wrong
-                </Typography>
-                <Typography>
-                  An unexpected error occurred while the application was running. Try to reload page
-                </Typography>
-              </Box>
-
-              <img className="error-image" src="svg/error-905.svg" alt="Error image" />
-            </Box>
-            <ErrorAlert error={this.state.error}></ErrorAlert>
-          </Container>
-        </Box>
-      </CssBaseline>
-    ) : (
-      this.props.children
-    );
+    return this.state.error ? <FallbackComponent error={this.state.error} /> : this.props.children;
   }
 }
 

@@ -111,6 +111,22 @@ const localizedStrings = {
     en: 'Passwords must match',
     ru: 'Пароли должны совпадать',
   },
+  FallbackComponentHeader: {
+    en: 'Something went wrong',
+    ru: 'Что-то пошло не так',
+  },
+  FallbackComponentDescription: {
+    en: 'An unexpected error occurred while the application was running. Try to reload page',
+    ru: 'Во время работы приложения произошла непредвиденная ошибка. Попробуйте перезагрузить страницу',
+  },
+  ErrorAlertCloseTitle: {
+    en: 'Close error alert',
+    ru: 'Закрыть ошибку',
+  },
+  ErrorAlertCollapseTitle: {
+    en: 'Show error stack',
+    ru: 'Показать стек ошибок',
+  },
 };
 
 export type LangField = keyof typeof localizedStrings;
