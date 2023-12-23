@@ -19,10 +19,9 @@ import { blueGrey, green } from '@mui/material/colors';
 import { FirebaseError } from 'firebase/app';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setIsOpenMessage, setMessageType, setStatusMessage } from '../../app/modulSlice';
-import { LangField, useLocalizer } from '../../localization/language';
+import useNotification from '../../components/notification/Notification';
+import { LangField, useLocalizer } from '../../contexts/localization';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
 import useLocalizerErrors from '../../shared/firebaseErrors';
 import { signinSchema } from '../../shared/validationSchema';
@@ -34,6 +33,7 @@ interface SubmitForm {
 
 export default function LoginPage() {
   const localize = useLocalizer();
+  const { handleNotificationOpen } = useNotification();
   const getAuthErrorMessage = useLocalizerErrors();
 
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -49,7 +49,6 @@ export default function LoginPage() {
     mode: 'onChange',
     resolver: yupResolver(signinSchema),
   });
-  const dispatch = useDispatch();
 
   function handleClickShowPassword() {
     setIsShowPassword((show) => !show);
@@ -59,16 +58,13 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       await logInWithEmailAndPassword(data.email, data.password);
-      dispatch(setMessageType('success'));
-      dispatch(setStatusMessage(localize('logged')));
+      handleNotificationOpen('success', localize('logged'));
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
-      dispatch(setMessageType('error'));
-      dispatch(setStatusMessage(message));
+      handleNotificationOpen('error', message);
       setLoginError(true);
     } finally {
-      dispatch(setIsOpenMessage(true));
       setIsLoading(false);
     }
   }
@@ -77,16 +73,12 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       await sendPasswordReset(getValues('email'));
-      dispatch(setMessageType('success'));
-      dispatch(setStatusMessage(localize('passwordSent')));
+      handleNotificationOpen('success', localize('passwordSent'));
     } catch (error) {
       const err = error as Error;
       const message = getAuthErrorMessage(err.message);
-
-      dispatch(setMessageType('error'));
-      dispatch(setStatusMessage(message));
+      handleNotificationOpen('error', message);
     } finally {
-      dispatch(setIsOpenMessage(true));
       setIsLoading(false);
     }
   }

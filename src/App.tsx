@@ -3,13 +3,15 @@ import { Outlet } from 'react-router-dom';
 import ErrorBoundary from './components/error-boundary/ErrorBoundary';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
-import Notification from './components/notification/Notification';
-import Provider from './contexts/Provider';
+import useNotification from './components/notification/Notification';
+import { LangProvider } from './contexts/localization';
 import './index.scss';
 
 function App() {
+  const { Notification } = useNotification();
+
   return (
-    <Provider>
+    <LangProvider>
       <ErrorBoundary>
         <CssBaseline>
           <Box
@@ -27,7 +29,7 @@ function App() {
           </Box>
         </CssBaseline>
       </ErrorBoundary>
-    </Provider>
+    </LangProvider>
   );
 }
 

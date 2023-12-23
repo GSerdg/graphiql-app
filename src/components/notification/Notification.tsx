@@ -1,41 +1,46 @@
-import { Alert, Slide, SlideProps, Snackbar } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { setIsOpenMessage } from '../../app/modulSlice';
-import { useSelector } from '../../shared/useSelector';
+import { Alert, AlertColor, Slide, SlideProps, Snackbar } from '@mui/material';
+import { useState } from 'react';
 
 function SlideTransition(props: SlideProps) {
   return <Slide {...props} direction="left" />;
 }
 
-export default function Notification() {
-  const {
-    isNotificationOpen: isOpenMessage,
-    notificationType: messageType,
-    description: statusMessage,
-  } = useSelector((state) => state.modul);
-  const dispatch = useDispatch();
+export default function useNotification() {
+  const [isNotificationOpen, setIsNotificationOpen] = useState(true);
+  const [notificationType, setNotificationType] = useState<AlertColor>();
+  const [description, setDescription] = useState<string>();
 
-  return (
-    <Snackbar
-      sx={{ marginTop: '50px' }}
-      TransitionComponent={SlideTransition}
-      data-testid="modulTest"
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isOpenMessage}
-      autoHideDuration={4000}
-      onClose={() => {
-        dispatch(setIsOpenMessage(false));
-      }}
-    >
-      <Alert
+  const handleNotificationOpen = (type: AlertColor, message: string) => {
+    setIsNotificationOpen(true);
+    setNotificationType(type);
+    setDescription(message);
+  };
+
+  const Notification = () => {
+    return (
+      <Snackbar
+        sx={{ marginTop: '50px' }}
+        TransitionComponent={SlideTransition}
+        data-testid="modulTest"
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isNotificationOpen}
+        autoHideDuration={4000}
         onClose={() => {
-          dispatch(setIsOpenMessage(false));
+          setIsNotificationOpen(false);
         }}
-        severity={messageType}
-        sx={{ width: '100%' }}
       >
-        {statusMessage}
-      </Alert>
-    </Snackbar>
-  );
+        <Alert
+          onClose={() => {
+            setIsNotificationOpen(false);
+          }}
+          severity={notificationType}
+          sx={{ width: '100%' }}
+        >
+          {description}
+        </Alert>
+      </Snackbar>
+    );
+  };
+
+  return { Notification, handleNotificationOpen };
 }

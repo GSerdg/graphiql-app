@@ -3,9 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedFunction, describe, expect, it, vi } from 'vitest';
-import Notification from '../../components/notification/Notification';
-import { LangContext } from '../../contexts/localization';
-import { SupportedLocales } from '../../localization/language';
+import useNotification from '../../components/notification/Notification';
+import { LangContext, SupportedLocales } from '../../contexts/localization';
 import { registerWithEmailAndPassword } from '../../shared/firebase';
 import { renderWithProviders } from '../../test/testUtils';
 import Signup from './SignupPage';
@@ -20,6 +19,7 @@ vi.mock('../../shared/firebase', async (importOriginal) => {
 
 const Mocktest = ({ language }: { language: 'ru' | 'en' }) => {
   const [lang, setLang] = useState<SupportedLocales>(language);
+  const { Notification } = useNotification();
 
   return (
     <BrowserRouter>
@@ -112,7 +112,7 @@ describe('SignUp', () => {
     expect(screen.getByTestId('repeatPasswordHelperTest')).not.toHaveTextContent(/\w/);
   });
 
-  it('should enabled submit button and fetch auth requiest', async () => {
+  it('should enabled submit button and fetch auth request', async () => {
     renderWithProviders(<Mocktest language={'en'} />);
 
     expect(screen.getByTestId('buttonTest')).toBeDisabled();
