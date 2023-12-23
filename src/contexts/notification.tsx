@@ -13,11 +13,13 @@ interface NotificationContext {
 export function useNotification() {
   const { setIsNotificationOpen, setNotificationType, setDescription } = useContext(NotificationContext);
 
-  return (type: AlertColor, message: string) => {
+  function showNotification(type: AlertColor, message: string) {
     setIsNotificationOpen(true);
     setNotificationType(type);
     setDescription(message);
-  };
+  }
+
+  return { showNotification };
 }
 
 export function useNotificationContext() {

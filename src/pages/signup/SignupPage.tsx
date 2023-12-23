@@ -35,7 +35,7 @@ interface SubmitForm {
 export default function Signup() {
   const localize = useLocalizer();
   const getAuthErrorMessage = useLocalizerErrors();
-  const notification = useNotification();
+  const { showNotification } = useNotification();
 
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowRepeatPassword, setIsShowRepeatPassword] = useState(false);
@@ -61,11 +61,11 @@ export default function Signup() {
     try {
       setIsLoading(true);
       await registerWithEmailAndPassword(data.email, data.email, data.password);
-      notification('success', localize('registrationComplete'));
+      showNotification('success', localize('registrationComplete'));
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
-      notification('error', message);
+      showNotification('error', message);
     } finally {
       setIsLoading(false);
     }

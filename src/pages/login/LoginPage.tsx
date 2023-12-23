@@ -33,7 +33,7 @@ interface SubmitForm {
 
 export default function LoginPage() {
   const localize = useLocalizer();
-  const notification = useNotification();
+  const { showNotification } = useNotification();
   const getAuthErrorMessage = useLocalizerErrors();
 
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -58,11 +58,11 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       await logInWithEmailAndPassword(data.email, data.password);
-      notification('success', localize('logged'));
+      showNotification('success', localize('logged'));
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
-      notification('error', message);
+      showNotification('error', message);
       setLoginError(true);
     } finally {
       setIsLoading(false);
@@ -73,11 +73,11 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       await sendPasswordReset(getValues('email'));
-      notification('success', localize('passwordSent'));
+      showNotification('success', localize('passwordSent'));
     } catch (error) {
       const err = error as Error;
       const message = getAuthErrorMessage(err.message);
-      notification('error', message);
+      showNotification('error', message);
     } finally {
       setIsLoading(false);
     }
