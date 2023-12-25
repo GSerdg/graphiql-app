@@ -2,21 +2,20 @@ import { AlertColor } from '@mui/material';
 import { createContext, useContext, useState } from 'react';
 
 interface NotificationContext {
+  notification: NotificationInterface;
+  setNotification: React.Dispatch<React.SetStateAction<NotificationInterface>>;
+}
+interface NotificationInterface {
   isNotificationOpen: boolean;
-  setIsNotificationOpen: React.Dispatch<React.SetStateAction<boolean>>;
   notificationType: AlertColor;
-  setNotificationType: React.Dispatch<React.SetStateAction<AlertColor>>;
   description: string;
-  setDescription: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function useNotification() {
-  const { setIsNotificationOpen, setNotificationType, setDescription } = useContext(NotificationContext);
+  const { setNotification } = useContext(NotificationContext);
 
   function showNotification(type: AlertColor, message: string) {
-    setIsNotificationOpen(true);
-    setNotificationType(type);
-    setDescription(message);
+    setNotification({ isNotificationOpen: true, notificationType: type, description: message });
   }
 
   return { showNotification };
@@ -33,21 +32,14 @@ export function useNotificationContext() {
 export const NotificationContext = createContext<NotificationContext>({} as NotificationContext);
 
 export function NotificationProvider({ children }: { children: JSX.Element }) {
-  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  const [notificationType, setNotificationType] = useState<AlertColor>('success');
-  const [description, setDescription] = useState('');
+  const [notification, setNotification] = useState<NotificationInterface>({
+    isNotificationOpen: false,
+    notificationType: 'success',
+    description: '',
+  });
 
   return (
-    <NotificationContext.Provider
-      value={{
-        isNotificationOpen,
-        setIsNotificationOpen,
-        notificationType,
-        setNotificationType,
-        description,
-        setDescription,
-      }}
-    >
+    <NotificationContext.Provider value={{ notification, setNotification }}>
       {children}
     </NotificationContext.Provider>
   );

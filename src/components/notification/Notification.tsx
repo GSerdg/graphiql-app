@@ -6,8 +6,7 @@ function SlideTransition(props: SlideProps) {
 }
 
 export function Notification() {
-  const { isNotificationOpen, notificationType, description, setIsNotificationOpen } =
-    useNotificationContext();
+  const { notification, setNotification } = useNotificationContext();
 
   return (
     <Snackbar
@@ -15,20 +14,20 @@ export function Notification() {
       TransitionComponent={SlideTransition}
       data-testid="modulTest"
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isNotificationOpen}
+      open={notification.isNotificationOpen}
       autoHideDuration={4000}
       onClose={() => {
-        setIsNotificationOpen(false);
+        setNotification({ ...notification, isNotificationOpen: false });
       }}
     >
       <Alert
         onClose={() => {
-          setIsNotificationOpen(false);
+          setNotification({ ...notification, isNotificationOpen: false });
         }}
-        severity={notificationType}
+        severity={notification.notificationType}
         sx={{ width: '100%' }}
       >
-        {description}
+        {notification.description}
       </Alert>
     </Snackbar>
   );
