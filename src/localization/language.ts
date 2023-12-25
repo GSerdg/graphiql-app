@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { LangContext } from '../contexts/localization';
 
-const localizedStrings = {
+export const localizedStrings = {
   emailInput: {
     en: 'Email',
     ru: 'Адрес электронной почты',
@@ -151,7 +151,7 @@ const localizedStrings = {
     ru: 'НАША КОМАНДА',
   },
   role: {
-    en: 'Вeveloper',
+    en: 'Developer',
     ru: 'Разработчик',
   },
   endpoint: {
@@ -185,6 +185,30 @@ const localizedStrings = {
   tooltipCopy: {
     en: 'Copy query',
     ru: 'Копировать запрос',
+  },
+  developerName1: {
+    en: 'SERGEY GREBEL',
+    ru: 'СЕРГЕЙ ГРЕБЕЛЬ',
+  },
+  developerName2: {
+    en: 'ANDREY KIZILOV',
+    ru: 'АНДРЕЙ КИЗИЛОВ',
+  },
+  developerName3: {
+    en: 'SERGEY RODNYKH',
+    ru: 'СЕРГЕЙ РОДНЫХ',
+  },
+  developerDescription1: {
+    en: "I'm a front-end developer. After studying at RS School, I can now do everything in a Java script!!! Well, or almost everything. And everything that I cannot achieve, I will achieve as I work on future interesting and probably very entertaining projects.",
+    ru: 'Я фронтенд-разработчик. После обучения в RS School я могу делать на JavaScript всё!!! Ну или почти все. И всего, чего я не смогу достичь, я добьюсь, работая над будущими интересными и, наверное, очень занимательными проектами.',
+  },
+  developerDescription2: {
+    en: 'Student of the RSSCHOOL stage1 stream 2023. With the desire to continue learning on the React framework.',
+    ru: 'Студент RSSCHOOL stage1 потока 2023 года. С желанием продолжить обучение на React framework.',
+  },
+  developerDescription3: {
+    en: "Frontend developer without commercial experience. For the last year I have been actively studying frontend development and want to become professional in this field. I'm currently learning React.",
+    ru: 'Frontend-разработчик без коммерческого опыта. Последний год я активно изучаю фронтенд-разработку и хочу стать профессионалом в этой области. Сейчас изучаю React.',
   },
 };
 

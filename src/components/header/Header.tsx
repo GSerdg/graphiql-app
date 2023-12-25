@@ -75,7 +75,7 @@ export default function Header() {
               onChange={handleSwitch}
               color="default"
               data-testid="langSwitcher"
-              defaultChecked={lang === 'ru'}
+              checked={lang === 'ru'}
             />
             <Typography>{localize('languageSwitchRu')}</Typography>
           </Stack>

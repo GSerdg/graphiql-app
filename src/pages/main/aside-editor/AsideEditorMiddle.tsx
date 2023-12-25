@@ -1,5 +1,8 @@
 import { Box } from '@mui/material';
 import DocsField from '../docs-field/DocsField';
+import CodeMirror from '@uiw/react-codemirror';
+import { basicDark } from '@uiw/codemirror-theme-basic';
+import { javascript } from '@codemirror/lang-javascript';
 
 const AsideEditorMiddle = () => {
   return (
@@ -12,17 +15,7 @@ const AsideEditorMiddle = () => {
           border: '1px solid #48515B',
           borderRight: 'none',
         }}
-      >
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'row-reverse',
-            justifyContent: 'space-between',
-            height: '100%',
-            overflow: 'auto',
-          }}
-        ></Box>
-      </Box>
+      ></Box>
       <DocsField />
     </>
   );

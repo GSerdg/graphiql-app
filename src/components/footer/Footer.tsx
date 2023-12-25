@@ -1,14 +1,10 @@
 import { Box, Container, List, Typography } from '@mui/material';
-import { useContext } from 'react';
-import { LangContext } from '../../contexts/localization';
 import { ourTeam } from '../../pages/welcome/team-data';
 import './Footer.scss';
 import { GitLink } from './GitLink/GitLink';
 import logo from '/svg/rs_school_js.svg';
 
 export default function Footer() {
-  const { lang } = useContext(LangContext);
-
   return (
     <Box sx={{ backgroundColor: '#2E3235' }}>
       <Container
@@ -28,7 +24,7 @@ export default function Footer() {
           2023
         </Typography>
         <List sx={{ padding: '0.2rem 0' }}>
-          {ourTeam[lang].map((member, index) => {
+          {ourTeam.map((member, index) => {
             return <GitLink key={index} gitName={member.gitName} gitLink={member.gitLink} />;
           })}
         </List>

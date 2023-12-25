@@ -1,6 +1,4 @@
 import { Box, Chip, Container, Divider, Stack, Typography } from '@mui/material';
-import { useContext } from 'react';
-import { LangContext } from '../../contexts/localization';
 import { useLocalizer } from '../../localization/language';
 import './Welcome.scss';
 import { DeveloperCard } from './card/card';
@@ -8,7 +6,6 @@ import { ourTeam } from './team-data';
 import graphqlLogo from '/image/graphql.png';
 
 export default function Welcome() {
-  const { lang } = useContext(LangContext);
   const localize = useLocalizer();
 
   return (
@@ -65,7 +62,7 @@ export default function Welcome() {
         margin="5rem 0"
         justifyContent="space-evenly"
       >
-        {ourTeam[lang].map((member, index) => {
+        {ourTeam.map((member, index) => {
           return (
             <DeveloperCard
               key={index}

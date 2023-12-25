@@ -35,6 +35,7 @@ const AdditionalEditor = () => {
         flexDirection: 'column',
         backgroundColor: '#2E3235',
         border: '1px solid #48515B',
+        borderRight: 'none',
       }}
     >
       <Box

@@ -112,7 +112,5 @@ describe('Tests for header component', () => {
     await userEvent.click(logoutButton);
 
     expect(firebase.logout).toHaveBeenCalled();
-
-    screen.debug();
   });
 });
