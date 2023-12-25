@@ -3,10 +3,10 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import router from '../../app/router';
 
-import { renderWithProviders } from '../../test/testUtils';
+import { renderWithReduxProviders } from '../../test/testUtils';
 describe('Tests for not-found page', () => {
   it('Make sure the component is rendering', () => {
-    renderWithProviders(
+    renderWithReduxProviders(
       <RouterProvider
         router={createMemoryRouter(router.routes, {
           initialEntries: ['/bad-route'],
