@@ -17,17 +17,17 @@ export const modulSlice = createSlice({
   name: 'modul',
   initialState,
   reducers: {
-    setIsOpenMessage: (state, action) => {
+    setIsNotificationOpen: (state, action) => {
       state.isNotificationOpen = action.payload;
     },
-    setMessageType: (state, action) => {
+    setNotificationType: (state, action) => {
       state.notificationType = action.payload;
     },
-    setStatusMessage: (state, action) => {
+    setDescription: (state, action) => {
       state.description = action.payload;
     },
   },
 });
 
-export const { setIsOpenMessage, setMessageType, setStatusMessage } = modulSlice.actions;
+export const { setIsNotificationOpen, setNotificationType, setDescription } = modulSlice.actions;
 export default modulSlice.reducer;

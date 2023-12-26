@@ -6,7 +6,7 @@ import logo from '/svg/rs_school_js.svg';
 
 export default function Footer() {
   return (
-    <Box sx={{ bgcolor: 'primary.main' }}>
+    <Box sx={{ backgroundColor: '#2E3235' }}>
       <Container
         component="footer"
         sx={{
@@ -15,8 +15,9 @@ export default function Footer() {
           alignItems: 'center',
           padding: '0 24px',
         }}
+        maxWidth="xl"
       >
-        <a href="https://rs.school/react/">
+        <a href="https://rs.school/react/" className="footer__logo">
           <img src={logo} alt="rss_logo" className="logo" />
         </a>
         <Typography component="span" color="inherit" sx={{ color: '#fffffc' }}>
