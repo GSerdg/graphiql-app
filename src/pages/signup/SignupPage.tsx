@@ -19,10 +19,9 @@ import { green } from '@mui/material/colors';
 import { FirebaseError } from 'firebase/app';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setDescription, setIsNotificationOpen, setNotificationType } from '../../app/modulSlice';
-import { LangField, useLocalizer } from '../../localization/language';
+import { LangField, useLocalizer } from '../../contexts/localization';
+import { useNotification } from '../../contexts/notification';
 import { registerWithEmailAndPassword } from '../../shared/firebase';
 import useLocalizerErrors from '../../shared/firebaseErrors';
 import { signupSchema } from '../../shared/validationSchema';
@@ -36,6 +35,7 @@ interface SubmitForm {
 export default function Signup() {
   const localize = useLocalizer();
   const getAuthErrorMessage = useLocalizerErrors();
+  const { showNotification } = useNotification();
 
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowRepeatPassword, setIsShowRepeatPassword] = useState(false);
@@ -48,7 +48,6 @@ export default function Signup() {
     mode: 'onChange',
     resolver: yupResolver(signupSchema),
   });
-  const dispatch = useDispatch();
 
   function handleClickShowPassword() {
     setIsShowPassword((show) => !show);
@@ -62,16 +61,12 @@ export default function Signup() {
     try {
       setIsLoading(true);
       await registerWithEmailAndPassword(data.email, data.email, data.password);
-      dispatch(setNotificationType('success'));
-      dispatch(setDescription(localize('registrationComplete')));
+      showNotification('success', localize('registrationComplete'));
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
-
-      dispatch(setNotificationType('error'));
-      dispatch(setDescription(message));
+      showNotification('error', message);
     } finally {
-      dispatch(setIsNotificationOpen(true));
       setIsLoading(false);
     }
   }

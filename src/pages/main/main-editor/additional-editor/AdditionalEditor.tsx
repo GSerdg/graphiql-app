@@ -2,11 +2,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box, IconButton, Tab, Tabs } from '@mui/material';
 import classNames from 'classnames';
 import { useState } from 'react';
-import { useLocalizer } from '../../../../localization/language';
+import { useLocalizer } from '../../../../contexts/localization';
 import InputField from '../input-field/InputField';
 
+type ValueType = number | boolean;
+
 const AdditionalEditor = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState<ValueType>(0);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const localizer = useLocalizer();
 
@@ -15,7 +17,14 @@ const AdditionalEditor = () => {
   };
 
   const handlePanelState = () => {
-    setIsPanelOpen((prevState) => !prevState);
+    setIsPanelOpen((prevState) => {
+      if (prevState) {
+        setValue(false);
+      } else {
+        setValue(0);
+      }
+      return !prevState;
+    });
   };
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {

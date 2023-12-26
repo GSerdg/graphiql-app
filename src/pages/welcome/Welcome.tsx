@@ -1,5 +1,5 @@
 import { Box, Chip, Container, Divider, Stack, Typography } from '@mui/material';
-import { useLocalizer } from '../../localization/language';
+import { useLocalizer } from '../../contexts/localization';
 import './Welcome.scss';
 import { DeveloperCard } from './card/card';
 import { ourTeam } from './team-data';

@@ -2,7 +2,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Box, Button } from '@mui/material';
 import classNames from 'classnames';
 import { useState } from 'react';
-import { useLocalizer } from '../../../localization/language';
+import { useLocalizer } from '../../../contexts/localization';
 
 const DocsField = () => {
   const [isDocsOpen, setIsDocsOpen] = useState(false);

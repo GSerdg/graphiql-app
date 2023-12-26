@@ -13,7 +13,7 @@ interface InputFieldProps {
   slice: 'query' | 'variables' | 'headers';
   children?: React.ReactNode;
   index?: number;
-  value?: number;
+  value?: number | boolean;
 }
 
 const InputField = ({ slice, children, index = 0, value = 0 }: InputFieldProps) => {

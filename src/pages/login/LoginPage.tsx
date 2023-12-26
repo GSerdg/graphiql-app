@@ -19,10 +19,9 @@ import { blueGrey, green } from '@mui/material/colors';
 import { FirebaseError } from 'firebase/app';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setDescription, setIsNotificationOpen, setNotificationType } from '../../app/modulSlice';
-import { LangField, useLocalizer } from '../../localization/language';
+import { LangField, useLocalizer } from '../../contexts/localization';
+import { useNotification } from '../../contexts/notification';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
 import useLocalizerErrors from '../../shared/firebaseErrors';
 import { signinSchema } from '../../shared/validationSchema';
@@ -34,6 +33,7 @@ interface SubmitForm {
 
 export default function LoginPage() {
   const localize = useLocalizer();
+  const { showNotification } = useNotification();
   const getAuthErrorMessage = useLocalizerErrors();
 
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -49,7 +49,6 @@ export default function LoginPage() {
     mode: 'onChange',
     resolver: yupResolver(signinSchema),
   });
-  const dispatch = useDispatch();
 
   function handleClickShowPassword() {
     setIsShowPassword((show) => !show);
@@ -59,16 +58,13 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       await logInWithEmailAndPassword(data.email, data.password);
-      dispatch(setNotificationType('success'));
-      dispatch(setDescription(localize('logged')));
+      showNotification('success', localize('logged'));
     } catch (error) {
       const err = error as FirebaseError;
       const message = getAuthErrorMessage(err.code);
-      dispatch(setNotificationType('error'));
-      dispatch(setDescription(message));
+      showNotification('error', message);
       setLoginError(true);
     } finally {
-      dispatch(setIsNotificationOpen(true));
       setIsLoading(false);
     }
   }
@@ -77,16 +73,12 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       await sendPasswordReset(getValues('email'));
-      dispatch(setNotificationType('success'));
-      dispatch(setDescription(localize('passwordSent')));
+      showNotification('success', localize('passwordSent'));
     } catch (error) {
       const err = error as Error;
       const message = getAuthErrorMessage(err.message);
-
-      dispatch(setNotificationType('error'));
-      dispatch(setDescription(message));
+      showNotification('error', message);
     } finally {
-      dispatch(setIsNotificationOpen(true));
       setIsLoading(false);
     }
   }

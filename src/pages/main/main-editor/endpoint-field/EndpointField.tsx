@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import { useLocalizer } from '../../../../localization/language';
+import { useLocalizer } from '../../../../contexts/localization';
 
 const EndpointField = () => {
   const localize = useLocalizer();

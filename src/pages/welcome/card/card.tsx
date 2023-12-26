@@ -1,7 +1,7 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import MuiLink from '@mui/material/Link';
-import { useLocalizer } from '../../../localization/language';
+import { useLocalizer } from '../../../contexts/localization';
 
 interface DeveloperCardProps {
   name: 'developerName1' | 'developerName2' | 'developerName3';

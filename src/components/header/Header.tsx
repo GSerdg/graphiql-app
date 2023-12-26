@@ -10,16 +10,15 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
-import { LangContext } from '../../contexts/localization';
+import { useLangContext, useLocalizer } from '../../contexts/localization';
 import { auth, logout } from '../../shared/firebase';
 import './Header.scss';
-import { useLocalizer } from '../../localization/language';
 
 export default function Header() {
-  const { lang, setLang } = useContext(LangContext);
+  const { lang, setLang } = useLangContext();
   const [user] = useAuthState(auth);
   const [isSticky, setIsSticky] = useState(false);
   const localize = useLocalizer();
@@ -94,9 +93,10 @@ export default function Header() {
               <Button
                 component={Link}
                 color="inherit"
-                to="/"
-                className="header__button--home"
-                sx={{ padding: 0 }}
+                variant="outlined"
+                to="/editor"
+                className="header__button"
+                sx={{ marginRight: '1rem' }}
               >
                 {localize('headerMainPageButton')}
               </Button>

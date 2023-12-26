@@ -2,7 +2,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Box, Button, Stack } from '@mui/material';
 import classNames from 'classnames';
 import { useState } from 'react';
-import { useLocalizer } from '../../../localization/language';
+import { useLocalizer } from '../../../contexts/localization';
 
 const AsideEditorSmall = () => {
   const [isDocsOpen, setIsDocsOpen] = useState(false);
