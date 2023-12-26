@@ -38,11 +38,11 @@ export const DeveloperCard = ({ name, gitLink, gitName, image, description }: De
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#2196f3',
+            color: '#AD7630',
             fontSize: '0.9em',
             transition: '0.3s',
             ':hover': {
-              color: '#1769aa',
+              color: '#855B25',
             },
           }}
           underline="none"

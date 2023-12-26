@@ -112,4 +112,8 @@ export const localizedStrings = {
     en: 'Passwords must match',
     ru: 'Пароли должны совпадать',
   },
+  prettifyMissingError: {
+    en: 'Missing opening or closing parenthesis',
+    ru: 'Пропущена открывающая или закрывающая скобка',
+  },
 };
