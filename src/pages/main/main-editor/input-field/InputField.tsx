@@ -47,7 +47,6 @@ const InputField = ({ slice, children, index = 0, value = 0 }: InputFieldProps) 
     >
       {value === index && (
         <CodeMirror
-          value={query}
           className="editor__query"
           theme={basicDark}
           height="100%"
