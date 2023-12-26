@@ -3,13 +3,15 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { setDescription, setIsNotificationOpen, setNotificationType } from '../../../../app/modulSlice';
 import { setQuery } from '../../../../app/querySlice';
-import { LangField, useLocalizer } from '../../../../localization/language';
+import { LangField, useLocalizer } from '../../../../contexts/localization';
+import { useNotification } from '../../../../contexts/notification';
 import convertPrettifyText from '../../../../shared/prettify';
 import { useSelector } from '../../../../shared/useSelector';
 
 const ToolBox = () => {
+  const { showNotification } = useNotification();
+
   const query = useSelector((state) => state.query.query);
   const variables = useSelector((state) => state.variables.variables);
   const headers = useSelector((state) => state.headers.headers);
@@ -28,23 +30,17 @@ const ToolBox = () => {
       dispatch(setQuery(prettifyText));
     } catch (error) {
       const err = error as Error;
-      dispatch(setNotificationType('error'));
-      dispatch(setDescription(localizer(err.message as LangField)));
-      dispatch(setIsNotificationOpen(true));
+      showNotification('error', localizer(err.message as LangField));
     }
   };
 
   const handleQueryCopy = () => {
     navigator.clipboard.writeText(query).then(
       function () {
-        dispatch(setNotificationType('success'));
-        dispatch(setDescription('Query copied successfully'));
-        dispatch(setIsNotificationOpen(true));
+        showNotification('success', 'Query copied successfully');
       },
       function () {
-        dispatch(setNotificationType('error'));
-        dispatch(setDescription('Copy query failed'));
-        dispatch(setIsNotificationOpen(true));
+        showNotification('error', 'Copy query failed');
       }
     );
   };

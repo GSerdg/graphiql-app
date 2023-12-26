@@ -1,8 +1,14 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
+import headersReducer from '../app/headersSlice';
+import queryReducer from '../app/querySlice';
+import variablesReducer from '../app/variablesSlice';
 import { api } from './api/api';
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
+  query: queryReducer,
+  variables: variablesReducer,
+  headers: headersReducer,
 });
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
