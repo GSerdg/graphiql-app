@@ -56,7 +56,7 @@ export default function Header() {
 
   return (
     <AppBar position="fixed" className={isSticky ? 'app-bar--sticky' : 'app-bar'}>
-      <Container className="header" maxWidth="xl">
+      <Container className="header" maxWidth={false}>
         <Toolbar className="header__toolbar">
           <Box sx={{ flexGrow: 1 }}>
             <Button

@@ -15,7 +15,7 @@ export function PrivateRoute({ children }: PrivateRouteProps) {
   return (
     <Container
       component="main"
-      maxWidth="xl"
+      maxWidth={false}
       disableGutters
       sx={{ flexGrow: 1, display: 'flex', alignItems: 'stretch' }}
     >

@@ -36,14 +36,10 @@ const AdditionalEditor = () => {
         backgroundColor: '#2E3235',
         border: '1px solid #48515B',
         borderRight: 'none',
+        maxHeight: '25vh',
       }}
     >
-      <Box
-        className={classNames(
-          'editor__tab-group',
-          isPanelOpen ? 'editor__tab-group--open' : 'editor__tab-group--close'
-        )}
-      >
+      <Box className={classNames('editor__tab-group', isPanelOpen && 'editor__tab-group--open')}>
         <Tabs value={value} onChange={handleChange} onClick={handleClick} sx={{ minHeight: '10px' }}>
           <Tab label={localizer('tabHeaders')} id="variables" className="editor__tab" />
           <Tab label={localizer('tabVariables')} id="headers" className="editor__tab" />
@@ -57,7 +53,7 @@ const AdditionalEditor = () => {
         </IconButton>
       </Box>
       {isPanelOpen && (
-        <Box sx={{ height: '100%', display: 'flex' }} data-testid="additional-editor">
+        <Box sx={{ height: '100%', display: 'flex', overflowY: 'auto' }} data-testid="additional-editor">
           <InputField slice="variables" value={value} index={0} />
           <InputField slice="headers" value={value} index={1} />
         </Box>

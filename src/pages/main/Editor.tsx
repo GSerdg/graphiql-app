@@ -20,7 +20,7 @@ export default function Editor() {
     >
       <Container
         sx={{ display: 'flex', flexDirection: 'column', padding: '1rem' }}
-        maxWidth="xl"
+        maxWidth={false}
         className="editor"
       >
         <Stack

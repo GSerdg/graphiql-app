@@ -40,9 +40,8 @@ const InputField = ({ slice, children, index = 0, value = 0 }: InputFieldProps) 
   return (
     <Box
       sx={{
-        flexGrow: 2,
-        alignItems: 'stretch',
-        overflow: 'auto',
+        flexGrow: 1,
+        overflow: 'hidden',
       }}
       display={value === index ? 'flex' : 'none'}
     >

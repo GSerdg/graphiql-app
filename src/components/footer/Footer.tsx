@@ -15,7 +15,7 @@ export default function Footer() {
           alignItems: 'center',
           padding: '0 24px',
         }}
-        maxWidth="xl"
+        maxWidth={false}
       >
         <a href="https://rs.school/react/" className="footer__logo">
           <img src={logo} alt="rss_logo" className="logo" />

@@ -1,8 +1,5 @@
 import { Box } from '@mui/material';
 import DocsField from '../docs-field/DocsField';
-import CodeMirror from '@uiw/react-codemirror';
-import { basicDark } from '@uiw/codemirror-theme-basic';
-import { javascript } from '@codemirror/lang-javascript';
 
 const AsideEditorMiddle = () => {
   return (
