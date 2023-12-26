@@ -112,7 +112,7 @@ describe('SignUp', () => {
     expect(screen.getByTestId('repeatPasswordHelperTest')).not.toHaveTextContent(/\w/);
   });
 
-  it('should enabled submit button and fetch auth requiest', async () => {
+  it('should enabled submit button and fetch auth request', async () => {
     renderWithProviders(<Mocktest language={'en'} />);
 
     expect(screen.getByTestId('buttonTest')).toBeDisabled();
