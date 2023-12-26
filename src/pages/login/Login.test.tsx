@@ -1,13 +1,9 @@
-import { screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { MockedFunction, describe, expect, it, vi } from 'vitest';
-import Notification from '../../components/notification/Notification';
-import { LangContext } from '../../contexts/localization';
-import { SupportedLocales } from '../../localization/language';
+import { Notification } from '../../components/notification/Notification';
 import { logInWithEmailAndPassword, sendPasswordReset } from '../../shared/firebase';
-import { renderWithProviders } from '../../test/testUtils';
+import { MockWrapper } from '../../test/testUtils';
 import LoginPage from './LoginPage';
 
 vi.mock('../../shared/firebase', async (importOriginal) => {
@@ -20,22 +16,20 @@ vi.mock('../../shared/firebase', async (importOriginal) => {
   };
 });
 
-const Mocktest = ({ language }: { language: 'ru' | 'en' }) => {
-  const [lang, setLang] = useState<SupportedLocales>(language);
-
+const Mocktest = () => {
   return (
-    <BrowserRouter>
-      <LangContext.Provider value={{ lang, setLang }}>
+    <MockWrapper>
+      <>
         <Notification />
         <LoginPage />
-      </LangContext.Provider>
-    </BrowserRouter>
+      </>
+    </MockWrapper>
   );
 };
 
 describe('SignIn', () => {
   it('should render', () => {
-    renderWithProviders(<Mocktest language={'en'} />);
+    render(<Mocktest />);
 
     expect(
       screen.getByRole('heading', {
@@ -47,7 +41,7 @@ describe('SignIn', () => {
   });
 
   it('should validate email input', async () => {
-    renderWithProviders(<Mocktest language={'en'} />);
+    render(<Mocktest />);
 
     await userEvent.type(screen.getByTestId('emailTest'), 'a');
     await userEvent.clear(screen.getByTestId('emailTest'));
@@ -68,7 +62,7 @@ describe('SignIn', () => {
   });
 
   it('should validate password input', async () => {
-    renderWithProviders(<Mocktest language={'en'} />);
+    render(<Mocktest />);
 
     await userEvent.type(screen.getByTestId('passwordTest'), 'a');
     await userEvent.clear(screen.getByTestId('passwordTest'));
@@ -79,7 +73,7 @@ describe('SignIn', () => {
   });
 
   it('should enabled submit button and fetch auth requiest', async () => {
-    renderWithProviders(<Mocktest language={'en'} />);
+    render(<Mocktest />);
 
     expect(screen.getByTestId('buttonTest')).toBeDisabled();
 
@@ -96,7 +90,7 @@ describe('SignIn', () => {
   });
 
   it('should show reset password button and fetch requiest', async () => {
-    renderWithProviders(<Mocktest language={'en'} />);
+    render(<Mocktest />);
 
     expect(screen.queryByTestId('resetPasswordTest')).not.toBeInTheDocument();
 
@@ -120,7 +114,7 @@ describe('SignIn', () => {
       code: 'auth/invalid-credential',
     });
 
-    renderWithProviders(<Mocktest language={'en'} />);
+    render(<Mocktest />);
 
     expect(screen.queryByTestId('modulTest')).not.toBeInTheDocument();
 
@@ -133,7 +127,9 @@ describe('SignIn', () => {
   });
 
   it('should render width ru language', () => {
-    renderWithProviders(<Mocktest language={'ru'} />);
+    localStorage.setItem('lang', 'ru');
+
+    render(<Mocktest />);
 
     expect(
       screen.getByRole('heading', {
@@ -148,8 +144,9 @@ describe('SignIn', () => {
     (logInWithEmailAndPassword as MockedFunction<typeof logInWithEmailAndPassword>).mockRejectedValue({
       code: 'auth/invalid-credential',
     });
+    localStorage.setItem('lang', 'ru');
 
-    renderWithProviders(<Mocktest language={'ru'} />);
+    render(<Mocktest />);
 
     await userEvent.type(screen.getByTestId('emailTest'), 'a');
     expect(

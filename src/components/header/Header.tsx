@@ -10,15 +10,15 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
-import { LangContext } from '../../contexts/localization';
+import { useLangContext } from '../../contexts/localization';
 import { auth, logout } from '../../shared/firebase';
 import './Header.scss';
 
 export default function Header() {
-  const { setLang } = useContext(LangContext);
+  const { setLang } = useLangContext();
   const [user] = useAuthState(auth);
   const [isSticky, setIsSticky] = useState(false);
 
