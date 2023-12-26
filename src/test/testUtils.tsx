@@ -5,8 +5,11 @@ import { render } from '@testing-library/react';
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { api } from '../app/api/api';
+import headersReducer from '../app/headersSlice';
 import modulReducer from '../app/modulSlice';
+import queryReducer from '../app/querySlice';
 import type { AppStore, RootState } from '../app/store';
+import variablesReducer from '../app/variablesSlice';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -21,6 +24,9 @@ export function renderWithProviders(
       reducer: {
         [api.reducerPath]: api.reducer,
         modul: modulReducer,
+        query: queryReducer,
+        variables: variablesReducer,
+        headers: headersReducer,
       },
       preloadedState,
       middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
