@@ -94,10 +94,9 @@ export default function Header() {
               <Button
                 component={Link}
                 color="inherit"
-                variant="outlined"
-                to="/editor"
-                className="header__button"
-                sx={{ marginRight: '1rem' }}
+                to="/"
+                className="header__button--home"
+                sx={{ padding: 0 }}
               >
                 {localize('headerMainPageButton')}
               </Button>
