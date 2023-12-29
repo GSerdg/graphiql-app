@@ -8,8 +8,14 @@ import { LangField, useLocalizer } from '../../../../contexts/localization';
 import { useNotification } from '../../../../contexts/notification';
 import convertPrettifyText from '../../../../shared/prettify';
 import { useSelector } from '../../../../shared/useSelector';
+import { executeQuery } from '../../../../app/executeQuery';
 
-const ToolBox = () => {
+interface ToolBox {
+  endpoint: string;
+  setResponse: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ToolBox = ({ endpoint, setResponse }: ToolBox) => {
   const { showNotification } = useNotification();
 
   const query = useSelector((state) => state.query.value);
@@ -18,10 +24,10 @@ const ToolBox = () => {
   const dispatch = useDispatch();
   const localizer = useLocalizer();
 
-  const handleExecuteQuery = () => {
-    console.log('query:', query);
-    console.log('variables:', variables);
-    console.log('headers:', headers);
+  const handleExecuteQuery = async () => {
+    const json = await executeQuery({ endpoint, query, variables, headers });
+    const response = JSON.stringify(json, null, 2);
+    setResponse(response);
   };
 
   const handlePrettify = () => {

@@ -3,8 +3,9 @@ import { Box, Button, Stack } from '@mui/material';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { useLocalizer } from '../../../contexts/localization';
+import { AsideEditorType } from './AsideEditorMiddle';
 
-const AsideEditorSmall = () => {
+const AsideEditorSmall = ({ children }: AsideEditorType) => {
   const [isDocsOpen, setIsDocsOpen] = useState(false);
   const localize = useLocalizer();
 
@@ -30,7 +31,9 @@ const AsideEditorSmall = () => {
           borderRight: 'none',
           overflowY: 'auto',
         }}
-      ></Box>
+      >
+        {children}
+      </Box>
       <Box className={classNames('editor__docs', isDocsOpen && 'editor__docs--open')}>
         <Button
           variant="contained"

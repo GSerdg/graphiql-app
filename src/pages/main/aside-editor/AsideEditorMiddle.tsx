@@ -1,7 +1,12 @@
 import { Box } from '@mui/material';
 import DocsField from '../docs-field/DocsField';
+import { ReactNode } from 'react';
 
-const AsideEditorMiddle = () => {
+export interface AsideEditorType {
+  children: ReactNode;
+}
+
+const AsideEditorMiddle = ({ children }: AsideEditorType) => {
   return (
     <>
       <Box
@@ -11,8 +16,11 @@ const AsideEditorMiddle = () => {
           width: '20%',
           border: '1px solid #48515B',
           borderRight: 'none',
+          overflow: 'auto',
         }}
-      ></Box>
+      >
+        {children}
+      </Box>
       <DocsField />
     </>
   );

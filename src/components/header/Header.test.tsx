@@ -93,9 +93,6 @@ describe('Tests for header component', () => {
     render(<Mocktest />);
 
     const homeLink = await screen.findByRole('link', { name: 'Домой' });
-
-    screen.debug();
-
     const loginLink = screen.getByRole('link', { name: 'Вход' });
     const signupLink = screen.getByRole('link', { name: 'Регистрация' });
 

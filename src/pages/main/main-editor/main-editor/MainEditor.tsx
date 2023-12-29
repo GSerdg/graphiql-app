@@ -1,10 +1,12 @@
 import { Stack } from '@mui/material';
-import AdditionalEditor from './additional-editor/AdditionalEditor';
-import EndpointField from './endpoint-field/EndpointField';
-import InputField from './input-field/InputField';
-import ToolBox from './toolbox/ToolBox';
+import { ReactNode } from 'react';
+import AdditionalEditor from '../additional-editor/AdditionalEditor';
 
-const MainEditor = () => {
+interface MainEditorType {
+  children: ReactNode;
+}
+
+const MainEditor = ({ children }: MainEditorType) => {
   return (
     <Stack
       sx={{
@@ -15,10 +17,7 @@ const MainEditor = () => {
         flexDirection: 'column',
       }}
     >
-      <EndpointField />
-      <InputField slice="query">
-        <ToolBox />
-      </InputField>
+      {children}
       <AdditionalEditor />
     </Stack>
   );
