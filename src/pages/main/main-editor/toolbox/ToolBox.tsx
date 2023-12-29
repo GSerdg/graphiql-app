@@ -37,10 +37,10 @@ const ToolBox = () => {
   const handleQueryCopy = () => {
     navigator.clipboard.writeText(query).then(
       function () {
-        showNotification('success', 'Query copied successfully');
+        showNotification('success', localizer('successCopyNotification'));
       },
       function () {
-        showNotification('error', 'Copy query failed');
+        showNotification('error', localizer('failCopyNotification'));
       }
     );
   };

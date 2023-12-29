@@ -215,4 +215,12 @@ export const localizedStrings = {
     en: "Frontend developer without commercial experience. For the last year I have been actively studying frontend development and want to become professional in this field. I'm currently learning React.",
     ru: 'Frontend-разработчик без коммерческого опыта. Последний год я активно изучаю фронтенд-разработку и хочу стать профессионалом в этой области. Сейчас изучаю React.',
   },
+  successCopyNotification: {
+    en: 'Query copied successfully',
+    ru: 'Запрос скопирован успешно',
+  },
+  failCopyNotification: {
+    en: 'Copy query failed',
+    ru: 'Не удалось скопировать запрос',
+  },
 };
