@@ -1,26 +1,19 @@
 import { render, screen } from '@testing-library/react';
-import { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { LangContext } from '../../contexts/localization';
-import { SupportedLocales } from '../../localization/language';
+import { MockWrapper } from '../../test/testUtils';
 import Welcome from './Welcome';
 
-const Mocktest = ({ language }: { language: 'ru' | 'en' }) => {
-  const [lang, setLang] = useState<SupportedLocales>(language);
-
+const Mocktest = () => {
   return (
-    <BrowserRouter>
-      <LangContext.Provider value={{ lang, setLang }}>
-        <Welcome />
-      </LangContext.Provider>
-    </BrowserRouter>
+    <MockWrapper>
+      <Welcome />
+    </MockWrapper>
   );
 };
 
 describe('Tests for home component', () => {
   it('Make sure the component is rendering in English', () => {
-    render(<Mocktest language="en" />);
+    render(<Mocktest />);
 
     const title = screen.getAllByRole('heading');
     const divider = screen.getByRole('separator');
@@ -32,7 +25,9 @@ describe('Tests for home component', () => {
   });
 
   it('Make sure the component is rendering in Russian', () => {
-    render(<Mocktest language="ru" />);
+    localStorage.setItem('lang', 'ru');
+
+    render(<Mocktest />);
 
     const title = screen.getAllByRole('heading');
     const chip = screen.getByText('НАША КОМАНДА');

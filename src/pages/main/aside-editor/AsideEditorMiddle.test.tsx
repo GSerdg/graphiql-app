@@ -1,39 +1,26 @@
 import { render, screen } from '@testing-library/react';
-import { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { describe, expect, it } from 'vitest';
-import { LangContext } from '../../../contexts/localization';
-import { SupportedLocales } from '../../../localization/language';
-import AsideEditorMiddle from './AsideEditorMiddle';
 import userEvent from '@testing-library/user-event';
+import { describe, expect, it } from 'vitest';
+import { MockWrapper } from '../../../test/testUtils';
+import AsideEditorMiddle from './AsideEditorMiddle';
 
-const Mocktest = ({ language }: { language: 'ru' | 'en' }) => {
-  const [lang, setLang] = useState<SupportedLocales>(language);
-
+const Mocktest = () => {
   return (
-    <BrowserRouter>
-      <LangContext.Provider value={{ lang, setLang }}>
-        <AsideEditorMiddle />
-      </LangContext.Provider>
-    </BrowserRouter>
+    <MockWrapper>
+      <AsideEditorMiddle />
+    </MockWrapper>
   );
 };
 
 describe('Tests for AsideEditorMiddle', () => {
   it('Make sure the component is rendering in English', () => {
-    render(<Mocktest language="en" />);
+    render(<Mocktest />);
 
     expect(screen.getByRole('button', { name: 'DOCS' })).toBeInTheDocument();
   });
 
-  it('Make sure the component is rendering in Russian', () => {
-    render(<Mocktest language="ru" />);
-
-    expect(screen.getByRole('button', { name: 'Справка' })).toBeInTheDocument();
-  });
-
   it('Verify that clicking the "Docs" opens the docs panel', async () => {
-    render(<Mocktest language="en" />);
+    render(<Mocktest />);
 
     const docsButton = screen.getByRole('button', { name: 'DOCS' });
 
@@ -42,5 +29,13 @@ describe('Tests for AsideEditorMiddle', () => {
     await userEvent.click(docsButton);
 
     expect(screen.queryByTestId('docs-panel')).toBeInTheDocument();
+  });
+
+  it('Make sure the component is rendering in Russian', () => {
+    localStorage.setItem('lang', 'ru');
+
+    render(<Mocktest />);
+
+    expect(screen.getByRole('button', { name: 'Справка' })).toBeInTheDocument();
   });
 });

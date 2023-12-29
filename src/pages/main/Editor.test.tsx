@@ -1,11 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
-import { LangContext } from '../../contexts/localization';
-import { SupportedLocales } from '../../localization/language';
-import Editor from './Editor';
 import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
+import { MockWrapper } from '../../test/testUtils';
+import Editor from './Editor';
 
 vi.mock('@uiw/react-codemirror');
 vi.mock('react-redux', () => {
@@ -23,21 +20,17 @@ Object.defineProperty(navigator, 'clipboard', {
   },
 });
 
-const Mocktest = ({ language }: { language: 'ru' | 'en' }) => {
-  const [lang, setLang] = useState<SupportedLocales>(language);
-
+const Mocktest = () => {
   return (
-    <BrowserRouter>
-      <LangContext.Provider value={{ lang, setLang }}>
-        <Editor />
-      </LangContext.Provider>
-    </BrowserRouter>
+    <MockWrapper>
+      <Editor />
+    </MockWrapper>
   );
 };
 
 describe('Tests for main page', () => {
   it('Make sure the component is rendering in English', () => {
-    render(<Mocktest language="en" />);
+    render(<Mocktest />);
 
     expect(screen.getByRole('button', { name: 'Change' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Execute query' })).toBeInTheDocument();
@@ -46,18 +39,8 @@ describe('Tests for main page', () => {
     expect(screen.getByRole('tab', { name: 'Variables' })).toBeInTheDocument();
   });
 
-  it('Make sure the component is rendering in Russian', () => {
-    render(<Mocktest language="ru" />);
-
-    expect(screen.getByRole('button', { name: 'Изменить' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Выполнить запрос' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Справка' })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: 'Заголовки' })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: 'Переменные' })).toBeInTheDocument();
-  });
-
   it('Verify that clicking the "Copy query" button calls window.navigator', async () => {
-    render(<Mocktest language="en" />);
+    render(<Mocktest />);
 
     const copyButton = screen.getByRole('button', { name: 'Copy query' });
 
@@ -67,7 +50,7 @@ describe('Tests for main page', () => {
   });
 
   it('Verify that clicking the "Docs" opens the docs panel', async () => {
-    render(<Mocktest language="en" />);
+    render(<Mocktest />);
 
     const docsButton = screen.getByRole('button', { name: 'DOCS' });
 
@@ -79,7 +62,7 @@ describe('Tests for main page', () => {
   });
 
   it('Verify that clicking the expand button opens/closes the additional panel', async () => {
-    render(<Mocktest language="en" />);
+    render(<Mocktest />);
 
     const iconButton = screen.getByTestId('expand-button');
 
@@ -95,7 +78,7 @@ describe('Tests for main page', () => {
   });
 
   it('Verify that clicking the variables tab opens the additional panel', async () => {
-    render(<Mocktest language="en" />);
+    render(<Mocktest />);
 
     const variablesTab = screen.getByRole('tab', { name: 'Variables' });
 
@@ -107,7 +90,7 @@ describe('Tests for main page', () => {
   });
 
   it('Verify that clicking the headers tab open the additional panel', async () => {
-    render(<Mocktest language="en" />);
+    render(<Mocktest />);
 
     const headersTab = screen.getByRole('tab', { name: 'Headers' });
 
@@ -116,5 +99,17 @@ describe('Tests for main page', () => {
     await userEvent.click(headersTab);
 
     expect(screen.queryByTestId('additional-editor')).toBeInTheDocument();
+  });
+
+  it('Make sure the component is rendering in Russian', () => {
+    localStorage.setItem('lang', 'ru');
+
+    render(<Mocktest />);
+
+    expect(screen.getByRole('button', { name: 'Изменить' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Выполнить запрос' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Справка' })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: 'Заголовки' })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: 'Переменные' })).toBeInTheDocument();
   });
 });

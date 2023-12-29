@@ -1,26 +1,19 @@
 import { render, screen } from '@testing-library/react';
-import { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { LangContext } from '../../contexts/localization';
-import { SupportedLocales } from '../../localization/language';
 import Footer from './Footer';
+import { MockWrapper } from '../../test/testUtils';
 
-const Mocktest = ({ language }: { language: 'ru' | 'en' }) => {
-  const [lang, setLang] = useState<SupportedLocales>(language);
-
+const Mocktest = () => {
   return (
-    <BrowserRouter>
-      <LangContext.Provider value={{ lang, setLang }}>
-        <Footer />
-      </LangContext.Provider>
-    </BrowserRouter>
+    <MockWrapper>
+      <Footer />
+    </MockWrapper>
   );
 };
 
 describe('Tests for footer component', () => {
   it('Make sure the component is rendering', () => {
-    render(<Mocktest language="en" />);
+    render(<Mocktest />);
 
     const footer = screen.getByRole('contentinfo');
     const rssLogo = screen.getByRole('link', { name: 'rss_logo' });
