@@ -1,13 +1,16 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box, IconButton, Tab, Tabs } from '@mui/material';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { useLocalizer } from '../../../../contexts/localization';
-import InputField from '../input-field/InputField';
+import { ValueType } from '../../Editor';
 
-type ValueType = number | boolean;
+interface AdditionalEditorType {
+  value: ValueType;
+  setValue: React.Dispatch<React.SetStateAction<ValueType>>;
+  children: ReactNode;
+}
 
-const AdditionalEditor = () => {
-  const [value, setValue] = useState<ValueType>(0);
+const AdditionalEditor = ({ setValue, value, children }: AdditionalEditorType) => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const localizer = useLocalizer();
 
@@ -58,8 +61,8 @@ const AdditionalEditor = () => {
         }}
       >
         <Tabs value={value} onChange={handleChange} onClick={handleClick} sx={{ minHeight: '10px' }}>
-          <Tab label={localizer('tabHeaders')} id="variables" className="editor__tab" />
-          <Tab label={localizer('tabVariables')} id="headers" className="editor__tab" />
+          <Tab label={localizer('tabVariables')} id="variables" className="editor__tab" />
+          <Tab label={localizer('tabHeaders')} id="headers" className="editor__tab" />
         </Tabs>
         <IconButton
           sx={{ padding: '0', color: '#fffffc' }}
@@ -67,14 +70,13 @@ const AdditionalEditor = () => {
           data-testid="expand-button"
         >
           <ExpandMoreIcon
-            sx={{ transition: '0.3s', transform: isPanelOpen ? 'rotate(180deg)' : 'rotate(0)' }}
+            sx={{ transition: '0.3s', transform: isPanelOpen ? 'rotate(0)' : 'rotate(180deg)' }}
           />
         </IconButton>
       </Box>
       {isPanelOpen && (
         <Box sx={{ height: '100%', display: 'flex', overflowY: 'auto' }} data-testid="additional-editor">
-          <InputField slice="variables" value={value} index={0} />
-          <InputField slice="headers" value={value} index={1} />
+          {children}
         </Box>
       )}
     </Box>

@@ -7,20 +7,19 @@ import { setQuery } from '../../../../app/querySlice';
 import { LangField, useLocalizer } from '../../../../contexts/localization';
 import { useNotification } from '../../../../contexts/notification';
 import convertPrettifyText from '../../../../shared/prettify';
-import { useSelector } from '../../../../shared/useSelector';
 import { executeQuery } from '../../../../app/executeQuery';
 
 interface ToolBox {
   endpoint: string;
   query: string;
+  variables: string;
+  headers: string;
   setResponse: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ToolBox = ({ endpoint, setResponse, query }: ToolBox) => {
+const ToolBox = ({ endpoint, setResponse, query, variables, headers }: ToolBox) => {
   const { showNotification } = useNotification();
 
-  const variables = useSelector((state) => state.variables.value);
-  const headers = useSelector((state) => state.headers.value);
   const dispatch = useDispatch();
   const localizer = useLocalizer();
 

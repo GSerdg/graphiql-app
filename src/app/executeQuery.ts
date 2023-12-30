@@ -5,9 +5,11 @@ interface ExecuteQueryType {
   headers: string;
 }
 
-export async function executeQuery({ endpoint, query }: ExecuteQueryType) {
+export async function executeQuery({ endpoint, query, variables, headers }: ExecuteQueryType) {
   console.log('endpoint:', endpoint);
   console.log('query:', query);
+  console.log('variables', variables);
+  console.log('headers', headers);
 
   const response = await fetch(endpoint, {
     method: 'POST',

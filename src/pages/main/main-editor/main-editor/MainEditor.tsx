@@ -1,6 +1,5 @@
 import { Stack } from '@mui/material';
 import { ReactNode } from 'react';
-import AdditionalEditor from '../additional-editor/AdditionalEditor';
 
 interface MainEditorType {
   isDocsOpen: boolean;
@@ -21,7 +20,6 @@ const MainEditor = ({ isDocsOpen, children }: MainEditorType) => {
       }}
     >
       {children}
-      <AdditionalEditor />
     </Stack>
   );
 };
