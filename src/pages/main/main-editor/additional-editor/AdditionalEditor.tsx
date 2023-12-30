@@ -1,6 +1,5 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box, IconButton, Tab, Tabs } from '@mui/material';
-import classNames from 'classnames';
 import { useState } from 'react';
 import { useLocalizer } from '../../../../contexts/localization';
 import InputField from '../input-field/InputField';
@@ -48,7 +47,16 @@ const AdditionalEditor = () => {
         maxHeight: '25vh',
       }}
     >
-      <Box className={classNames('editor__tab-group', isPanelOpen && 'editor__tab-group--open')}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          backgroundColor: '#292D30',
+          padding: '0.2rem',
+          borderBottom: isPanelOpen ? '1px solid #48515B' : 'none',
+        }}
+      >
         <Tabs value={value} onChange={handleChange} onClick={handleClick} sx={{ minHeight: '10px' }}>
           <Tab label={localizer('tabHeaders')} id="variables" className="editor__tab" />
           <Tab label={localizer('tabVariables')} id="headers" className="editor__tab" />
@@ -58,7 +66,9 @@ const AdditionalEditor = () => {
           onClick={handlePanelState}
           data-testid="expand-button"
         >
-          <ExpandMoreIcon className={isPanelOpen ? '' : 'editor__expand-icon--close'} />
+          <ExpandMoreIcon
+            sx={{ transition: '0.3s', transform: isPanelOpen ? 'rotate(180deg)' : 'rotate(0)' }}
+          />
         </IconButton>
       </Box>
       {isPanelOpen && (

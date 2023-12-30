@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import ReactCodeMirror from '@uiw/react-codemirror';
 import { basicDark } from '@uiw/codemirror-theme-basic';
 import { javascript } from '@codemirror/lang-javascript';
+import { Box } from '@mui/material';
 
 interface InputFieldProps {
   response: string;
@@ -23,7 +24,16 @@ const EntryField = ({ children, response, readonly }: InputFieldProps) => {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        position: 'absolute',
+        top: '2rem',
+        height: 'calc(100% - 2rem)',
+        width: '100%',
+        display: 'flex',
+        overflowX: 'auto',
+      }}
+    >
       <ReactCodeMirror
         className="editor__query"
         theme={basicDark}
@@ -34,7 +44,7 @@ const EntryField = ({ children, response, readonly }: InputFieldProps) => {
         value={inputValue}
       />
       {children}
-    </>
+    </Box>
   );
 };
 

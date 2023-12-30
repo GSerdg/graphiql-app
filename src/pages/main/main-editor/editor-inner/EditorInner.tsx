@@ -14,11 +14,7 @@ const EditorInner = ({ children }: EditorInnerType) => {
         alignItems: 'stretch',
       }}
     >
-      <Container
-        sx={{ display: 'flex', flexDirection: 'column', padding: '1rem' }}
-        maxWidth={false}
-        className="editor"
-      >
+      <Container sx={{ display: 'flex', flexDirection: 'column', padding: { xs: '0' } }} maxWidth={false}>
         <Stack
           direction={{ xs: 'column', md: 'row' }}
           sx={{

@@ -1,9 +1,6 @@
-div.editor.MuiContainer-root {
-  padding: 0;
-}
-
 input.editor__endpoint-input {
   flex-grow: 1;
+  font-size: 1rem;
   height: 100%;
   width: 2rem;
   outline: none;
@@ -41,66 +38,4 @@ button.editor__button:hover {
 
 span.MuiTabs-indicator {
   display: none;
-}
-
-.editor__tab-group {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #292D30;
-  padding: 0.2rem;
-
-  &--open {
-    border-bottom: 1px solid #48515B;
-  }
-}
-
-.editor__expand-icon--close {
-  transform: rotate(180deg);
-}
-
-.MuiSvgIcon-root.editor__docs-icon {
-  font-size: 1rem;
-  transition: 0.3s;
-
-  &--open {
-    transform: rotate(180deg);
-    transform-origin: 25% center;
-  }
-}
-
-.editor__docs {
-  flex-grow: 0;
-  width: auto;
-  background-color: #292D30;
-  border: 1px solid #48515B;
-  border-left: none;
-  transition: 0.5s;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-
-  &--open {
-    flex-grow: 2;
-    border-left: 1px solid #48515B;
-    overflow-y: auto;
-
-    @media (max-width: $md) {
-      flex-grow: 1;
-      border-top: none;
-    }
-
-    @media (max-width: $sm) {
-      border-left: none;
-    }
-  }
-}
-
-.editor__docs-content {
-  position: absolute;
-  padding: 0.5rem;
-}
-
-.editor__response {
-  height: 100%;
 }

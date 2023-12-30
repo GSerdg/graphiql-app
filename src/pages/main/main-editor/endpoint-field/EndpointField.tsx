@@ -17,7 +17,6 @@ const EndpointField = ({ endpoint, setEndpoint }: EndpointFieldType) => {
 
   const handleClick = () => {
     setEndpoint(inputValue);
-    console.log(inputValue);
   };
 
   return (

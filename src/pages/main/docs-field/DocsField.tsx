@@ -1,37 +1,30 @@
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Box, Button } from '@mui/material';
-import classNames from 'classnames';
-import { useState } from 'react';
-import { useLocalizer } from '../../../contexts/localization';
+import { Box } from '@mui/material';
 
-const DocsField = () => {
-  const [isDocsOpen, setIsDocsOpen] = useState(false);
-  const localizer = useLocalizer();
+interface DocsFieldType {
+  isDocsOpen: boolean;
+}
 
-  const handleClick = () => {
-    setIsDocsOpen((isOpen) => !isOpen);
-  };
-
+const DocsField = ({ isDocsOpen }: DocsFieldType) => {
   return (
-    <Box className={classNames('editor__docs', isDocsOpen && 'editor__docs--open')}>
-      <Button
-        variant="contained"
-        disableElevation
-        className="editor__button"
-        sx={{
-          boxShadow: 'none',
-          backgroundColor: '#AD7630',
-          borderRadius: '0',
-          height: '1.9rem',
-        }}
-        onClick={handleClick}
-      >
-        <ArrowBackIosIcon
-          className={classNames('editor__docs-icon', isDocsOpen && 'editor__docs-icon--open')}
-        />{' '}
-        {localizer('docsButton')}
-      </Button>
-      {isDocsOpen && <Box className="editor__docs-content" data-testid="docs-panel"></Box>}
+    <Box
+      sx={{
+        flexGrow: isDocsOpen ? 1 : 0,
+        backgroundColor: '#292D30',
+        border: '1px solid #48515B',
+        borderTop: { xs: 'none', md: '1px solid #48515B' },
+        borderLeft: isDocsOpen ? '1px solid #48515B' : 'none',
+        transition: '0.5s',
+        position: 'relative',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+      }}
+    >
+      {isDocsOpen && (
+        <Box
+          sx={{ padding: '0.5rem', position: 'absolute', minWidth: { xs: '47vw', md: '25vw' } }}
+          data-testid="docs-panel"
+        ></Box>
+      )}
     </Box>
   );
 };
