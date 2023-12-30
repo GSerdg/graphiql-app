@@ -23,6 +23,7 @@ button.editor__button:hover {
 
 .editor__query {
   flex-grow: 1;
+  overflow: hidden;
 }
 
 .MuiButtonBase-root.editor__tab {

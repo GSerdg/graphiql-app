@@ -12,13 +12,13 @@ import { executeQuery } from '../../../../app/executeQuery';
 
 interface ToolBox {
   endpoint: string;
+  query: string;
   setResponse: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ToolBox = ({ endpoint, setResponse }: ToolBox) => {
+const ToolBox = ({ endpoint, setResponse, query }: ToolBox) => {
   const { showNotification } = useNotification();
 
-  const query = useSelector((state) => state.query.value);
   const variables = useSelector((state) => state.variables.value);
   const headers = useSelector((state) => state.headers.value);
   const dispatch = useDispatch();

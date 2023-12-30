@@ -29,8 +29,6 @@ const AsideEditor = ({ isDocsOpen, children }: AsideEditorType) => {
           border: '1px solid #48515B',
           borderTop: { xs: 'none' },
           borderRight: 'none',
-          overflowY: 'auto',
-          overflowX: 'hidden',
         }}
       >
         {children}
