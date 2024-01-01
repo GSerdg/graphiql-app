@@ -24,9 +24,9 @@ const ToolBox = ({ endpoint, setResponse, query, variables, headers }: ToolBox) 
   const localizer = useLocalizer();
 
   const handleExecuteQuery = async () => {
-    const json = await executeQuery({ endpoint, query, variables, headers });
-    const response = JSON.stringify(json, null, 2);
-    setResponse(response);
+    const result = await executeQuery({ endpoint, query, variables, headers });
+
+    setResponse(result);
   };
 
   const handlePrettify = () => {
