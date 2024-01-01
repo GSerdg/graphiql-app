@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useLocalizer } from '../../../../contexts/localization';
 import { useState } from 'react';
+import { useNotification } from '../../../../contexts/notification';
 
 interface EndpointFieldType {
   endpoint: string;
@@ -10,6 +11,7 @@ interface EndpointFieldType {
 const EndpointField = ({ endpoint, setEndpoint }: EndpointFieldType) => {
   const localize = useLocalizer();
   const [inputValue, setInputValue] = useState(endpoint);
+  const { showNotification } = useNotification();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -17,6 +19,7 @@ const EndpointField = ({ endpoint, setEndpoint }: EndpointFieldType) => {
 
   const handleClick = () => {
     setEndpoint(inputValue);
+    showNotification('success', localize('successEndpointChange'));
   };
 
   return (

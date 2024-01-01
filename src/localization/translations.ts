@@ -223,4 +223,8 @@ export const localizedStrings = {
     en: 'Copy query failed',
     ru: 'Не удалось скопировать запрос',
   },
+  successEndpointChange: {
+    en: 'Endpoint changed successfully',
+    ru: 'Эндпоинт успешно изменен',
+  },
 };
