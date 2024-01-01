@@ -4,12 +4,21 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate, useLocation } from 'react-router-dom';
 import { auth } from '../../shared/firebase';
 
-export function PrivateRoute({ children }: { children: JSX.Element }) {
+interface PrivateRouteProps {
+  children?: React.ReactNode;
+}
+
+export function PrivateRoute({ children }: PrivateRouteProps) {
   const [user, loading] = useAuthState(auth);
   const location = useLocation();
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ flexGrow: 1 }}>
+    <Container
+      component="main"
+      maxWidth="xl"
+      disableGutters
+      sx={{ flexGrow: 1, display: 'flex', alignItems: 'stretch' }}
+    >
       {loading ? (
         <CircularProgress
           size={24}

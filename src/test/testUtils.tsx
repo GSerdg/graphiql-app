@@ -4,23 +4,30 @@ import type { RenderOptions } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { api } from '../app/api/api';
-import modulReducer from '../app/modulSlice';
+import headersReducer from '../app/headersSlice';
+import queryReducer from '../app/querySlice';
 import type { AppStore, RootState } from '../app/store';
+import variablesReducer from '../app/variablesSlice';
+import { LangProvider } from '../contexts/localization';
+import { NotificationProvider } from '../contexts/notification';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
   store?: AppStore;
 }
 
-export function renderWithProviders(
+export function renderWithReduxProviders(
   ui: React.ReactElement,
   {
     preloadedState = {},
     store = configureStore({
       reducer: {
         [api.reducerPath]: api.reducer,
-        modul: modulReducer,
+        query: queryReducer,
+        variables: variablesReducer,
+        headers: headersReducer,
       },
       preloadedState,
       middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
@@ -33,4 +40,14 @@ export function renderWithProviders(
   }
 
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+}
+
+export function MockWrapper({ children }: { children: JSX.Element }) {
+  return (
+    <BrowserRouter>
+      <NotificationProvider>
+        <LangProvider>{children}</LangProvider>
+      </NotificationProvider>
+    </BrowserRouter>
+  );
 }

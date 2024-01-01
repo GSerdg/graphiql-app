@@ -1,5 +1,5 @@
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
-import { useLocalizer } from '../../localization/language';
+import { useLocalizer } from '../../contexts/localization';
 import ErrorAlert from './ErrorAlert';
 
 interface FallbackProps {

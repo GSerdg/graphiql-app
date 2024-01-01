@@ -1,7 +1,8 @@
-import { useContext } from 'react';
-import { LangContext } from '../contexts/localization';
-
-const localizedStrings = {
+export const localizedStrings = {
+  unknown: {
+    en: 'Unknown error',
+    ru: 'Неизвестная ошибка',
+  },
   emailInput: {
     en: 'Email',
     ru: 'Адрес электронной почты',
@@ -127,22 +128,8 @@ const localizedStrings = {
     en: 'Show error stack',
     ru: 'Показать стек ошибок',
   },
+  prettifyMissingError: {
+    en: 'Missing opening or closing parenthesis',
+    ru: 'Пропущена открывающая или закрывающая скобка',
+  },
 };
-
-export type LangField = keyof typeof localizedStrings;
-export type SupportedLocales = 'ru' | 'en';
-
-export function useLocalizer() {
-  const { lang } = useContext(LangContext);
-
-  return (field: LangField) => {
-    try {
-      if (localizedStrings[field]) {
-        return localizedStrings[field][lang];
-      }
-      throw new Error('Language key not found in object');
-    } catch (error) {
-      console.error(error);
-    }
-  };
-}

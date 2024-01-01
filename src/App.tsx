@@ -3,31 +3,34 @@ import { Outlet } from 'react-router-dom';
 import ErrorBoundary from './components/error-boundary/ErrorBoundary';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
-import Notification from './components/notification/Notification';
-import Provider from './contexts/Provider';
+import { Notification } from './components/notification/Notification';
+import { LangProvider } from './contexts/localization';
+import { NotificationProvider } from './contexts/notification';
 import './index.scss';
 
 function App() {
   return (
-    <Provider>
-      <ErrorBoundary>
-        <CssBaseline>
-          <Box
-            sx={{
-              flexDirection: 'column',
-              display: 'flex',
-              minHeight: '100vh',
-              paddingTop: '64px',
-            }}
-          >
-            <Header />
-            <Notification />
-            <Outlet />
-            <Footer />
-          </Box>
-        </CssBaseline>
-      </ErrorBoundary>
-    </Provider>
+    <LangProvider>
+      <NotificationProvider>
+        <ErrorBoundary>
+          <CssBaseline>
+            <Box
+              sx={{
+                flexDirection: 'column',
+                display: 'flex',
+                minHeight: '100vh',
+                paddingTop: '64px',
+              }}
+            >
+              <Header />
+              <Notification />
+              <Outlet />
+              <Footer />
+            </Box>
+          </CssBaseline>
+        </ErrorBoundary>
+      </NotificationProvider>
+    </LangProvider>
   );
 }
 

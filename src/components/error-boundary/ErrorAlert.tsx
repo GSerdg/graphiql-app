@@ -2,7 +2,7 @@ import { Collapse, Alert, IconButton, AlertTitle, Fade, Tooltip } from '@mui/mat
 import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
-import { useLocalizer } from '../../localization/language';
+import { useLocalizer } from '../../contexts/localization';
 
 interface ErrorAlertProps {
   error: Error;

@@ -18,7 +18,7 @@ export const GitLink = ({ gitName, gitLink }: GitLinkProps) => {
           fontSize: '0.9rem',
           transition: '0.3s',
           ':hover': {
-            color: '#b7d9ed',
+            color: '#AD7630',
           },
         }}
         underline="none"

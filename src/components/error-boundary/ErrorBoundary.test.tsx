@@ -1,10 +1,7 @@
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import ErrorBoundary from './ErrorBoundary';
-import { renderWithProviders } from '../../test/testUtils';
-import { LangContext } from '../../contexts/localization';
-import { SupportedLocales } from '../../localization/language';
-import { useState } from 'react';
+import { MockWrapper } from '../../test/testUtils';
 
 const errorName = 'generated error';
 const error = new Error(errorName);
@@ -12,15 +9,13 @@ const ComponentWithError = () => {
   throw error;
 };
 
-const Mocktest = ({ language }: { language: 'ru' | 'en' }) => {
-  const [lang, setLang] = useState<SupportedLocales>(language);
-
+const Mocktest = () => {
   return (
-    <LangContext.Provider value={{ lang, setLang }}>
+    <MockWrapper>
       <ErrorBoundary>
         <ComponentWithError />
       </ErrorBoundary>
-    </LangContext.Provider>
+    </MockWrapper>
   );
 };
 
@@ -28,7 +23,7 @@ describe('Tests for ErrorBoundary', () => {
   vi.spyOn(console, 'error').mockImplementation(() => null);
 
   it('Should render Fallback component on Error', () => {
-    renderWithProviders(<Mocktest language="en" />);
+    render(<Mocktest />);
 
     const title = screen.getByRole('heading');
     const description = screen.getByText(
@@ -40,7 +35,8 @@ describe('Tests for ErrorBoundary', () => {
   });
 
   it('Should change language in accordance with provider', () => {
-    renderWithProviders(<Mocktest language="ru" />);
+    localStorage.setItem('lang', 'ru');
+    render(<Mocktest />);
 
     const title = screen.getByRole('heading');
     const description = screen.getByText(

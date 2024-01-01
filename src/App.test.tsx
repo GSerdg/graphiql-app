@@ -3,7 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedFunction, describe, expect, it, vi } from 'vitest';
 import App from './App';
-import { renderWithProviders } from './test/testUtils';
+import { renderWithReduxProviders } from './test/testUtils';
 
 vi.mock('react-firebase-hooks/auth');
 
@@ -19,7 +19,7 @@ describe('App', () => {
   it('Should renders', () => {
     (useAuthState as MockedFunction<typeof useAuthState>).mockReturnValue([undefined, false, undefined]);
 
-    renderWithProviders(<Mocktest />);
+    renderWithReduxProviders(<Mocktest />);
 
     expect(
       screen.getByRole('link', {
