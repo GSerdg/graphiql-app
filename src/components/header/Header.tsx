@@ -70,12 +70,7 @@ export default function Header() {
           </Box>
           <Stack direction="row" sx={{ mr: '2rem', alignItems: 'center' }}>
             <Typography>{localize('languageSwitchEn')}</Typography>
-            <Switch
-              onChange={handleSwitch}
-              color="default"
-              data-testid="langSwitcher"
-              checked={lang === 'ru'}
-            />
+            <Switch onChange={handleSwitch} color="default" checked={lang === 'ru'} />
             <Typography>{localize('languageSwitchRu')}</Typography>
           </Stack>
           {!user && (

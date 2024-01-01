@@ -30,6 +30,7 @@ export default function Editor() {
         <EntryField setQuery={setQuery} response={query}>
           <ToolBox
             endpoint={endpoint}
+            setQuery={setQuery}
             setResponse={setResponse}
             query={query}
             variables={variables}

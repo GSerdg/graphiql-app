@@ -6,10 +6,7 @@ import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { api } from '../app/api/api';
-import headersReducer from '../app/headersSlice';
-import queryReducer from '../app/querySlice';
 import type { AppStore, RootState } from '../app/store';
-import variablesReducer from '../app/variablesSlice';
 import { LangProvider } from '../contexts/localization';
 import { NotificationProvider } from '../contexts/notification';
 
@@ -25,9 +22,6 @@ export function renderWithReduxProviders(
     store = configureStore({
       reducer: {
         [api.reducerPath]: api.reducer,
-        query: queryReducer,
-        variables: variablesReducer,
-        headers: headersReducer,
       },
       preloadedState,
       middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),

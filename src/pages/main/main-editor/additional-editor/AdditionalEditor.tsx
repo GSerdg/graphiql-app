@@ -14,10 +14,6 @@ const AdditionalEditor = ({ setValue, value, children }: AdditionalEditorType) =
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const localizer = useLocalizer();
 
-  const setFlexGrow = (isOpen: boolean) => {
-    return isOpen ? 1 : 0;
-  };
-
   const handlePanelState = () => {
     setIsPanelOpen((prevState) => {
       if (prevState) {
@@ -42,7 +38,7 @@ const AdditionalEditor = ({ setValue, value, children }: AdditionalEditorType) =
       sx={{
         display: 'flex',
         transition: '0.5s',
-        flexGrow: setFlexGrow(isPanelOpen),
+        flexGrow: isPanelOpen ? 1 : 0,
         flexDirection: 'column',
         backgroundColor: '#2E3235',
         border: '1px solid #48515B',

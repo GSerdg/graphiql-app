@@ -2,8 +2,6 @@ import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Box, IconButton, Tooltip } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { setQuery } from '../../../../app/querySlice';
 import { LangField, useLocalizer } from '../../../../contexts/localization';
 import { useNotification } from '../../../../contexts/notification';
 import convertPrettifyText from '../../../../shared/prettify';
@@ -15,12 +13,12 @@ interface ToolBox {
   variables: string;
   headers: string;
   setResponse: React.Dispatch<React.SetStateAction<string>>;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ToolBox = ({ endpoint, setResponse, query, variables, headers }: ToolBox) => {
+const ToolBox = ({ endpoint, setResponse, setQuery, query, variables, headers }: ToolBox) => {
   const { showNotification } = useNotification();
 
-  const dispatch = useDispatch();
   const localizer = useLocalizer();
 
   const handleExecuteQuery = async () => {
@@ -32,7 +30,7 @@ const ToolBox = ({ endpoint, setResponse, query, variables, headers }: ToolBox) 
   const handlePrettify = () => {
     try {
       const prettifyText = convertPrettifyText(query);
-      dispatch(setQuery(prettifyText));
+      setQuery(prettifyText);
     } catch (error) {
       const err = error as Error;
       showNotification('error', localizer(err.message as LangField));
