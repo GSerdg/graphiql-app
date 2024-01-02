@@ -2,28 +2,33 @@ import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Box, IconButton, Tooltip } from '@mui/material';
+import { executeQuery } from '../../../../app/executeQuery';
 import { LangField, useLocalizer } from '../../../../contexts/localization';
 import { useNotification } from '../../../../contexts/notification';
 import convertPrettifyText from '../../../../shared/prettify';
-import { executeQuery } from '../../../../app/executeQuery';
 
 interface ToolBox {
   endpoint: string;
   query: string;
   variables: string;
   headers: string;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setResponse: React.Dispatch<React.SetStateAction<string>>;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ToolBox = ({ endpoint, setResponse, setQuery, query, variables, headers }: ToolBox) => {
+const ToolBox = ({ endpoint, setResponse, setQuery, setIsLoading, query, variables, headers }: ToolBox) => {
   const { showNotification } = useNotification();
 
   const localizer = useLocalizer();
 
   const handleExecuteQuery = async () => {
+    setResponse('');
+    setIsLoading(true);
+
     const result = await executeQuery({ endpoint, query, variables, headers });
 
+    setIsLoading(false);
     setResponse(result);
   };
 

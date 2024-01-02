@@ -1,13 +1,16 @@
 import { Box, Stack } from '@mui/material';
-import DocsField from '../docs-field/DocsField';
+import CircularProgress from '@mui/material/CircularProgress';
+import { green } from '@mui/material/colors';
 import { ReactNode } from 'react';
+import DocsField from '../docs-field/DocsField';
 
 export interface AsideEditorType {
   isDocsOpen: boolean;
+  isLoading: boolean;
   children: ReactNode;
 }
 
-const AsideEditor = ({ isDocsOpen, children }: AsideEditorType) => {
+const AsideEditor = ({ isDocsOpen, children, isLoading }: AsideEditorType) => {
   return (
     <Stack
       sx={{
@@ -32,6 +35,17 @@ const AsideEditor = ({ isDocsOpen, children }: AsideEditorType) => {
         }}
       >
         {children}
+        {isLoading && (
+          <CircularProgress
+            size={24}
+            sx={{
+              color: green[500],
+              position: 'absolute',
+              top: '46%',
+              right: '46%',
+            }}
+          />
+        )}
       </Box>
       <DocsField isDocsOpen={isDocsOpen} />
     </Stack>
