@@ -26,10 +26,14 @@ const ToolBox = ({ endpoint, setResponse, setQuery, setIsLoading, query, variabl
     setResponse('');
     setIsLoading(true);
 
-    const result = await executeQuery({ endpoint, query, variables, headers });
-
-    setIsLoading(false);
-    setResponse(result);
+    try {
+      const result = await executeQuery({ endpoint, query, variables, headers });
+      setResponse(result);
+    } catch {
+      setResponse('Unexpected error. Check that the entered URL is correct.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handlePrettify = () => {

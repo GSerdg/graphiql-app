@@ -5,14 +5,6 @@ import { MockWrapper } from '../../test/testUtils';
 import Editor from './Editor';
 
 vi.mock('@uiw/react-codemirror');
-vi.mock('react-redux', () => {
-  return {
-    useDispatch: () => {
-      return vi.fn();
-    },
-    useSelector: vi.fn(),
-  };
-});
 
 Object.defineProperty(navigator, 'clipboard', {
   value: {
