@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import { MockWrapper } from '../../test/testUtils';
+import { MockWrapper, renderWithReduxProviders } from '../../test/testUtils';
 import Editor from './Editor';
 
 vi.mock('@uiw/react-codemirror');
@@ -22,7 +22,7 @@ const Mocktest = () => {
 
 describe('Tests for main page', () => {
   it('Make sure the component is rendering in English', () => {
-    render(<Mocktest />);
+    renderWithReduxProviders(<Mocktest />);
 
     expect(screen.getByRole('button', { name: 'Change' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Execute query' })).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe('Tests for main page', () => {
   });
 
   it('Verify that clicking the "Copy query" button calls window.navigator', async () => {
-    render(<Mocktest />);
+    renderWithReduxProviders(<Mocktest />);
 
     const copyButton = screen.getByRole('button', { name: 'Copy query' });
 
@@ -42,7 +42,7 @@ describe('Tests for main page', () => {
   });
 
   it('Verify that clicking the "Docs" opens the docs panel', async () => {
-    render(<Mocktest />);
+    renderWithReduxProviders(<Mocktest />);
 
     const docsButton = screen.getByRole('button', { name: 'DOCS' });
 
@@ -54,7 +54,7 @@ describe('Tests for main page', () => {
   });
 
   it('Verify that clicking the expand button opens/closes the additional panel', async () => {
-    render(<Mocktest />);
+    renderWithReduxProviders(<Mocktest />);
 
     const iconButton = screen.getByTestId('expand-button');
 
@@ -70,7 +70,7 @@ describe('Tests for main page', () => {
   });
 
   it('Verify that clicking the variables tab opens the additional panel', async () => {
-    render(<Mocktest />);
+    renderWithReduxProviders(<Mocktest />);
 
     const variablesTab = screen.getByRole('tab', { name: 'Variables' });
 
@@ -82,7 +82,7 @@ describe('Tests for main page', () => {
   });
 
   it('Verify that clicking the headers tab open the additional panel', async () => {
-    render(<Mocktest />);
+    renderWithReduxProviders(<Mocktest />);
 
     const headersTab = screen.getByRole('tab', { name: 'Headers' });
 
@@ -96,7 +96,7 @@ describe('Tests for main page', () => {
   it('Make sure the component is rendering in Russian', () => {
     localStorage.setItem('lang', 'ru');
 
-    render(<Mocktest />);
+    renderWithReduxProviders(<Mocktest />);
 
     expect(screen.getByRole('button', { name: 'Изменить' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Выполнить запрос' })).toBeInTheDocument();

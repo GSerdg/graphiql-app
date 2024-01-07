@@ -5,11 +5,11 @@ import { render } from '@testing-library/react';
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { BASE_API } from '../app/api/api';
+import graphqlSlice from '../app/graphqlSlice';
 import type { AppStore, RootState } from '../app/store';
 import { LangProvider } from '../contexts/localization';
 import { NotificationProvider } from '../contexts/notification';
-import graphqlSlice from '../app/graphqlSlice';
-import { BASE_API } from '../app/api/api';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -42,21 +42,10 @@ export function renderWithReduxProviders(
 
 export function MockWrapper({ children }: { children: JSX.Element }) {
   return (
-    <Provider
-      store={configureStore({
-        reducer: { graphqlSlice },
-        preloadedState: {
-          graphqlSlice: {
-            sourceLink: BASE_API,
-          },
-        },
-      })}
-    >
-      <BrowserRouter>
-        <NotificationProvider>
-          <LangProvider>{children}</LangProvider>
-        </NotificationProvider>
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <NotificationProvider>
+        <LangProvider>{children}</LangProvider>
+      </NotificationProvider>
+    </BrowserRouter>
   );
 }

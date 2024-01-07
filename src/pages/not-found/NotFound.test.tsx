@@ -1,12 +1,11 @@
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import router from '../../app/router';
 
-import { renderWithReduxProviders } from '../../test/testUtils';
 describe('Tests for not-found page', () => {
   it('Make sure the component is rendering', () => {
-    renderWithReduxProviders(
+    render(
       <RouterProvider
         router={createMemoryRouter(router.routes, {
           initialEntries: ['/bad-route'],
