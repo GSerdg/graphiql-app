@@ -243,4 +243,12 @@ export const localizedStrings = {
     en: 'Endpoint changed successfully',
     ru: 'Эндпоинт успешно изменен',
   },
+  documentationFallbackHeader: {
+    en: 'No provided schema',
+    ru: 'Нет предоставленной схемы',
+  },
+  documentationFallbackDescription: {
+    en: 'Unfortunately, the request scheme was not received, possibly due to an incorrect address',
+    ru: 'К сожалению схема запросов не была получена возможно из за некорректного адреса',
+  },
 };

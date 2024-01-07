@@ -9,8 +9,7 @@ import EndpointField from './main-editor/endpoint-field/EndpointField';
 import EntryField from './main-editor/entry-field/EntryField';
 import MainEditor from './main-editor/main-editor/MainEditor';
 import ToolBox from './main-editor/toolbox/ToolBox';
-
-const BASE_API = 'https://rickandmortyapi.com/graphql';
+import { BASE_API } from '../../app/api/api';
 
 export type ValueType = number | boolean;
 

@@ -1,10 +1,17 @@
+import { lazy, Suspense } from 'react';
 import { Box } from '@mui/material';
+import { useDocumentationContext } from '../../../contexts/docs';
+import FallbackComponent from './FallbackComponent';
 
 interface DocsFieldType {
   isDocsOpen: boolean;
 }
 
+const Documentation = lazy(() => import('./Documentation'));
+
 const DocsField = ({ isDocsOpen }: DocsFieldType) => {
+  const { documentation } = useDocumentationContext();
+
   return (
     <Box
       sx={{
@@ -21,9 +28,23 @@ const DocsField = ({ isDocsOpen }: DocsFieldType) => {
     >
       {isDocsOpen && (
         <Box
-          sx={{ padding: '0.5rem', position: 'absolute', minWidth: { xs: '47vw', md: '25vw' } }}
+          sx={{
+            padding: '0.5rem',
+            position: 'absolute',
+            minWidth: { xs: '47vw', md: '25vw' },
+            width: '100%',
+            height: '100%',
+            overflowY: 'scroll',
+          }}
           data-testid="docs-panel"
-        ></Box>
+        >
+          {isDocsOpen && documentation.schema && (
+            <Suspense>
+              <Documentation />
+            </Suspense>
+          )}
+          {!documentation.schema && <FallbackComponent />}
+        </Box>
       )}
     </Box>
   );

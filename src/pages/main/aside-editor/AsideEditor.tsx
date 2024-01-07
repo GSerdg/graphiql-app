@@ -3,6 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { green } from '@mui/material/colors';
 import { ReactNode } from 'react';
 import DocsField from '../docs-field/DocsField';
+import { DocumentationProvider } from '../../../contexts/docs';
 
 export interface AsideEditorType {
   isDocsOpen: boolean;
@@ -47,7 +48,9 @@ const AsideEditor = ({ isDocsOpen, children, isLoading }: AsideEditorType) => {
           />
         )}
       </Box>
-      <DocsField isDocsOpen={isDocsOpen} />
+      <DocumentationProvider>
+        <DocsField isDocsOpen={isDocsOpen} />
+      </DocumentationProvider>
     </Stack>
   );
 };
