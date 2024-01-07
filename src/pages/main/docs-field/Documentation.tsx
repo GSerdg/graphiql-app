@@ -1,7 +1,7 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Autocomplete, Box, Button, Stack, TextField } from '@mui/material';
 import { useDocumentationContext } from '../../../contexts/docs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TypeDescription from './TypeDescription';
 import './Documentation.css';
 
@@ -19,7 +19,9 @@ export default function Documentation() {
       setSearchStack(documentation.searchStack.concat(newValue));
     }
   };
-
+  useEffect(() => {
+    setSearchValue(null);
+  }, [documentation.endpoint]);
   return (
     documentation.schema && (
       <Box>
