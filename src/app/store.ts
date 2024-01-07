@@ -1,14 +1,13 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
-import { api } from './api/api';
+import graphqlSlice from './graphqlSlice';
 
 const rootReducer = combineReducers({
-  [api.reducerPath]: api.reducer,
+  graphqlSlice,
 });
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
   });
 }
 

@@ -2,6 +2,8 @@ import { Box, Button, Typography } from '@mui/material';
 import { useLocalizer } from '../../../../contexts/localization';
 import { useState } from 'react';
 import { useNotification } from '../../../../contexts/notification';
+import { graphqlSlice } from '../../../../app/graphqlSlice';
+import { useDispatch } from 'react-redux';
 
 interface EndpointFieldType {
   endpoint: string;
@@ -9,6 +11,8 @@ interface EndpointFieldType {
 }
 
 const EndpointField = ({ endpoint, setEndpoint }: EndpointFieldType) => {
+  const dispatch = useDispatch();
+  const { updateSourceLink } = graphqlSlice.actions;
   const localize = useLocalizer();
   const [inputValue, setInputValue] = useState(endpoint);
   const { showNotification } = useNotification();
@@ -20,6 +24,7 @@ const EndpointField = ({ endpoint, setEndpoint }: EndpointFieldType) => {
   const handleClick = () => {
     setEndpoint(inputValue);
     showNotification('success', localize('successEndpointChange'));
+    dispatch(updateSourceLink(inputValue));
   };
 
   return (
