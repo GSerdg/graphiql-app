@@ -2,7 +2,6 @@ export default function convertPrettifyText(query: string) {
   const text = query;
   const checkText: string[] = [];
 
-  // Проверяем на наличие ошибок в расстановке скобок
   text.match(/{|}/g)?.forEach((item) => {
     if (item === '{') {
       checkText.push(item);
