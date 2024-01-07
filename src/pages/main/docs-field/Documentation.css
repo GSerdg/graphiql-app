@@ -1,0 +1,10 @@
+.autocomplete input {
+    color: white;
+}
+.autocomplete label {
+    color: grey;
+}
+
+.back-arrow:disabled {
+    color: grey;
+}
