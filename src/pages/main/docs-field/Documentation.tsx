@@ -19,9 +19,21 @@ export default function Documentation() {
       setSearchStack(documentation.searchStack.concat(newValue));
     }
   };
+
   useEffect(() => {
     setSearchValue(null);
   }, [documentation.endpoint]);
+
+  useEffect(() => {
+    const stackLength = documentation.searchStack.length;
+    if (!stackLength) {
+      setSearchValue(null);
+    } else if (documentation.searchStack[stackLength - 1] !== searchValue) {
+      setSearchValue(documentation.searchStack[stackLength - 1]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [documentation.searchStack]);
+
   return (
     documentation.schema && (
       <Box>
