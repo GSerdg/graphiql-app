@@ -2,7 +2,7 @@ header .header {
   padding: 0;
 
   @media (min-width: $sm) {
-    padding: 0 24px;
+    padding: 0 12px;
   }
 }
 
@@ -17,20 +17,23 @@ header .header {
 
   & .header__button--home {
     font-size: 1.1rem;
+    min-width: 40px;
+    line-height: 1.1rem;
   }
 
   & .header__button {
-    width: 6.2rem;
+    width: auto;
     height: 2rem;
     font-size: 0.8rem;
     transition: 1s;
-    padding: 0 0.3rem;
+    padding: 0 0.6rem;
   }
 
   & .header__toolbar {
     transition: 1s;
-    min-height: 64px;
-    padding: 12px 0;
+    height: 4rem;
+    padding: 0 12px;
+    min-height: 0;
   }
 }
 
@@ -47,18 +50,20 @@ header .header {
 
   & .header__button--home {
     font-size: 1rem;
+    min-width: 40px;
   }
 
   & .header__toolbar {
     transition: 1s;
-    min-height: 40px;
-    padding: 2px 0;
+    min-height: 0;
+    padding: 0 12px;
+    height: 3rem;
   }
 
   & .header__button {
     transition: 1s;
-    padding: 0 0.2rem;
-    width: 5.5rem;
+    padding: 0 0.5rem;
+    width: auto;
     height: 1.8rem;
     font-size: 0.7rem;
   }

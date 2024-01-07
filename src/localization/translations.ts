@@ -75,7 +75,6 @@ export const localizedStrings = {
     en: 'Email address must be properly formatted (e.g., user@example.com)',
     ru: 'Адрес электронной почты должен быть правильно отформатирован (например, user@example.com)',
   },
-
   requirePasswordValidation: {
     en: 'Enter your password',
     ru: 'Введите пароль',
@@ -131,5 +130,117 @@ export const localizedStrings = {
   prettifyMissingError: {
     en: 'Missing opening or closing parenthesis',
     ru: 'Пропущена открывающая или закрывающая скобка',
+  },
+  headerHomeButton: {
+    en: 'Home',
+    ru: 'Домой',
+  },
+  languageSwitchEn: {
+    en: 'en',
+    ru: 'анг',
+  },
+  languageSwitchRu: {
+    en: 'ru',
+    ru: 'рус',
+  },
+  headerLoginButton: {
+    en: 'Log in',
+    ru: 'Вход',
+  },
+  headerSignupButton: {
+    en: 'Sign up',
+    ru: 'Регистрация',
+  },
+  headerMainPageButton: {
+    en: 'Main page',
+    ru: 'На главную',
+  },
+  headerLogoutButton: {
+    en: 'Log out',
+    ru: 'Выход',
+  },
+  welcomeTitle: {
+    en: 'Debugging your GraphQL server was never this easy!',
+    ru: 'Отладка вашего сервера GraphQL никогда не была такой простой!',
+  },
+  welcomeSubtitle: {
+    en: 'GraphiQL Client helps you debug GraphQL queries and implementations - taking care of the hard part so you can focus on actually getting things done.',
+    ru: 'Клиент GraphiQL помогает отлаживать запросы и реализации GraphQL, беря на себя самую сложную часть, чтобы вы могли сосредоточиться на том, чтобы действительно добиться цели.',
+  },
+  chipOurTeam: {
+    en: 'OUR TEAM',
+    ru: 'НАША КОМАНДА',
+  },
+  role: {
+    en: 'Developer',
+    ru: 'Разработчик',
+  },
+  endpoint: {
+    en: 'Endpoint:',
+    ru: 'Эндпоинт:',
+  },
+  mainChangeButton: {
+    en: 'Change',
+    ru: 'Изменить',
+  },
+  tabHeaders: {
+    en: 'Headers',
+    ru: 'Заголовки',
+  },
+  tabVariables: {
+    en: 'Variables',
+    ru: 'Переменные',
+  },
+  docsButton: {
+    en: 'DOCS',
+    ru: 'Справка',
+  },
+  tooltipExecute: {
+    en: 'Execute query',
+    ru: 'Выполнить запрос',
+  },
+  tooltipPrettify: {
+    en: 'Prettify query',
+    ru: 'Форматировать запрос',
+  },
+  tooltipCopy: {
+    en: 'Copy query',
+    ru: 'Копировать запрос',
+  },
+  developerName1: {
+    en: 'SERGEY GREBEL',
+    ru: 'СЕРГЕЙ ГРЕБЕЛЬ',
+  },
+  developerName2: {
+    en: 'ANDREY KIZILOV',
+    ru: 'АНДРЕЙ КИЗИЛОВ',
+  },
+  developerName3: {
+    en: 'SERGEY RODNYKH',
+    ru: 'СЕРГЕЙ РОДНЫХ',
+  },
+  developerDescription1: {
+    en: "I'm a front-end developer. After studying at RS School, I can now do everything in a Java script!!! Well, or almost everything. And everything that I cannot achieve, I will achieve as I work on future interesting and probably very entertaining projects.",
+    ru: 'Я фронтенд-разработчик. После обучения в RS School я могу делать на JavaScript всё!!! Ну или почти все. И всего, чего я не смогу достичь, я добьюсь, работая над будущими интересными и, наверное, очень занимательными проектами.',
+  },
+  developerDescription2: {
+    en: 'Student of the RSSCHOOL stage1 stream 2023. With the desire to continue learning on the React framework.',
+    ru: 'Студент RSSCHOOL stage1 потока 2023 года. С желанием продолжить обучение на React framework.',
+  },
+  developerDescription3: {
+    en: "Frontend developer without commercial experience. For the last year I have been actively studying frontend development and want to become professional in this field. I'm currently learning React.",
+    ru: 'Frontend-разработчик без коммерческого опыта. Последний год я активно изучаю фронтенд-разработку и хочу стать профессионалом в этой области. Сейчас изучаю React.',
+  },
+  successCopyNotification: {
+    en: 'Query copied successfully',
+    ru: 'Запрос скопирован успешно',
+  },
+  failCopyNotification: {
+    en: 'Copy query failed',
+    ru: 'Не удалось скопировать запрос',
+  },
+  successEndpointChange: {
+    en: 'Endpoint changed successfully',
+    ru: 'Эндпоинт успешно изменен',
   },
 };

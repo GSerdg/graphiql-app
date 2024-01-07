@@ -90,8 +90,8 @@ export default function convertPrettifyText(query: string) {
         nextWord === '{'
           ? (string += textString[i] + ' ')
           : nextWord === '}'
-          ? (string += textString[i] + '\n' + ' '.repeat((nestingLevel - 1) * 2))
-          : (string += textString[i]);
+            ? (string += textString[i] + '\n' + ' '.repeat((nestingLevel - 1) * 2))
+            : (string += textString[i]);
         break;
     }
   }

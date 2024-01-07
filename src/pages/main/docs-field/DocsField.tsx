@@ -1,16 +1,31 @@
 import { Box } from '@mui/material';
 
-const DocsField = () => {
+interface DocsFieldType {
+  isDocsOpen: boolean;
+}
+
+const DocsField = ({ isDocsOpen }: DocsFieldType) => {
   return (
     <Box
       sx={{
-        width: '20%',
-        flexGrow: 1,
+        flexGrow: isDocsOpen ? 1 : 0,
         backgroundColor: '#292D30',
         border: '1px solid #48515B',
-        borderLeft: 'none',
+        borderTop: { xs: 'none', md: '1px solid #48515B' },
+        borderLeft: isDocsOpen ? '1px solid #48515B' : 'none',
+        transition: '0.5s',
+        position: 'relative',
+        overflowY: 'auto',
+        overflowX: 'hidden',
       }}
-    ></Box>
+    >
+      {isDocsOpen && (
+        <Box
+          sx={{ padding: '0.5rem', position: 'absolute', minWidth: { xs: '47vw', md: '25vw' } }}
+          data-testid="docs-panel"
+        ></Box>
+      )}
+    </Box>
   );
 };
 

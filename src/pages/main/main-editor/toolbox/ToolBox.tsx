@@ -2,32 +2,44 @@ import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { Box, IconButton, Tooltip } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { setQuery } from '../../../../app/querySlice';
+import { executeQuery } from '../../../../app/executeQuery';
 import { LangField, useLocalizer } from '../../../../contexts/localization';
 import { useNotification } from '../../../../contexts/notification';
 import convertPrettifyText from '../../../../shared/prettify';
-import { useSelector } from '../../../../shared/useSelector';
 
-const ToolBox = () => {
+interface ToolBox {
+  endpoint: string;
+  query: string;
+  variables: string;
+  headers: string;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setResponse: React.Dispatch<React.SetStateAction<string>>;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ToolBox = ({ endpoint, setResponse, setQuery, setIsLoading, query, variables, headers }: ToolBox) => {
   const { showNotification } = useNotification();
 
-  const query = useSelector((state) => state.query.query);
-  const variables = useSelector((state) => state.variables.variables);
-  const headers = useSelector((state) => state.headers.headers);
-  const dispatch = useDispatch();
   const localizer = useLocalizer();
 
-  const handleExecuteQuery = () => {
-    console.log('query:', query);
-    console.log('variables:', variables);
-    console.log('headers:', headers);
+  const handleExecuteQuery = async () => {
+    setResponse('');
+    setIsLoading(true);
+
+    try {
+      const result = await executeQuery({ endpoint, query, variables, headers });
+      setResponse(result);
+    } catch {
+      setResponse('Unexpected error. Check that the entered URL is correct.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handlePrettify = () => {
     try {
       const prettifyText = convertPrettifyText(query);
-      dispatch(setQuery(prettifyText));
+      setQuery(prettifyText);
     } catch (error) {
       const err = error as Error;
       showNotification('error', localizer(err.message as LangField));
@@ -37,10 +49,10 @@ const ToolBox = () => {
   const handleQueryCopy = () => {
     navigator.clipboard.writeText(query).then(
       function () {
-        showNotification('success', 'Query copied successfully');
+        showNotification('success', localizer('successCopyNotification'));
       },
       function () {
-        showNotification('error', 'Copy query failed');
+        showNotification('error', localizer('failCopyNotification'));
       }
     );
   };
@@ -58,7 +70,7 @@ const ToolBox = () => {
         right: 0,
       }}
     >
-      <Tooltip title="Execute query">
+      <Tooltip title={localizer('tooltipExecute')}>
         <IconButton
           className="editor__button"
           onClick={handleExecuteQuery}
@@ -71,7 +83,7 @@ const ToolBox = () => {
           <PlayArrowIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Prettify query">
+      <Tooltip title={localizer('tooltipPrettify')}>
         <IconButton
           onClick={handlePrettify}
           sx={{ color: '#808076', '&:hover': { backgroundColor: '#8080762e' } }}
@@ -79,7 +91,7 @@ const ToolBox = () => {
           <AutoFixHighIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Copy query">
+      <Tooltip title={localizer('tooltipCopy')}>
         <IconButton
           onClick={handleQueryCopy}
           sx={{ color: '#808076', '&:hover': { backgroundColor: '#8080762e' } }}
