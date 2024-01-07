@@ -34,6 +34,7 @@ const DocsField = ({ isDocsOpen }: DocsFieldType) => {
             minWidth: { xs: '47vw', md: '25vw' },
             width: '100%',
             height: '100%',
+            overflowY: 'scroll',
           }}
           data-testid="docs-panel"
         >

@@ -5,10 +5,10 @@ import { Fields, InputFields, MainDescription } from './typesToShow/Components';
 export default function TypeDescription() {
   const { documentation } = useDocumentationContext();
   const stackLength = documentation.searchStack.length;
-  const typeTosearch = stackLength
+  const typeToSearch = stackLength
     ? documentation.searchStack[stackLength - 1]
     : documentation.schema?.queryType.name;
-  const type = documentation.schema?.types.filter((type) => type.name === typeTosearch)[0];
+  const type = documentation.schema?.types.filter((type) => type.name === typeToSearch)[0];
 
   return (
     type && (

@@ -39,14 +39,14 @@ describe('Documentation section', () => {
     const argumentsName = await screen.findAllByTestId(/argument-name/);
     const fieldsName = await screen.findAllByTestId(/field-name/);
     const argumentsType = await screen.findAllByTestId(/argument-type/);
-    const filedsType = await screen.findAllByTestId(/field-type/);
+    const fieldsType = await screen.findAllByTestId(/field-type/);
 
     expect(fieldsName.map(({ textContent }) => textContent).sort()).toEqual(
       getTypeFromName(rootTypeName)
         .fields?.map((field) => field.name)
         .sort()
     );
-    expect(filedsType.map(({ textContent }) => textContent).sort()).toEqual(
+    expect(fieldsType.map(({ textContent }) => textContent).sort()).toEqual(
       getTypeFromName(rootTypeName)
         .fields?.map((field) => returnType(field.type)[0])
         .sort()
