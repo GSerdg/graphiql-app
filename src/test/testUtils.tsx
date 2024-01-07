@@ -5,10 +5,11 @@ import { render } from '@testing-library/react';
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { api } from '../app/api/api';
 import type { AppStore, RootState } from '../app/store';
 import { LangProvider } from '../contexts/localization';
 import { NotificationProvider } from '../contexts/notification';
+import graphqlSlice from '../app/graphqlSlice';
+import { BASE_API } from '../app/api/api';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -18,13 +19,16 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
 export function renderWithReduxProviders(
   ui: React.ReactElement,
   {
-    preloadedState = {},
+    preloadedState = {
+      graphqlSlice: {
+        sourceLink: BASE_API,
+      },
+    },
     store = configureStore({
       reducer: {
-        [api.reducerPath]: api.reducer,
+        graphqlSlice,
       },
       preloadedState,
-      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
     }),
     ...renderOptions
   }: ExtendedRenderOptions = {}
@@ -38,10 +42,21 @@ export function renderWithReduxProviders(
 
 export function MockWrapper({ children }: { children: JSX.Element }) {
   return (
-    <BrowserRouter>
-      <NotificationProvider>
-        <LangProvider>{children}</LangProvider>
-      </NotificationProvider>
-    </BrowserRouter>
+    <Provider
+      store={configureStore({
+        reducer: { graphqlSlice },
+        preloadedState: {
+          graphqlSlice: {
+            sourceLink: BASE_API,
+          },
+        },
+      })}
+    >
+      <BrowserRouter>
+        <NotificationProvider>
+          <LangProvider>{children}</LangProvider>
+        </NotificationProvider>
+      </BrowserRouter>
+    </Provider>
   );
 }
