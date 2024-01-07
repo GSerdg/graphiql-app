@@ -42,13 +42,11 @@ export function DocumentationProvider({ children }: { children: JSX.Element }) {
         });
 
         const response: { data: { __schema: IntrospectionSchema } } = await res.json();
-
         const newSchema: null | IntrospectionSchema = response.data.__schema;
+
         setCached({ ...cached, [sourceLink]: newSchema });
         setSchema(newSchema);
-        console.log(newSchema);
       } catch {
-        setCached({ ...cached, [sourceLink]: null });
         setSchema(null);
       }
     } else {
@@ -59,7 +57,6 @@ export function DocumentationProvider({ children }: { children: JSX.Element }) {
   useEffect(() => {
     fetchSchema();
     setSearchStack([]);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sourceLink]);
 

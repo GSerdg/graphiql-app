@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Box } from '@mui/material';
 import { useDocumentationContext } from '../../../contexts/docs';
+import FallbackComponent from './FallbackComponent';
 
 interface DocsFieldType {
   isDocsOpen: boolean;
@@ -32,6 +33,7 @@ const DocsField = ({ isDocsOpen }: DocsFieldType) => {
             position: 'absolute',
             minWidth: { xs: '47vw', md: '25vw' },
             width: '100%',
+            height: '100%',
           }}
           data-testid="docs-panel"
         >
@@ -40,6 +42,7 @@ const DocsField = ({ isDocsOpen }: DocsFieldType) => {
               <Documentation />
             </Suspense>
           )}
+          {!documentation.schema && <FallbackComponent />}
         </Box>
       )}
     </Box>
